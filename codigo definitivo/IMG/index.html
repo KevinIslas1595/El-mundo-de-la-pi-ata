@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Piñatas Alex - Venta de Piñatas Personalizadas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-yellow-50 text-gray-800 font-sans">
+    <!-- Header -->
+    <header class="bg-pink-500 text-white p-6 text-center shadow-lg">
+      <h1 class="text-4xl font-bold">🎉🎉🎉🎉 Piñatas Alex 🎉🎉🎉🎉</h1>
+      <p class="mt-2 text-lg">¡Haz de tu fiesta un momento inolvidable!</p>
+      <p class="mt-2 text-lg">VENTA DE PIÑATAS PERSONALIZADAS</p>
+    </header>
+    <!DOCTYPE html>
+
+    <!-- Botón de WhatsApp flotante -->
+    <a
+      href="https://wa.me/5621386850"
+      class="fixed bottom-5 right-5 z-50"
+      target="_blank"
+      title="Chatea conmigo en WhatsApp"
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
+        alt="WhatsApp"
+        class="w-16 h-16 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
+      />
+    </a>
+<!-- Botón de carrito -->
+<a href="carrito.html" class="fixed top-5 right-5 bg-white p-3 rounded-xl shadow-lg hover:scale-110 transition z-50">
+  🛒 Ver carrito
+</a>
+
+    <!-- Galería de Piñatas -->
+    <section class="py-10 px-6 max-w-6xl mx-auto">
+      <h2 class="text-2xl font-semibold text-center mb-8">Nuestras Piñatas</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Producto 1 Barbie -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/barbie.jpg"
+            alt="Piñata Barbie"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Barbie</h3>
+          <p class="text-red-600 mt-2 font-semibold">$350</p>
+            <button onclick="addToCart('piñata barbie', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 2 BARBIE 2 -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/barbie3.jpg"
+            alt="Piñata barbie2"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">barbie2</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$400</p>
+            <button onclick="addToCart('Piñata barbie2', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 3 Bluey -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/bluey.jpg"
+            alt="Piñata Bluey"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Bluey</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$450</p>
+          <button onclick="addToCart('piñata bluey', 450)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        
+
+        <!-- Producto 4   bob esponja-->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/bob esponja2.jpg"
+            alt="bob esponja"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold"> Bob Esponja</h3>
+          <p class="text-red-600 mt-2 font-semibold">$350</p>
+           <button onclick="addToCart('piñata bob esponja', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 5  Capibara -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/capibara.jpg"
+            alt="Piñata Capibara"
+            onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Capibara</h3>
+          <p class="text-red-600 mt-2 font-semibold">$350</p>
+           <button onclick="addToCart('piñata Capibara', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 6   Caroline -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/caroline.jpg"
+            alt="Piñata Caroline"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Caroline</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$400</p>
+           <button onclick="addToCart('piñata Caroline', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 7 Chopper -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/Chopper.jpg"
+            alt="Piñata Caroline"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Chopper</h3>
+          <p class="text-red-600 mt-2 font-semibold">$550</p>
+           <button onclick="addToCart('piñata Caroline', 550)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 8  Frozen-->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/frozen.jpg"
+            alt="Piñata Frozen"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Frozen</h3>
+          <p class="text-red-600 mt-2 font-semibold">$700</p>
+           <button onclick="addToCart('piñata Frozen', 700)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 9  Hello Kitty -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/Hello Kitty.jpg"
+            alt="Piñata Hello Kitty"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Hello Kitty</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$300</p>
+           <button onclick="addToCart('Hello Kitty', 300)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+ <!-- Producto 10  Jack -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/Jack.jpg"
+            alt="Jack"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Jack</h3>
+          <p class="text-red-600 mt-2 font-semibold">$350</p>
+           <button onclick="addToCart('piñata Jack', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 11 Kutromi -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/kuromi1.jpg"
+            alt="Piñata Kutromi"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Kuromi M/1 </h3>
+          <p class="text-pink-600 mt-2 font-semibold">$400</p>
+           <button onclick="addToCart('piñata Kutromi', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 12 Kuromi2-->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/kuromi2.jpg"
+            alt="Piñata Kuromi2"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Kuromi M/2 </h3>
+          <p class="text-pink-600 mt-2 font-semibold">$450</p>
+           <button onclick="addToCart('piñata Kuromi2', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 13 Moana -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/moana.jpg"
+            alt="Piñata Moana"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Moana</h3>
+          <p class="text-red-600 mt-2 font-semibold">$350</p>
+           <button onclick="addToCart('piñata Moana', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 14 Nezuko -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/nezuko.jpg"
+            alt="Piñata Nezuko"
+            onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Nezuko</h3>
+          <p class="text-red-600 mt-2 font-semibold">$350</p>
+           <button onclick="addToCart('piñata Nezuko', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 15  Plim Plim-->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/plim plim.jpg"
+            alt="Plim Plim"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Plim Plim</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$400</p>
+           <button onclick="addToCart('piñata Plim Plim', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+        
+
+        <!-- Producto 16 Spiderman 1-->
+     <div class="bg-white p-4 rounded-xl shadow-md text-center">
+  <div class="w-full h-64 overflow-hidden rounded-lg mb-4">
+    <img
+      src="img/spiderman.jpg"
+      alt="Piñata Spiderman"
+       onclick="mostrarImagen(this.src)"
+      class="w-full h-full object-contain transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+    />
+  </div>
+  <h3 class="text-xl font-bold">Spiderman M/1</h3>
+  <p class="text-red-600 mt-2 font-semibold">$550</p>
+   <button onclick="addToCart('piñata Spiderman', 550)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+</div>
+
+        <!-- Producto 17 Spiderman2 -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/spiderman 2.jpg"
+            alt="Piñata Spiderman2 "
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Spiderman M/2</h3>
+          <p class="text-red-600 mt-2 font-semibold">$700</p>
+           <button onclick="addToCart('piñata Spiderman2 ', 700)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 18 Spiderman 3 -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/spiderman3.jpg"
+            alt="Spiderman 3"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Spiderman M/3</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$300</p>
+           <button onclick="addToCart('piñata Spiderman 3', 300)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+      <!-- Producto 19  Tortugas Ninjas   -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/tortugas ninja.jpg"
+            alt="Piñata Tortugas Ninjas"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Tortugas Ninjas</h3>
+          <p class="text-red-600 mt-2 font-semibold">$350</p>
+           <button onclick="addToCart('piñata Tortugas Ninjas', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 20 Turbo Granny -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/Turbo Granny.jpg"
+            alt="Piñata Turbo Granny"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Turbo Granny 
+          <p class="text-pink-600 mt-2 font-semibold">$400</p>
+           <button onclick="addToCart('piñata Turbo Granny', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 21 Unicornio  -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/unicornio.jpeg"
+            alt="Piñata  Unicornio"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Unicornio</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$450</p>
+           <button onclick="addToCart('piñata Unicornio', 450)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 22 Capibara  -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/capibara2.jpg"
+            alt="Piñata Capibara"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Capibara</h3>
+          <p class="text-red-600 mt-2 font-semibold">$350</p>
+           <button onclick="addToCart('piñata Capibara', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 23 Dumbo -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/Dumbo2.jpg"
+            alt="Dumbo"
+            onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Dumbo</h3>
+          <p class="text-red-600 mt-2 font-semibold">$350</p>
+           <button onclick="addToCart('piñata Dumbo', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 24 Cars-->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/cars.jpg"
+            alt="Piñata Cars"
+            onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Cars</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$400</p>
+           <button onclick="addToCart('piñata Cars', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 25 Plimplim -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/plim plim2.jpg"
+            alt="Piñata Plimplim"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Plim Plim</h3>
+          <p class="text-red-600 mt-2 font-semibold">$550</p>
+             <button onclick="addToCart('plim plim', 550)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+    
+        </div>
+
+        <!-- Producto 26 cars 2 -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/cars2.jpg"
+            alt="cars 2"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Cars</h3>
+          <p class="text-red-600 mt-2 font-semibold">$700</p>
+             <button onclick="addToCart('Piñata cars 2', 700)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+
+        </div>
+
+        <!-- Producto 27 Sonic -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/Sonic.jpg"
+            alt="Piñata Mario Bros"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Sonic</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$300</p>
+             <button onclick="addToCart('Piñata Sonic', 300)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+
+        </div>
+      
+         <!-- Producto 28 Labubu -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/labubu.jpg"
+            alt="Piñata Labubu"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Labubu</h3>
+          <p class="text-red-600 mt-2 font-semibold">$350</p>
+          <button onclick="addToCart('Piñata Labubu', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+</div>
+
+
+        <!-- Producto 29  One piece 2  -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/One piece 2.jpg"
+            alt="Piñata One piece 2"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Piñata One piece 2</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$300</p>
+          <button onclick="addToCart('Piñata One piece 2', 300)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 30  Nezuco M/3-->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/nezuko3.jpg"
+            alt="Piñata Nezuco M/3"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Piñata Nezuco M/3s</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$200</p>
+          <button onclick="addToCart('Piñata Nezuco M/3', 200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 31 Dinosaurio -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/Dinosaurio.jpg"
+            alt="Piñata Dinosaurio"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Piñata Dinosaurio</h3>
+          <p class="text-red-600 mt-2 font-semibold">$180</p>
+          <button onclick="addToCart('Piñata Dinosaurio', 180)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 5 -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/KUROMI.jpg"
+            alt="Piñata Kuromi"
+            onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Piñata Kuromi</h3>
+          <p class="text-red-600 mt-2 font-semibold">$350</p>
+          <button onclick="addToCart('Piñata Spiderman', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 6 -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/ONEPIECE.jpg"
+            alt="Piñata One Piece"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Piñata One Piece</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$400</p>
+          <button onclick="addToCart('Piñata Spiderman', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 7 -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/goku.jpg"
+            alt="Piñata Goku"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Piñata Goku</h3>
+          <p class="text-red-600 mt-2 font-semibold">$550</p>
+          <button onclick="addToCart('Piñata Spiderman', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 8 -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/princesa.webp"
+            alt="Piñata Princesa Peach"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Piñata Princesa Peach</h3>
+          <p class="text-red-600 mt-2 font-semibold">$700</p>
+          <button onclick="addToCart('Piñata Spiderman', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+        </div>
+
+
+        
+        <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Producto Labubu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .active {
+      border: 2px solid #f87171;
+    }
+
+    .slide {
+      opacity: 0;
+      transform: translateX(0);
+      transition: all 0.4s ease-in-out;
+    }
+
+    .slide-left {
+      transform: translateX(-50px);
+    }
+
+    .slide-right {
+      transform: translateX(50px);
+    }
+
+    .show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="bg-white p-4 rounded-xl shadow-md text-center max-w-md mx-auto">
+    <img
+      id="mainImage"
+      src="img/labubu4.jpg"
+      alt="Piñata Labubu"
+      class="w-full h-64 object-cover rounded-lg mb-4 slide show"
+    />
+
+    <!-- Miniaturas -->
+    <div class="flex justify-center space-x-2 mb-4" id="thumbnailContainer">
+      <img src="img/labubu.jpg" class="w-16 h-16 object-cover rounded cursor-pointer active" onclick="changeImage(this, 0)" />
+      <img src="img/labubu2.jpg" class="w-16 h-16 object-cover rounded cursor-pointer" onclick="changeImage(this, 1)" />
+      <img src="img/labubu3.jpg" class="w-16 h-16 object-cover rounded cursor-pointer" onclick="changeImage(this, 2)" />
+    </div>
+
+    <h3 class="text-xl font-bold">Labubu</h3>
+    <p class="text-red-600 mt-2 font-semibold">$350</p>
+    <button onclick="addToCart('Piñata Spiderman', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+  </div>
+
+  <script>
+    let currentIndex = 0;
+
+    function changeImage(el, newIndex) {
+      const mainImg = document.getElementById('mainImage');
+
+      // Determinar dirección del deslizamiento
+      const direction = newIndex > currentIndex ? 'slide-right' : 'slide-left';
+
+      // Quitar animaciones actuales
+      mainImg.classList.remove('show', 'slide-left', 'slide-right');
+
+      // Aplicar dirección del nuevo slide
+      mainImg.classList.add(direction);
+
+      setTimeout(() => {
+        // Cambiar la imagen
+        mainImg.src = el.src;
+
+        // Limpiar dirección y mostrar imagen
+        mainImg.classList.remove('slide-left', 'slide-right');
+        mainImg.classList.add('show');
+      }, 200);
+
+      // Actualizar índice actual
+      currentIndex = newIndex;
+
+      // Quitar clase "active" de miniaturas
+      const thumbnails = document.querySelectorAll('#thumbnailContainer img');
+      thumbnails.forEach(img => img.classList.remove('active'));
+
+      // Activar miniatura seleccionada
+      el.classList.add('active');
+    }
+  </script>
+</body>
+</html>
+
+        <!-- Producto 9 -->
+        <div class="bg-white p-4 rounded-xl shadow-md text-center">
+          <img
+            src="img/ONEPIECE.jpg"
+            alt="Piñata Mario Bros"
+             onclick="mostrarImagen(this.src)"
+      class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+          <h3 class="text-xl font-bold">Piñata Mario Bros</h3>
+          <p class="text-pink-600 mt-2 font-semibold">$300</p>
+          <button onclick="addToCart('Piñata Spiderman', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+        </div>
+      </div>
+      <script>
+  function cargarProductosDinamicos() {
+    const productos = JSON.parse(localStorage.getItem("productosAdmin")) || [];
+    const contenedor = document.getElementById("productos-dinamicos");
+
+    productos.forEach(producto => {
+      const card = document.createElement("div");
+      card.className = "bg-white p-4 rounded-xl shadow-md text-center";
+
+      card.innerHTML = `
+        <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl" onclick="mostrarImagen('${producto.imagen}')"/>
+        <h3 class="text-xl font-bold">${producto.nombre}</h3>
+        <p class="text-red-600 mt-2 font-semibold">$${producto.precio}</p>
+        <button onclick="addToCart('${producto.nombre}', ${producto.precio})" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
+      `;
+
+      contenedor.appendChild(card);
+    });
+  }
+
+  cargarProductosDinamicos();
+</script>
+
+      <!-- MODAL IMAGEN PANTALLA COMPLETA -->
+<div
+  id="modalImagen"
+  class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden"
+  onclick="cerrarImagen()"
+>
+  <img
+    id="imagenGrande"
+    class="max-w-full max-h-full rounded-xl shadow-2xl border-4 border-white"
+  />
+</div>
+
+<!-- SCRIPT -->
+<script>
+  function mostrarImagen(src) {
+    document.getElementById("imagenGrande").src = src;
+    document.getElementById("modalImagen").classList.remove("hidden");
+  }
+
+  function cerrarImagen() {
+    document.getElementById("modalImagen").classList.add("hidden");
+  }
+</script>
+      </div>
+
+
+  <!-- Icono de carrito -->
+  <div class="fixed top-4 right-4 bg-white shadow px-4 py-2 rounded-xl flex items-center gap-2">
+    <span class="text-xl">🛒</span>
+    <span id="cartCount" class="text-lg font-semibold">0</span>
+  </div>
+
+ 
+  <!-- Carrito -->
+  <div class="max-w-2xl mx-auto bg-pink-300 rounded-xl shadow p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold">🛒 Tu carrito</h2>
+      <button onclick="clearCart()" class="text-red-500 hover:underline text-sm">Vaciar carrito</button>
+    </div>
+
+    <ul id="cartItems" class="space-y-3 text-left text-lg"></ul>
+    <p class="mt-4 text-xl font-bold">Total: $<span id="total">0</span></p>
+
+    <!-- Botón WhatsApp -->
+   <a id="whatsappLink" href="https://wa.me/525525284178" target="_blank" class="mt-4 inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded text-lg">
+     Enviar pedido por WhatsApp
+    </a>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function saveCart() {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    function addToCart(name, price) {
+      const item = cart.find(p => p.name === name);
+      if (item) {
+        item.qty += 1;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+
+      saveCart();
+      updateCart();
+
+      Swal.fire({
+        title: '¡Agregado!',
+        text: `${name} fue agregado al carrito`,
+        icon: 'success',
+        timer: 1200,
+        showConfirmButton: false
+      });
+    }
+
+    function removeFromCart(name) {
+      cart = cart.filter(p => p.name !== name);
+      saveCart();
+      updateCart();
+    }
+
+    function changeQty(name, qty) {
+      const item = cart.find(p => p.name === name);
+      if (item) {
+        item.qty = qty <= 0 ? 1 : qty;
+        saveCart();
+        updateCart();
+      }
+    }
+
+    function clearCart() {
+      Swal.fire({
+        title: '¿Vaciar carrito?',
+        text: 'Esto eliminará todos los productos',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, vaciar',
+        cancelButtonText: 'Cancelar'
+      }).then(result => {
+        if (result.isConfirmed) {
+          cart = [];
+          saveCart();
+          updateCart();
+        }
+      });
+    }
+
+    function updateCart() {
+      const list = document.getElementById('cartItems');
+      const count = document.getElementById('cartCount');
+      list.innerHTML = '';
+      let total = 0;
+      let countItems = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+        countItems += item.qty;
+
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div class="flex justify-between items-center">
+            <div>
+              <span class="font-semibold">${item.name}</span><br>
+              <input type="number" min="1" value="${item.qty}" onchange="changeQty('${item.name}', this.value)" class="w-16 mt-1 px-2 py-1 border rounded"/>
+            </div>
+            <div class="text-right">
+              <p>$${itemTotal}</p>
+              <button onclick="removeFromCart('${item.name}')" class="text-red-500 text-sm hover:underline">Eliminar</button>
+            </div>
+          </div>
+        `;
+        list.appendChild(li);
+      });
+
+      document.getElementById('total').textContent = total;
+      count.textContent = countItems;
+
+      // WhatsApp link
+      let msg = "Hola, quiero pedir los siguientes productos que vi en  tu pagina:\n";
+      cart.forEach(p => {
+        msg += `- ${p.qty} x ${p.name} = $${p.qty * p.price}\n`;
+      });
+      msg += `\nTotal: $${total}`;
+      const encodedMsg = encodeURIComponent(msg);
+      const phone = "5615868610"; // Tu número de WhatsApp
+      document.getElementById('whatsappLink').href = `https://wa.me/${phone}?text=${encodedMsg}`;
+    }
+
+    updateCart(); // Inicializar
+  </script>
+</body>
+</html>
+
+
+      <!-- Botón de WhatsApp adicional -->
+      <div class="text-center mt-10">
+        <a
+          href="https://wa.me/5525284178?text=Hola%2C+quiero+comprar+una+piñata"
+          target="_blank"
+          class="bg-green-500 text-white px-6 py-3 rounded-full text-lg hover:bg-green-600 transition"
+        >
+          📱 Hacer pedido por WhatsApp
+        </a>
+      </div>
+    </section>
+
+    
+
+    <!-- Formulario de contacto -->
+    <section class="bg-white py-10 px-6">
+      <h2 class="text-2xl font-semibold text-center mb-6">Contáctanos</h2>
+      <form class="max-w-xl mx-auto grid gap-4">
+        <input
+          type="text"
+          placeholder="Tu nombre"
+          class="border p-3 rounded-md"
+          required
+        />
+        <input
+          type="email"
+          placeholder="Tu correo"
+          class="border p-3 rounded-md"
+          required
+        />
+        <textarea
+          placeholder="Mensaje o tipo de piñata"
+          rows="4"
+          class="border p-3 rounded-md"
+          required
+        ></textarea>
+        <button
+          type="submit"
+          class="bg-red-500 text-white py-3 rounded-md hover:bg-red-600 transition"
+        >
+          Enviar mensaje
+        </button>
+      </form>
+    </section>
+
+  
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito Mejorado</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-100 p-6 relative">
+
+    <!-- Ubicación -->
+    <section class="text-center py-6">
+      <h2 class="text-xl mb-4">
+        👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
+      </h2>
+      <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank">
+        <img src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto w-104" />
+      
+      
+
+        
+    </div>
+  </body>
+</html>
+  <!-- Footer  barra final -->
+    <footer class="bg-red-600 text-white text-center py-4 mt-10">
+      © 2025 Piñatas ALEX. Todos los derechos reservados.
+    </footer>
+  </body>
+</html>

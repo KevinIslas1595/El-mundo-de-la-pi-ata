@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administrador de productos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 p-6">
+    <h1 class="text-3xl font-bold text-center mb-6 text-pink-600">
+      🎯 Administrador de productos 🎯
+    </h1>
+
+    <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow space-y-4">
+      
+    <input type="hidden" id="editIndex" value="-1" />
+    <select id="categoria" class="w-full p-2 border rounded">
+      <option value="productos">Página Principal</option>
+      <option value="productos-globos">Globos</option>
+      <option value="productos-velas">Velas</option>
+    </select>
+    
+      <input
+        type="text"
+        id="nombre"
+        placeholder="Nombre del producto"
+        class="w-full p- border rounded"
+        required
+      />
+      <input
+        type="number"
+        id="precio"
+        placeholder="Precio"
+        class="w-full p-2 border rounded"
+        required
+      />
+      <input
+        type="file"
+        id="imagen"
+        accept="image/*"
+        class="w-full p-2 border rounded"
+      />
+
+      <button
+        onclick="guardarProducto()"
+        class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600"
+      >
+        Guardar producto
+      </button>
+    </div>
+
+    <div class="max-w-4xl mx-auto mt-10 bg-white p-6 rounded-xl shadow">
+      <h2 class="text-xl font-bold mb-4">📦 Productos guardados</h2>
+      <div id="lista-productos" class="grid md:grid-cols-3 gap-4"></div>
+    </div>
+
+    <script>
+      function guardarProducto() {
+        const nombre = document.getElementById("nombre").value.trim();
+        const precio = parseFloat(document.getElementById("precio").value);
+        const imagenInput = document.getElementById("imagen");
+        const archivo = imagenInput.files[0];
+        const editIndex = parseInt(document.getElementById("editIndex").value);
+
+        if (!nombre || !precio || (editIndex === -1 && !archivo)) {
+          alert("Por favor, completa todos los campos.");
+          return;
+        }
+
+        const categoria = document.getElementById("categoria").value;
+        const productos = JSON.parse(localStorage.getItem(categoria)) || [];
+
+        const guardar = (imagenBase64) => {
+          const nuevoProducto = { nombre, precio, imagen: imagenBase64 };
+
+          if (editIndex >= 0) {
+            productos[editIndex] = nuevoProducto;
+          } else {
+            productos.push(nuevoProducto);
+          }
+
+          localStorage.setItem(categoria, JSON.stringify(productos));
+          limpiarFormulario();
+          mostrarProductos();
+          alert(
+            editIndex >= 0 ? "✅ Producto editado." : "✅ Producto guardado."
+          );
+        };
+
+        if (archivo) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            guardar(e.target.result);
+          };
+          reader.readAsDataURL(archivo);
+        } else {
+          // Mantener imagen original al editar si no se selecciona una nueva
+          guardar(productos[editIndex].imagen);
+        }
+      }
+
+      function mostrarProductos() {
+        const categoria = document.getElementById("categoria").value;
+        const productos = JSON.parse(localStorage.getItem(categoria)) || [];
+        const contenedor = document.getElementById("lista-productos");
+        contenedor.innerHTML = "";
+
+        productos.forEach((p, index) => {
+          const div = document.createElement("div");
+          div.className = "border p-4 rounded-lg shadow text-center";
+
+          div.innerHTML = `
+          <img src="${p.imagen}" class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl" />
+          <h3 class="font-bold text-xl">${p.nombre}</h3>
+          <p class="text-pink-600">$${p.precio}</p>
+          <div class="flex justify-center gap-4 mt-3">
+            <button onclick="editarProducto(${index})" class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded">✏️ Editar</button>
+            <button onclick="eliminarProducto(${index})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">🗑️ Eliminar</button>
+          </div>
+        `;
+          contenedor.appendChild(div);
+        });
+      }
+
+      function eliminarProducto(index) {
+        if (confirm("¿Eliminar este producto?")) {
+          const categoria = document.getElementById("categoria").value;
+        const productos = JSON.parse(localStorage.getItem(categoria)) || [];
+          productos.splice(index, 1);
+          localStorage.setItem(categoria, JSON.stringify(productos));
+          mostrarProductos();
+        }
+      }
+
+      function editarProducto(index) {
+        const categoria = document.getElementById("categoria").value;
+        const productos = JSON.parse(localStorage.getItem(categoria)) || [];
+        const producto = productos[index];
+        document.getElementById("nombre").value = producto.nombre;
+        document.getElementById("precio").value = producto.precio;
+        document.getElementById("editIndex").value = index;
+        document.getElementById("imagen").value = "";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function limpiarFormulario() {
+        document.getElementById("nombre").value = "";
+        document.getElementById("precio").value = "";
+        document.getElementById("imagen").value = "";
+        document.getElementById("editIndex").value = -1;
+      }
+
+      mostrarProductos(); // Mostrar al cargar
+    </script>
+  </body>
+</html>
+
+<div class="text-center mt-6">
+  <a
+    href="principal.html"
+    class="border-4 border-red-500 text-red-600 px-8 py-4 rounded-xl text-2xl font-bold hover:bg-red-100 transition-transform hover:scale-105"
+  >
+    ⬅ Volver a la tienda ⬅
+  </a>
+</div>
+
+<script>
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
+  function renderCart() {
+    const list = document.getElementById("cartItems");
+    const totalEl = document.getElementById("total");
+    const waLink = document.getElementById("whatsappLink");
+
+    list.innerHTML = "";
+    let total = 0;
+    let mensaje = "Hola, quiero pedir los siguientes productos:\n";
+
+    cart.forEach((item, index) => {
+      const subtotal = item.price * item.qty;
+      total += subtotal;
+      mensaje += `- ${item.qty} x ${item.name} = $${subtotal}\n`;
+
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <div class="flex justify-between items-center bg-gray-50 p-3 rounded shadow">
+          <div>
+            <span class="font-semibold">${item.name}</span><br>
+            <div class="flex items-center gap-2 mt-2">
+              <button onclick="decreaseQty(${index})" class="px-2 bg-red-500 text-white rounded">-</button>
+              <span>${item.qty}</span>
+              <button onclick="increaseQty(${index})" class="px-2 bg-green-500 text-white rounded">+</button>
+            </div>
+          </div>
+          <div class="text-right">
+            <p>$${subtotal}</p>
+            <button onclick="removeItem(${index})" class="text-red-500 text-sm hover:underline mt-2 block">Eliminar</button>
+          </div>
+        </div>
+      `;
+      list.appendChild(li);
+    });
+
+    totalEl.textContent = total;
+    const encodedMsg = encodeURIComponent(mensaje + `\nTotal: $${total}`);
+    waLink.href = `https://wa.me/5615868610?text=${encodedMsg}`;
+  }
+
+  function increaseQty(index) {
+    cart[index].qty += 1;
+    saveCart();
+    renderCart();
+  }
+
+  function decreaseQty(index) {
+    if (cart[index].qty > 1) {
+      cart[index].qty -= 1;
+    } else {
+      cart.splice(index, 1);
+    }
+    saveCart();
+    renderCart();
+  }
+
+  function removeItem(index) {
+    cart.splice(index, 1);
+    saveCart();
+    renderCart();
+  }
+
+  renderCart();
+</script>

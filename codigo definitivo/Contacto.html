@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <!-- Encabezado fijo -->
+  <header class="fixed top-0 left-0 w-full bg-white shadow-md p-4 flex items-center justify-between z-50">
+    <!-- Botón hamburguesa (izquierda) -->
+    <button id="menuBtn" class="text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
+
+   <!-- Logo centrado con enlace -->
+<a href="principal.html" class="text-xl font-bold absolute left-1/2 transform -translate-x-1/2 hover:underline cursor-pointer">
+  🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
+</a>
+    <!-- Carrito (derecha) -->
+    <a href="carrito.html" class="text-2xl hover:scale-110 transition-transform">🛒</a>
+  </header>
+
+  <!-- Menú lateral -->
+  <nav id="menu" class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50 pt-20 p-4">
+    <h2 class="text-lg font-bold mb-4">Categorías</h2>
+    <ul class="space-y-3">
+      <li><a href="principal.html" class="block text-gray-800 hover:text-pink-500">🥳 Pagina de inicio🥳</a></li>
+      <li><a href="index.html" class="block text-gray-800 hover:text-pink-500">🎉Piñatas🎉</a></li>
+      <li><a href="Globos.html" class="block text-gray-800 hover:text-pink-500">🎈 Globos🎈</a></li>
+      <li><a href="Velas.html" class="block text-gray-800 hover:text-pink-500">🎂Velas🎂</a></li>
+      <li><a href="Contacto.html" class="block text-gray-800 hover:text-pink-500">📞 Contacto📞</a></li>
+    </ul>
+  </nav>
+
+  <!-- Fondo oscuro al abrir el menú -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+
+
+
+  <!-- Script para abrir/cerrar menú -->
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const menu = document.getElementById("menu");
+    const overlay = document.getElementById("overlay");
+
+    menuBtn.addEventListener("click", () => {
+      menu.classList.toggle("-translate-x-full");
+      overlay.classList.toggle("hidden");
+    });
+
+    overlay.addEventListener("click", () => {
+      menu.classList.add("-translate-x-full");
+      overlay.classList.add("hidden");
+    });
+  </script>
+
+</body>
+</html>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto - Piñatería Neza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+
+      /* Fondo animado con emojis flotando */
+      body {
+        background-color: #ffe4e6; /* rosa suave */
+        overflow: hidden;
+      }
+
+      .emoji {
+        position: absolute;
+        font-size: 2rem;
+        animation: float 7s linear infinite;
+        opacity: 0.8;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) rotate(0deg);
+          opacity: 0;
+        }
+        20% {
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(-100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen flex flex-col justify-center items-center text-center p-6 relative"
+  >
+    <!-- Emojis flotantes -->
+    <span class="emoji" style="left: 10%; animation-delay: 1s">🎈</span>
+    <span class="emoji" style="left: 25%; animation-delay: 2s">🎊</span>
+    <span class="emoji" style="left: 40%; animation-delay: 0.5s">🎉</span>
+    <span class="emoji" style="left: 55%; animation-delay: 0s">🎈</span>
+    <span class="emoji" style="left: 70%; animation-delay: 0.7s">🎂</span>
+    <span class="emoji" style="left: 85%; animation-delay: 3s">🎊</span>
+
+    <!-- Contenido -->
+    <div class="bg-white p-6 rounded-2xl shadow-md w-full max-w-md z-10">
+      <h1 class="text-3xl font-bold text-pink-700 mb-6">Contáctanos</h1>
+
+      <h2 class="text-xl font-semibold text-pink-600 mb-3">Redes Sociales</h2>
+      <p class="mb-2">
+        📷 Instagram:
+        <a href="#" class="text-pink-500 underline">@pinateria_neza</a>
+      </p>
+      <p class="mb-4">
+        📘 Facebook:
+        <a href="#" class="text-pink-500 underline">Piñatería Neza Oficial</a>
+      </p>
+
+      <h2 class="text-xl font-semibold text-pink-600 mb-3 mt-4">WhatsApp</h2>
+      <p class="mb-4">
+        📱
+        <a href="https://wa.me/5615868610" class="text-pink-500 underline"
+          >Enviar mensaje por WhatsApp</a
+        >
+      </p>
+
+      <h2 class="text-xl font-semibold text-pink-600 mb-3 mt-4">
+        Número de Celular
+      </h2>
+      <p class="mb-2">📞5615868610</p>
+    </div>
+  </body>
+  <div class="text-center mt-6">
+    <a
+      href="principal.html"
+      class="border-4 border-red-500 text-red-600 px-8 py-4 rounded-xl text-2xl font-bold hover:bg-red-100 transition-transform hover:scale-105"
+    >
+      ⬅ Volver a la tienda ⬅
+    </a>
+  </div>
+</html>

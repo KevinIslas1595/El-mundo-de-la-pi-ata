@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El mundo de las piñatas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-yellow-50 text-gray-800 font-sans">
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Encabezado tipo Mango</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Encabezado fijo -->
+  <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md p-4 flex items-center justify-between z-50">
+    <!-- Botón hamburguesa (izquierda) -->
+    <button id="menuBtn" class="text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
+
+  <!-- Logo centrado con enlace -->
+<a href="principal.html" class="text-xl font-bold absolute left-1/2 transform -translate-x-1/2 hover:underline cursor-pointer">
+  🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
+</a>
+    <!-- Carrito (derecha) -->
+    <a href="carrito.html" class="text-2xl hover:scale-110 transition-transform">🛒</a>
+  </header>
+
+  <!-- Menú lateral -->
+  <nav id="menu" class="fixed top-0 left-0 w-64 h-full bg-purple-300 shadow-lg transform -translate-x-full transition-transform duration-300 z-50 pt-20 p-4">
+    <h2 class="text-lg font-bold mb-5">Categorías</h2>
+    <ul class="space-y-3">
+      <li><a href="principal.html" class="block text-gray-800 hover:text-pink-500">🥳 Pagina de inicio🥳</a></li>
+      <li><a href="index.html" class="block text-gray-800 hover:text-pink-500">🎉Piñatas🎉</a></li>
+      <li><a href="Globos.html" class="block text-gray-800 hover:text-pink-500">🎈 Globos🎈</a></li>
+      <li><a href="Velas.html" class="block text-gray-800 hover:text-pink-500">🎂Velas🎂</a></li>
+      <li><a href="Contacto.html" class="block text-gray-800 hover:text-pink-500">📞 Contacto📞</a></li>
+      <li><a href="login.html" class="block text-gray-800 hover:text-pink-500">Usuario Administrador</a></li>
+    </ul>
+  </nav>
+
+  <!-- Fondo oscuro al abrir el menú -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+
+
+
+  <!-- Script para abrir/cerrar menú -->
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const menu = document.getElementById("menu");
+    const overlay = document.getElementById("overlay");
+
+    menuBtn.addEventListener("click", () => {
+      menu.classList.toggle("-translate-x-full");
+      overlay.classList.toggle("hidden");
+    });
+
+    overlay.addEventListener("click", () => {
+      menu.classList.add("-translate-x-full");
+      overlay.classList.add("hidden");
+    });
+  </script>
+
+</body>
+</html>
+
+  
+
+    
+    <!-- Botón de WhatsApp flotante -->
+    <a
+      href="https://wa.me/5615868610"
+      class="fixed bottom-5 right-5 z-50"
+      target="_blank"
+      title="Chatea conmigo en WhatsApp"
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
+        alt="WhatsApp"
+        class="w-16 h-16 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
+      />
+    </a>
+
+</a>
+    
+    <!-- Galería de Piñatas -->
+    <h1 class="text-3xl font-bold text-center mt-6">Galería de Piñatas</h1>
+
+    <div
+      class="w-full px-4 mt-8 relative group overflow-hidden rounded-2xl shadow-xl"
+      onmouseenter="pausar()"
+      onmouseleave="reanudar()"
+    >
+      <div
+        id="slider"
+        class="flex transition-transform duration-700 ease-in-out"
+      >
+        <img
+          src="img/alex.jpg"
+          class="w-full h-96 object-cover bg-white flex-shrink-0"
+          alt="Piñata 1"
+        />
+        <img
+          src="img/alex2.jpg"
+          class="w-full h-96 object-cover bg-white flex-shrink-0"
+          alt="Piñata 2"
+        />
+        <img
+          src="img/alex3.jpg"
+          class="w-full h-96 object-cover bg-white flex-shrink-0"
+          alt="Piñata 3"
+        />
+        <img
+          src="img/Hello Kitty.jpg"
+          class="w-full h-96 object-cover bg-white flex-shrink-0"
+          alt="Piñata 4"
+        />
+        <img
+          src="img/alex5.jpg"
+          class="w-full h-96 object-cover bg-white flex-shrink-0"
+          alt="Piñata 5"
+        />
+        <img
+          src="img/alex6.jpg"
+          class="w-full h-96 object-cover bg-white flex-shrink-0"
+          alt="Piñata 6"
+        />
+        <img
+          src="img/alex7.jpg"
+          class="w-full h-96 object-cover bg-white flex-shrink-0"
+          alt="Piñata 7"
+        />
+        <img
+          src="img/bob esponja.jpg"
+          class="w-full h-96 object-cover bg-white flex-shrink-0"
+          alt="Piñata 8"
+        />
+        <img
+          src="img/mario.jpg"
+          class="w-full h-96 object-cover bg-white flex-shrink-0"
+          alt="Piñata Mario"
+        />
+      </div>
+
+      <!-- Botones -->
+      <button
+        onclick="mover(-1)"
+        class="absolute top-1/2 left-3 -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-70"
+      >
+        &#10094;
+      </button>
+      <button
+        onclick="mover(1)"
+        class="absolute top-1/2 right-3 -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-70"
+      >
+        &#10095;
+      </button>
+
+      <!-- Indicadores -->
+      <div
+        class="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-2"
+      >
+        <!-- Se generan automáticamente -->
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const total = document.getElementById("slider").children.length;
+            const indicadores = document.querySelector(".absolute.flex.gap-2");
+            for (let i = 0; i < total; i++) {
+              const span = document.createElement("span");
+              span.className =
+                "dot w-3 h-3 bg-white rounded-full opacity-50 hover:opacity-100 cursor-pointer";
+              span.setAttribute("onclick", `irA(${i})`);
+              indicadores.appendChild(span);
+            }
+            actualizarVista();
+          });
+        </script>
+      </div>
+    </div>
+
+    <!-- Script carrusel -->
+    <script>
+      const slider = document.getElementById("slider");
+      let dots;
+      const total = slider.children.length;
+      let index = 0;
+      let intervalo = setInterval(() => mover(1), 3000);
+
+      function actualizarVista() {
+        slider.style.transform = `translateX(-${index * 100}%)`;
+        dots = document.querySelectorAll(".dot");
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("opacity-100", i === index);
+          dot.classList.toggle("opacity-50", i !== index);
+        });
+      }
+
+      function mover(dir) {
+        index = (index + dir + total) % total;
+        actualizarVista();
+      }
+
+      function irA(i) {
+        index = i;
+        actualizarVista();
+      }
+
+      function pausar() {
+        clearInterval(intervalo);
+      }
+
+      function reanudar() {
+        intervalo = setInterval(() => mover(1), 3000);
+      }
+    </script>
+  </body>
+</html>
+<!-- Información adicional -->
+
+<section
+  class="mt-10 max-w-3xl mx-auto bg-pink-100 p-6 rounded-xl shadow-lg text-center"
+>
+  <h2 class="text-2xl font-semibold text-pink-800 mb-2">
+    🎈 Personaliza tu Piñata 🎈
+  </h2>
+  <p class="text-md text-gray-700 leading-relaxed">
+    En <strong>Piñatas Alex</strong>, creamos piñatas únicas y personalizadas
+    para todo tipo de eventos: cumpleaños, bautizos, fiestas temáticas y más.
+    Contáctanos vía WhatsApp para cotizaciones, entregas o ideas especiales.
+  </p>
+  <p class="mt-4 text-sm text-pink-700 italic">
+    ¡Tu imaginación es el límite! 🎉
+  </p>
+</section>
+<!-- Esferas interactivas más grandes con giro -->
+<section class="mt-12 max-w-5xl mx-auto px-4 text-center">
+  <h2 class="text-2xl font-semibold text-pink-800 mb-6">
+    🎯 Explora nuestros productos 🎯
+  </h2>
+
+  <div
+    class="flex flex-wrap justify-center gap-6">
+  
+    <!-- Esfera 1 Piñatas -->
+    <a
+      href="index.html"
+      class="flex flex-col items-center group"
+    >
+      <div
+        class="w-32 h-32 bg-pink-300 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300"
+      >
+        <img
+          src="img/PIÑATA ANIMADA.png"
+          alt="PIÑATAS"
+          class="w-16 h-16 transition-transform duration-700 group-hover:rotate-[360deg]"
+        />
+      </div>
+      <span class="mt-3 text-base text-gray-700 group-hover:text-pink-600 font-bold">PIÑATAS</span>
+      
+    </a>
+
+    <!-- Esfera 2 Globos -->
+    <a href="Globos.html" class="flex flex-col items-center group">
+      <div
+        class="w-32 h-32 bg-yellow-300 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300"
+      >
+        <img
+          src="img/GLOBOS ANIMADO.png"
+          alt="GLOBOS"
+          class="w-16 h-16 transition-transform duration-700 group-hover:rotate-[360deg]"
+        />
+      </div>
+      <span class="mt-3 text-base text-gray-700 group-hover:text-pink-600 font-bold"
+        >GLOBOS</span
+      >
+    </a>
+
+    <!-- Esfera 3 Velas-->
+    <a
+      href="Velas.html"
+      class="flex flex-col items-center group"
+    >
+      <div
+        class="w-32 h-32 bg-green-300 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300"
+      >
+        <img
+          src="img/velas nuevo.png"
+          alt="VELAS"
+          class="w-16 h-16 transition-transform duration-700 group-hover:rotate-[360deg]"
+        />
+      </div>
+      <span class="mt-3 text-base text-gray-700 group-hover:text-pink-600 font-bold"
+        >VELAS</span
+      >
+    </a>
+
+    
+  </div>
+  <!-- Botón de WhatsApp adicional -->
+      <div class="text-center mt-10">
+        <a
+          href="https://wa.me/5615868610?text=Hola, estoy interesado en algunos productos que vi en la pagina web , el mundo de la piñata"
+          target="_blank"
+          class="bg-green-500 text-white px-6 py-3 rounded-full text-lg hover:bg-green-600 transition"
+        >
+          📱 Hacer pedido por WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <!-- Ubicación -->
+    <section class="text-center py-6">
+      <h2 class="text-xl mb-4">
+        👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
+      </h2>
+      <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank">
+        <img src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto w-104" />
+     
+</section>
+   <!-- Footer  barra final -->
+    <footer class="bg-red-600 text-white text-center py-2 mt-10">
+  <a href="Contacto.html" class="inline-block hover:underline cursor-pointer">
+    © 2025 🎈EL MUNDO DE LA PIÑATA🎈🎉 Todos los derechos reservados.
+  </a>
+</footer>
+  </body>
+</html>

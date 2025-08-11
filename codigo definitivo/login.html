@@ -1,0 +1,62 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acceso Super Usuario</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffe4e1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .login {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+      input {
+        padding: 10px;
+        margin: 10px 0;
+        width: 100%;
+      }
+      button {
+        padding: 10px;
+        background: #ff3366;
+        color: white;
+        border: none;
+        width: 100%;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login">
+      <h2>🔒 Acceso Super Usuario</h2>
+      <input type="password" id="clave" placeholder="Ingresa la contraseña" />
+      <button onclick="verificar()">Entrar</button>
+      <p id="mensaje" style="color: red"></p>
+    </div>
+
+    <script>
+      function verificar() {
+        const clave = document.getElementById("clave").value;
+        const claveCorrecta = "2gomitas"; // Cambia esto por tu contraseña CONTRASEÑA DE ACCESOS
+
+        if (clave === claveCorrecta) {
+          window.location.href = "admin.html";
+        } else {
+          document.getElementById("mensaje").textContent =
+            "⚠️ Contraseña incorrecta.";
+        }
+      }
+    </script>
+  </body>
+</html>
