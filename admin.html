@@ -4,9 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Administrador de productos</title>
+    <meta name="robots" content="noindex, nofollow" />
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Candado: si no hay sesión iniciada, manda al login antes de
+         que se llegue a dibujar nada de la página. -->
+    <script src="js/auth.js"></script>
+    <script>
+      protegerPagina();
+    </script>
   </head>
   <body class="bg-gray-100 p-6">
+    <div class="max-w-4xl mx-auto flex justify-end mb-2">
+      <button
+        onclick="cerrarSesion()"
+        class="text-sm text-gray-600 hover:text-red-600 hover:underline"
+      >
+        🔓 Cerrar sesión
+      </button>
+    </div>
+
     <h1 class="text-3xl font-bold text-center mb-6 text-pink-600">
       🎯 Administrador de productos 🎯
     </h1>
@@ -24,7 +41,7 @@
         type="text"
         id="nombre"
         placeholder="Nombre del producto"
-        class="w-full p- border rounded"
+        class="w-full p-2 border rounded"
         required
       />
       <input
@@ -151,86 +168,20 @@
       }
 
       mostrarProductos(); // Mostrar al cargar
+
+      // Volver a dibujar la lista al cambiar de categoría
+      document
+        .getElementById("categoria")
+        .addEventListener("change", mostrarProductos);
     </script>
+
+    <div class="text-center mt-6 mb-10">
+      <a
+        href="principal.html"
+        class="inline-block border-4 border-red-500 text-red-600 px-8 py-4 rounded-xl text-2xl font-bold hover:bg-red-100 transition-transform hover:scale-105"
+      >
+        ⬅ Volver a la tienda ⬅
+      </a>
+    </div>
   </body>
 </html>
-
-<div class="text-center mt-6">
-  <a
-    href="principal.html"
-    class="border-4 border-red-500 text-red-600 px-8 py-4 rounded-xl text-2xl font-bold hover:bg-red-100 transition-transform hover:scale-105"
-  >
-    ⬅ Volver a la tienda ⬅
-  </a>
-</div>
-
-<script>
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  function saveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
-
-  function renderCart() {
-    const list = document.getElementById("cartItems");
-    const totalEl = document.getElementById("total");
-    const waLink = document.getElementById("whatsappLink");
-
-    list.innerHTML = "";
-    let total = 0;
-    let mensaje = "Hola, quiero pedir los siguientes productos:\n";
-
-    cart.forEach((item, index) => {
-      const subtotal = item.price * item.qty;
-      total += subtotal;
-      mensaje += `- ${item.qty} x ${item.name} = $${subtotal}\n`;
-
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <div class="flex justify-between items-center bg-gray-50 p-3 rounded shadow">
-          <div>
-            <span class="font-semibold">${item.name}</span><br>
-            <div class="flex items-center gap-2 mt-2">
-              <button onclick="decreaseQty(${index})" class="px-2 bg-red-500 text-white rounded">-</button>
-              <span>${item.qty}</span>
-              <button onclick="increaseQty(${index})" class="px-2 bg-green-500 text-white rounded">+</button>
-            </div>
-          </div>
-          <div class="text-right">
-            <p>$${subtotal}</p>
-            <button onclick="removeItem(${index})" class="text-red-500 text-sm hover:underline mt-2 block">Eliminar</button>
-          </div>
-        </div>
-      `;
-      list.appendChild(li);
-    });
-
-    totalEl.textContent = total;
-    const encodedMsg = encodeURIComponent(mensaje + `\nTotal: $${total}`);
-    waLink.href = `https://wa.me/5615868610?text=${encodedMsg}`;
-  }
-
-  function increaseQty(index) {
-    cart[index].qty += 1;
-    saveCart();
-    renderCart();
-  }
-
-  function decreaseQty(index) {
-    if (cart[index].qty > 1) {
-      cart[index].qty -= 1;
-    } else {
-      cart.splice(index, 1);
-    }
-    saveCart();
-    renderCart();
-  }
-
-  function removeItem(index) {
-    cart.splice(index, 1);
-    saveCart();
-    renderCart();
-  }
-
-  renderCart();
-</script>

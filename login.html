@@ -1,10 +1,10 @@
-<!-- login.html -->
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Acceso Super Usuario</title>
+    <title>Acceso Super Usuario | El Mundo de la Piñata</title>
+    <meta name="robots" content="noindex, nofollow" />
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -12,19 +12,27 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 100vh;
+        margin: 0;
+        padding: 16px;
+        box-sizing: border-box;
       }
       .login {
         background: white;
-        padding: 20px;
+        padding: 24px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         text-align: center;
+        width: 100%;
+        max-width: 340px;
       }
       input {
         padding: 10px;
         margin: 10px 0;
         width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
       }
       button {
         padding: 10px;
@@ -34,29 +42,74 @@
         width: 100%;
         cursor: pointer;
         border-radius: 5px;
+        font-size: 1rem;
+      }
+      button:hover {
+        background: #e62e5c;
+      }
+      button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+      .volver {
+        display: inline-block;
+        margin-top: 16px;
+        color: #666;
+        font-size: 0.9rem;
       }
     </style>
   </head>
   <body>
-    <div class="login">
+    <main class="login">
       <h2>🔒 Acceso Super Usuario</h2>
-      <input type="password" id="clave" placeholder="Ingresa la contraseña" />
-      <button onclick="verificar()">Entrar</button>
-      <p id="mensaje" style="color: red"></p>
-    </div>
 
+      <!-- Un <form> de verdad: así funciona la tecla Enter -->
+      <form id="formLogin">
+        <label for="clave" class="sr-only" hidden>Contraseña</label>
+        <input
+          type="password"
+          id="clave"
+          placeholder="Ingresa la contraseña"
+          autocomplete="current-password"
+          required
+        />
+        <button type="submit" id="btnEntrar">Entrar</button>
+      </form>
+
+      <p id="mensaje" role="alert" style="color: red; white-space: pre-line"></p>
+      <a href="principal.html" class="volver">⬅ Volver a la tienda</a>
+    </main>
+
+    <script src="js/auth.js"></script>
     <script>
-      function verificar() {
-        const clave = document.getElementById("clave").value;
-        const claveCorrecta = "2gomitas"; // Cambia esto por tu contraseña CONTRASEÑA DE ACCESOS
+      const form = document.getElementById("formLogin");
+      const campo = document.getElementById("clave");
+      const boton = document.getElementById("btnEntrar");
+      const mensaje = document.getElementById("mensaje");
 
-        if (clave === claveCorrecta) {
-          window.location.href = "admin.html";
-        } else {
-          document.getElementById("mensaje").textContent =
-            "⚠️ Contraseña incorrecta.";
+      /* Si ya hay sesión abierta, entrar directo */
+      if (sesionActiva()) window.location.replace("admin.html");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        mensaje.textContent = "";
+        boton.disabled = true;
+
+        try {
+          if (await claveCorrecta(campo.value)) {
+            iniciarSesion();
+            window.location.replace("admin.html");
+          } else {
+            mensaje.textContent = "⚠️ Contraseña incorrecta.";
+            campo.value = "";
+            campo.focus();
+          }
+        } catch (error) {
+          mensaje.textContent = "⚠️ " + error.message;
+        } finally {
+          boton.disabled = false;
         }
-      }
+      });
     </script>
   </body>
 </html>
