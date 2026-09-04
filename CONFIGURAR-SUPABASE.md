@@ -94,9 +94,12 @@ create policy "gestionar fotos"
 
 1. Menú izquierdo → **Authentication** → **Users** → **Add user** →
    **Create new user**.
-2. Pon tu correo y una contraseña **larga** (4-5 palabras sueltas, tipo
-   `globo-verde-martes-42`, es más segura y más fácil de recordar que
-   `21Gomitas`).
+2. Pon tu correo y una contraseña **larga**: 4-5 palabras sueltas, tipo
+   `globo-verde-martes-42`. Son más seguras y más fáciles de recordar que
+   una corta con números.
+
+   > No reutilices la contraseña que usabas antes en el panel: estuvo
+   > publicada en el historial de este repositorio.
 3. Marca **Auto Confirm User** para no tener que validar el correo.
 4. **Create user**.
 
