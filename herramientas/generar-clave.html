@@ -57,16 +57,19 @@
     </p>
 
     <ol>
-      <li>Escribe abajo la contraseña nueva que quieras usar.</li>
+      <li>Escribe abajo el usuario y la contraseña que quieras usar.</li>
       <li>Copia el código largo que aparece.</li>
       <li>
         Pégalo en <code>js/auth.js</code>, en la línea que dice
-        <code>const CLAVE_HASH = "…"</code>.
+        <code>const ACCESO_HASH = "…"</code>.
       </li>
     </ol>
 
-    <label for="clave"><strong>Contraseña nueva:</strong></label>
-    <input type="text" id="clave" placeholder="Escribe aquí tu contraseña" autocomplete="off" />
+    <label for="usuario"><strong>Usuario:</strong></label>
+    <input type="text" id="usuario" placeholder="Escribe aquí el usuario" autocomplete="off" />
+
+    <label for="clave"><strong>Contraseña:</strong></label>
+    <input type="text" id="clave" placeholder="Escribe aquí la contraseña" autocomplete="off" />
 
     <div id="resultado">El código aparecerá aquí…</div>
 
@@ -77,15 +80,20 @@
     </p>
 
     <script>
-      const campo = document.getElementById("clave");
+      const campoUsuario = document.getElementById("usuario");
+      const campoClave = document.getElementById("clave");
       const salida = document.getElementById("resultado");
 
-      campo.addEventListener("input", async () => {
-        const texto = campo.value;
-        if (!texto) {
-          salida.textContent = "El código aparecerá aquí…";
+      async function calcular() {
+        const usuario = campoUsuario.value.trim();
+        const clave = campoClave.value;
+        if (!usuario || !clave) {
+          salida.textContent =
+            "Rellena usuario y contraseña para ver el código…";
           return;
         }
+        /* Mismo formato que usa js/auth.js: "usuario:contraseña" */
+        const texto = (usuario + ":" + clave).normalize("NFC");
         if (!window.crypto || !window.crypto.subtle) {
           salida.textContent =
             "⚠️ Abre esta página con Live Server (http://localhost). " +
@@ -98,7 +106,10 @@
           .map((b) => b.toString(16).padStart(2, "0"))
           .join("");
         salida.textContent = hash;
-      });
+      }
+
+      campoUsuario.addEventListener("input", calcular);
+      campoClave.addEventListener("input", calcular);
     </script>
   </body>
 </html>

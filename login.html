@@ -65,11 +65,22 @@
 
       <!-- Un <form> de verdad: así funciona la tecla Enter -->
       <form id="formLogin">
-        <label for="clave" class="sr-only" hidden>Contraseña</label>
+        <label for="usuario" hidden>Usuario</label>
+        <input
+          type="text"
+          id="usuario"
+          placeholder="Usuario"
+          autocomplete="username"
+          autocapitalize="none"
+          spellcheck="false"
+          required
+        />
+
+        <label for="clave" hidden>Contraseña</label>
         <input
           type="password"
           id="clave"
-          placeholder="Ingresa la contraseña"
+          placeholder="Contraseña"
           autocomplete="current-password"
           required
         />
@@ -83,7 +94,8 @@
     <script src="js/auth.js"></script>
     <script>
       const form = document.getElementById("formLogin");
-      const campo = document.getElementById("clave");
+      const campoUsuario = document.getElementById("usuario");
+      const campoClave = document.getElementById("clave");
       const boton = document.getElementById("btnEntrar");
       const mensaje = document.getElementById("mensaje");
 
@@ -96,13 +108,15 @@
         boton.disabled = true;
 
         try {
-          if (await claveCorrecta(campo.value)) {
+          if (await accesoCorrecto(campoUsuario.value.trim(), campoClave.value)) {
             iniciarSesion();
             window.location.replace("admin.html");
           } else {
-            mensaje.textContent = "⚠️ Contraseña incorrecta.";
-            campo.value = "";
-            campo.focus();
+            /* Mensaje genérico a propósito: no revelamos cuál de los
+               dos está mal, para no ayudar a quien esté probando. */
+            mensaje.textContent = "⚠️ Usuario o contraseña incorrectos.";
+            campoClave.value = "";
+            campoClave.focus();
           }
         } catch (error) {
           mensaje.textContent = "⚠️ " + error.message;

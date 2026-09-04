@@ -18,12 +18,12 @@
    porque el panel solo guarda datos en el navegador de quien lo usa.
    ============================================================ */
 
-/* Hash SHA-256 de la contraseña.
-   ⚠️ CAMBIAR: abre herramientas/generar-clave.html, escribe tu nueva
-   contraseña, copia el hash que te dé y pégalo aquí abajo.
-   La contraseña anterior quedó publicada en el historial de GitHub. */
-const CLAVE_HASH =
-  "a9c0b152e53f42b0960a4afa244c11a98eddc7fec865b96af215281a566ee208";
+/* Hash SHA-256 de "usuario:contraseña".
+   Ni el usuario ni la contraseña aparecen escritos aquí.
+   Para cambiarlos: abre herramientas/generar-clave.html, escribe los
+   nuevos y pega aquí el código que te dé. */
+const ACCESO_HASH =
+  "aee8220365106f9d46a88999adc5053a085d7eadd9a1b20d8f97de0b128f0505";
 
 const DURACION_SESION_MS = 2 * 60 * 60 * 1000; // 2 horas
 
@@ -36,16 +36,17 @@ async function hashear(texto) {
         "o desde el sitio publicado en https://"
     );
   }
-  const datos = new TextEncoder().encode(texto);
+  /* normalize("NFC") hace que la "ñ" valga igual venga del teclado que venga */
+  const datos = new TextEncoder().encode(texto.normalize("NFC"));
   const buffer = await window.crypto.subtle.digest("SHA-256", datos);
   return Array.from(new Uint8Array(buffer))
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
 }
 
-/* ---------- Comprobar la contraseña ---------- */
-async function claveCorrecta(clave) {
-  return (await hashear(clave)) === CLAVE_HASH;
+/* ---------- Comprobar usuario + contraseña ---------- */
+async function accesoCorrecto(usuario, clave) {
+  return (await hashear(usuario + ":" + clave)) === ACCESO_HASH;
 }
 
 /* ---------- Estado de la sesión ---------- */
