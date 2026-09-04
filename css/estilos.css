@@ -1,0 +1,52 @@
+/* ============================================================
+   EL MUNDO DE LA PIÑATA — Estilos compartidos
+   Antes estaban repartidos en varios <style> dentro de <head>
+   anidados en medio de las páginas.
+   ============================================================ */
+
+/* ---------- Galería del panel de administración ---------- */
+.producto {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+}
+
+.producto img {
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- Miniaturas con deslizamiento (ficha de producto) ---------- */
+.active {
+  border: 2px solid #f87171;
+}
+
+.slide {
+  opacity: 0;
+  transform: translateX(0);
+  transition: all 0.4s ease-in-out;
+}
+
+.slide-left {
+  transform: translateX(-50px);
+}
+
+.slide-right {
+  transform: translateX(50px);
+}
+
+.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---------- Accesibilidad: respetar "reducir movimiento" ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

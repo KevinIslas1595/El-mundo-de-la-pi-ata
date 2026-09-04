@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Piñatas | El Mundo de la Piñata</title>
+  <meta name="description" content="Piñatas artesanales para toda ocasión: personajes, cumpleaños y fiestas. Pedidos por WhatsApp." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body class="bg-gray-100 pt-20">
+
 <!-- Encabezado fijo -->
   <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md p-4 flex items-center justify-between z-50">
     <!-- Botón hamburguesa (izquierda) -->
@@ -28,70 +41,6 @@
   <!-- Fondo oscuro al abrir el menú -->
   <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
 
-
-
-  <!-- Script para abrir/cerrar menú -->
-  <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const menu = document.getElementById("menu");
-    const overlay = document.getElementById("overlay");
-
-    menuBtn.addEventListener("click", () => {
-      menu.classList.toggle("-translate-x-full");
-      overlay.classList.toggle("hidden");
-    });
-
-    overlay.addEventListener("click", () => {
-      menu.classList.add("-translate-x-full");
-      overlay.classList.add("hidden");
-    });
-  </script>
-
-
-<script>
-  const categoria = "productos";
-  const productos = JSON.parse(localStorage.getItem(categoria)) || [];
-  const contenedor = document.getElementById("productos-grid");
-
-  productos.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "bg-white p-4 rounded-xl shadow-md text-center";
-    div.innerHTML = `
-      <img
-        src="${p.imagen}"
-        alt="${p.nombre}"
-        onclick="mostrarImagen('${p.imagen}')"
-        class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-      />
-      <h3 class="text-xl font-bold">${p.nombre}</h3>
-      <p class="text-red-600 mt-2 font-semibold">$${p.precio}</p>
-      <button onclick="addToCart('${p.nombre}', ${p.precio})"
-        class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">
-        Agregar al carrito
-      </button>
-    `;
-    contenedor.appendChild(div);
-  });
-</script>
-
-<!-- Modal para imagen grande -->
-<div id="modalImagen" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden" onclick="cerrarImagen()">
-  <img id="imagenGrande" class="max-w-full max-h-full rounded-xl shadow-2xl border-4 border-white" />
-</div>
-
-<script>
-  function mostrarImagen(src) {
-    document.getElementById("imagenGrande").src = src;
-    document.getElementById("modalImagen").classList.remove("hidden");
-  }
-  function cerrarImagen() {
-    document.getElementById("modalImagen").classList.add("hidden");
-  }
-</script>
-
-</body>
-</html>
-
     <!-- Botón de WhatsApp flotante -->
     <a
       href="https://wa.me/5615868610"
@@ -106,7 +55,7 @@
       />
     </a>
 
-</a>
+  <main>
 
     <!-- Galería de Piñatas -->
     <section class="py-10 px-6 max-w-6xl mx-auto">
@@ -546,44 +495,6 @@
           <p class="text-pink-600 mt-2 font-semibold">$200</p>
           <button onclick="addToCart('Piñata Nezuco M/3', 200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
         </div>
-        
-        
-<!-- Productos agregados desde admin -->
-<section class="py-10 px-6 w-full">
-  <h2 class="text-2xl font-semibold text-center mb-8">🎈 Nuestros productos nuevos 🎉</h2>
-
-  <div id="productos-admin" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-4">
-    <!-- Aquí se insertan dinámicamente los productos -->
-  </div>
-</section>
-
-<script>
-  // Leer productos guardados por el admin
-  const productos = JSON.parse(localStorage.getItem("productos")) || [];
-  const contenedor = document.getElementById("productos-admin");
-
-  productos.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "bg-white p-4 rounded-xl shadow-md text-center";
-
-    div.innerHTML = `
-      <img
-        src="${p.imagen}"
-        alt="${p.nombre}"
-        onclick="mostrarImagen('${p.imagen}')"
-        class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-      />
-      <h3 class="text-xl font-bold">${p.nombre}</h3>
-      <p class="text-red-600 mt-2 font-semibold">$${p.precio}</p>
-      <button onclick="addToCart('${p.nombre}', ${p.precio})" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">
-        Agregar al carrito
-      </button>
-    `;
-
-    contenedor.appendChild(div);
-  });
-</script>
-
 
         <!-- Producto 31 Dinosaurio -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
@@ -598,40 +509,7 @@
           <button onclick="addToCart('Piñata Dinosaurio', 180)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
         </div>
 
-      
-        <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Producto Labubu</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .active {
-      border: 2px solid #f87171;
-    }
-
-    .slide {
-      opacity: 0;
-      transform: translateX(0);
-      transition: all 0.4s ease-in-out;
-    }
-
-    .slide-left {
-      transform: translateX(-50px);
-    }
-
-    .slide-right {
-      transform: translateX(50px);
-    }
-
-    .show {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  </style>
-</head>
-<body class="bg-gray-100 p-6">
+        <!-- Producto 32 Labubu (con miniaturas) -->
   <div class="bg-white p-4 rounded-xl shadow-md text-center max-w-md mx-auto">
     <img
       id="mainImage"
@@ -651,7 +529,99 @@
     <p class="text-red-600 mt-2 font-semibold">$350</p>
     <button onclick="addToCart('Piñata Spiderman', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
   </div>
+      </div>
+    </section>
 
+<!-- Productos agregados desde admin -->
+<section class="py-10 px-6 w-full">
+  <h2 class="text-2xl font-semibold text-center mb-8">🎈 Nuestros productos nuevos 🎉</h2>
+
+  <div id="productos-admin" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-4">
+    <!-- Aquí se insertan dinámicamente los productos -->
+  </div>
+</section>
+
+  <!-- Carrito -->
+  <div class="max-w-2xl mx-auto bg-pink-300 rounded-xl shadow p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold">🛒 Tu carrito</h2>
+      <button onclick="clearCart()" class="text-red-500 hover:underline text-sm">Vaciar carrito</button>
+    </div>
+
+    <ul id="cartItems" class="space-y-3 text-left text-lg"></ul>
+    <p class="mt-4 text-xl font-bold">Total: $<span id="total">0</span></p>
+
+    <!-- Botón WhatsApp -->
+   <a id="whatsappLink" href="https://wa.me/5615868610" target="_blank" class="mt-4 inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded text-lg">
+     Enviar pedido por WhatsApp
+    </a>
+  </div>
+
+    <!-- Ubicación -->
+    <section class="text-center py-6">
+      <h2 class="text-xl mb-4">
+        👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
+      </h2>
+      <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank">
+        <img src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto w-104" />
+      </a>
+    </section>
+
+    <!-- Formulario de contacto -->
+    <section class="bg-white py-10 px-6">
+      <h2 class="text-2xl font-semibold text-center mb-6">Contáctanos</h2>
+      <form class="max-w-xl mx-auto grid gap-4">
+        <input
+          type="text"
+          placeholder="Tu nombre"
+          class="border p-3 rounded-md"
+          required
+        />
+        <input
+          type="email"
+          placeholder="Tu correo"
+          class="border p-3 rounded-md"
+          required
+        />
+        <textarea
+          placeholder="Mensaje o tipo de piñata"
+          rows="4"
+          class="border p-3 rounded-md"
+          required
+        ></textarea>
+        <button
+          type="submit"
+          class="bg-red-500 text-white py-3 rounded-md hover:bg-red-600 transition"
+        >
+          Enviar mensaje
+        </button>
+      </form>
+    </section>
+
+      <!-- Botón de WhatsApp adicional -->
+      <div class="text-center mt-10">
+        <a
+          href="https://wa.me/5615868610?text=Hola quiero realizar un pedido de su pagina EL MUNDO DE LA PIÑATA"
+          target="_blank"
+          class="bg-green-500 text-white px-6 py-3 rounded-full text-lg hover:bg-green-600 transition"
+        >
+          📱 Hacer pedido por WhatsApp
+        </a>
+      </div>
+
+  </main>
+
+  <!-- Footer  barra final -->
+    <footer class="bg-red-600 text-white text-center py-4 mt-10">
+      © 2025 🎉🎈EL MUNDO DE LA PIÑATA🎈🎉 Todos los derechos reservados.
+    </footer>
+
+  <!-- Modal para ver la imagen en grande (uno solo para toda la pagina) -->
+  <div id="modalImagen" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden" onclick="cerrarImagen()">
+    <img id="imagenGrande" class="max-w-full max-h-full rounded-xl shadow-2xl border-4 border-white" alt="Imagen ampliada" />
+  </div>
+
+  <script src="js/comunes.js"></script>
   <script>
     let currentIndex = 0;
 
@@ -688,429 +658,5 @@
       el.classList.add('active');
     }
   </script>
-
-<script>
-  const categoria = "productos";
-  const productos = JSON.parse(localStorage.getItem(categoria)) || [];
-  const contenedor = document.getElementById("productos-grid");
-
-  productos.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "bg-white p-4 rounded-xl shadow-md text-center";
-    div.innerHTML = `
-      <img
-        src="${p.imagen}"
-        alt="${p.nombre}"
-        onclick="mostrarImagen('${p.imagen}')"
-        class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-      />
-      <h3 class="text-xl font-bold">${p.nombre}</h3>
-      <p class="text-red-600 mt-2 font-semibold">$${p.precio}</p>
-      <button onclick="addToCart('${p.nombre}', ${p.precio})"
-        class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">
-        Agregar al carrito
-      </button>
-    `;
-    contenedor.appendChild(div);
-  });
-</script>
-
-<!-- Modal para imagen grande -->
-<div id="modalImagen" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden" onclick="cerrarImagen()">
-  <img id="imagenGrande" class="max-w-full max-h-full rounded-xl shadow-2xl border-4 border-white" />
-</div>
-
-<script>
-  function mostrarImagen(src) {
-    document.getElementById("imagenGrande").src = src;
-    document.getElementById("modalImagen").classList.remove("hidden");
-  }
-  function cerrarImagen() {
-    document.getElementById("modalImagen").classList.add("hidden");
-  }
-</script>
-
-</body>
-</html>
-
- <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Productos</title>
-  <style>
-    .producto {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin: 10px;
-      display: inline-block;
-      width: 200px;
-      text-align: center;
-    }
-    .producto img {
-      width: 100%;
-      height: auto;
-    }
-  </style>
-
-
-      <!-- MODAL IMAGEN PANTALLA COMPLETA -->
-<div
-  id="modalImagen"
-  class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden"
-  onclick="cerrarImagen()"
->
-  <img
-    id="imagenGrande"
-    class="max-w-full max-h-full rounded-xl shadow-2xl border-4 border-white"
-  />
-</div>
-
-<!-- SCRIPT -->
-<script>
-  function mostrarImagen(src) {
-    document.getElementById("imagenGrande").src = src;
-    document.getElementById("modalImagen").classList.remove("hidden");
-  }
-
-  function cerrarImagen() {
-    document.getElementById("modalImagen").classList.add("hidden");
-  }
-</script>
-      </div>
-
-
-  <!-- Icono de carrito -->
-  <div class="fixed top-4 right-4 bg-white shadow px-4 py-2 rounded-xl flex items-center gap-2">
-    <span class="text-xl">🛒</span>
-    <span id="cartCount" class="text-lg font-semibold">0</span>
-  </div>
-
- 
-  <!-- Carrito -->
-  <div class="max-w-2xl mx-auto bg-pink-300 rounded-xl shadow p-6">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold">🛒 Tu carrito</h2>
-      <button onclick="clearCart()" class="text-red-500 hover:underline text-sm">Vaciar carrito</button>
-    </div>
-
-    <ul id="cartItems" class="space-y-3 text-left text-lg"></ul>
-    <p class="mt-4 text-xl font-bold">Total: $<span id="total">0</span></p>
-
-    <!-- Botón WhatsApp -->
-   <a id="whatsappLink" href="https://wa.me/5615868610" target="_blank" class="mt-4 inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded text-lg">
-     Enviar pedido por WhatsApp
-    </a>
-  </div>
-
-  <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    function saveCart() {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
-
-    function addToCart(name, price) {
-      const item = cart.find(p => p.name === name);
-      if (item) {
-        item.qty += 1;
-      } else {
-        cart.push({ name, price, qty: 1 });
-      }
-
-      saveCart();
-      updateCart();
-
-      Swal.fire({
-        title: '¡Agregado!',
-        text: `${name} fue agregado al carrito`,
-        icon: 'success',
-        timer: 1200,
-        showConfirmButton: false
-      });
-    }
-
-    function removeFromCart(name) {
-      cart = cart.filter(p => p.name !== name);
-      saveCart();
-      updateCart();
-    }
-
-    function changeQty(name, qty) {
-      const item = cart.find(p => p.name === name);
-      if (item) {
-        item.qty = qty <= 0 ? 1 : qty;
-        saveCart();
-        updateCart();
-      }
-    }
-
-    function clearCart() {
-      Swal.fire({
-        title: '¿Vaciar carrito?',
-        text: 'Esto eliminará todos los productos',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sí, vaciar',
-        cancelButtonText: 'Cancelar'
-      }).then(result => {
-        if (result.isConfirmed) {
-          cart = [];
-          saveCart();
-          updateCart();
-        }
-      });
-    }
-
-    function updateCart() {
-      const list = document.getElementById('cartItems');
-      const count = document.getElementById('cartCount');
-      list.innerHTML = '';
-      let total = 0;
-      let countItems = 0;
-
-      cart.forEach(item => {
-        const itemTotal = item.price * item.qty;
-        total += itemTotal;
-        countItems += item.qty;
-
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <div class="flex justify-between items-center">
-            <div>
-              <span class="font-semibold">${item.name}</span><br>
-              <input type="number" min="1" value="${item.qty}" onchange="changeQty('${item.name}', this.value)" class="w-16 mt-1 px-2 py-1 border rounded"/>
-            </div>
-            <div class="text-right">
-              <p>$${itemTotal}</p>
-              <button onclick="removeFromCart('${item.name}')" class="text-red-500 text-sm hover:underline">Eliminar</button>
-            </div>
-          </div>
-        `;
-        list.appendChild(li);
-      });
-
-      document.getElementById('total').textContent = total;
-      count.textContent = countItems;
-
-      // WhatsApp link
-      let msg = "Hola, quiero pedir los siguientes productos que vi en  tu pagina:\n";
-      cart.forEach(p => {
-        msg += `- ${p.qty} x ${p.name} = $${p.qty * p.price}\n`;
-      });
-      msg += `\nTotal: $${total}`;
-      const encodedMsg = encodeURIComponent(msg);
-      const phone = "5615868610"; // Tu número de WhatsApp
-      document.getElementById('whatsappLink').href = `https://wa.me/${phone}?text=${encodedMsg}`;
-    }
-
-    updateCart(); // Inicializar
-  </script>
-
-<script>
-  const categoria = "productos";
-  const productos = JSON.parse(localStorage.getItem(categoria)) || [];
-  const contenedor = document.getElementById("productos-grid");
-
-  productos.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "bg-white p-4 rounded-xl shadow-md text-center";
-    div.innerHTML = `
-      <img
-        src="${p.imagen}"
-        alt="${p.nombre}"
-        onclick="mostrarImagen('${p.imagen}')"
-        class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-      />
-      <h3 class="text-xl font-bold">${p.nombre}</h3>
-      <p class="text-red-600 mt-2 font-semibold">$${p.precio}</p>
-      <button onclick="addToCart('${p.nombre}', ${p.precio})"
-        class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">
-        Agregar al carrito
-      </button>
-    `;
-    contenedor.appendChild(div);
-  });
-</script>
-
-<!-- Modal para imagen grande -->
-<div id="modalImagen" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden" onclick="cerrarImagen()">
-  <img id="imagenGrande" class="max-w-full max-h-full rounded-xl shadow-2xl border-4 border-white" />
-</div>
-
-<script>
-  function mostrarImagen(src) {
-    document.getElementById("imagenGrande").src = src;
-    document.getElementById("modalImagen").classList.remove("hidden");
-  }
-  function cerrarImagen() {
-    document.getElementById("modalImagen").classList.add("hidden");
-  }
-</script>
-
-</body>
-</html>
-
-
-      <!-- Botón de WhatsApp adicional -->
-      <div class="text-center mt-10">
-        <a
-          href="https://wa.me/5615868610?text=Hola quiero realizar un pedido de su pagina EL MUNDO DE LA PIÑATA"
-          target="_blank"
-          class="bg-green-500 text-white px-6 py-3 rounded-full text-lg hover:bg-green-600 transition"
-        >
-          📱 Hacer pedido por WhatsApp
-        </a>
-      </div>
-    </section>
-
-    
-
-    <!-- Formulario de contacto -->
-    <section class="bg-white py-10 px-6">
-      <h2 class="text-2xl font-semibold text-center mb-6">Contáctanos</h2>
-      <form class="max-w-xl mx-auto grid gap-4">
-        <input
-          type="text"
-          placeholder="Tu nombre"
-          class="border p-3 rounded-md"
-          required
-        />
-        <input
-          type="email"
-          placeholder="Tu correo"
-          class="border p-3 rounded-md"
-          required
-        />
-        <textarea
-          placeholder="Mensaje o tipo de piñata"
-          rows="4"
-          class="border p-3 rounded-md"
-          required
-        ></textarea>
-        <button
-          type="submit"
-          class="bg-red-500 text-white py-3 rounded-md hover:bg-red-600 transition"
-        >
-          Enviar mensaje
-        </button>
-      </form>
-    </section>
-
-  
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Carrito Mejorado</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body class="bg-gray-100 p-6 relative">
-
-    <!-- Ubicación -->
-    <section class="text-center py-6">
-      <h2 class="text-xl mb-4">
-        👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
-      </h2>
-      <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank">
-        <img src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto w-104" />
-      
-      
-
-        
-    </div>
-  
-<script>
-  const categoria = "productos";
-  const productos = JSON.parse(localStorage.getItem(categoria)) || [];
-  const contenedor = document.getElementById("productos-grid");
-
-  productos.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "bg-white p-4 rounded-xl shadow-md text-center";
-    div.innerHTML = `
-      <img
-        src="${p.imagen}"
-        alt="${p.nombre}"
-        onclick="mostrarImagen('${p.imagen}')"
-        class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-      />
-      <h3 class="text-xl font-bold">${p.nombre}</h3>
-      <p class="text-red-600 mt-2 font-semibold">$${p.precio}</p>
-      <button onclick="addToCart('${p.nombre}', ${p.precio})"
-        class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">
-        Agregar al carrito
-      </button>
-    `;
-    contenedor.appendChild(div);
-  });
-</script>
-
-<!-- Modal para imagen grande -->
-<div id="modalImagen" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden" onclick="cerrarImagen()">
-  <img id="imagenGrande" class="max-w-full max-h-full rounded-xl shadow-2xl border-4 border-white" />
-</div>
-
-<script>
-  function mostrarImagen(src) {
-    document.getElementById("imagenGrande").src = src;
-    document.getElementById("modalImagen").classList.remove("hidden");
-  }
-  function cerrarImagen() {
-    document.getElementById("modalImagen").classList.add("hidden");
-  }
-</script>
-
-</body>
-</html>
-  <!-- Footer  barra final -->
-    <footer class="bg-red-600 text-white text-center py-4 mt-10">
-      © 2025 🎉🎈EL MUNDO DE LA PIÑATA🎈🎉 Todos los derechos reservados.
-    </footer>
-  
-<script>
-  const categoria = "productos";
-  const productos = JSON.parse(localStorage.getItem(categoria)) || [];
-  const contenedor = document.getElementById("productos-grid");
-
-  productos.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "bg-white p-4 rounded-xl shadow-md text-center";
-    div.innerHTML = `
-      <img
-        src="${p.imagen}"
-        alt="${p.nombre}"
-        onclick="mostrarImagen('${p.imagen}')"
-        class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-      />
-      <h3 class="text-xl font-bold">${p.nombre}</h3>
-      <p class="text-red-600 mt-2 font-semibold">$${p.precio}</p>
-      <button onclick="addToCart('${p.nombre}', ${p.precio})"
-        class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">
-        Agregar al carrito
-      </button>
-    `;
-    contenedor.appendChild(div);
-  });
-</script>
-
-<!-- Modal para imagen grande -->
-<div id="modalImagen" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden" onclick="cerrarImagen()">
-  <img id="imagenGrande" class="max-w-full max-h-full rounded-xl shadow-2xl border-4 border-white" />
-</div>
-
-<script>
-  function mostrarImagen(src) {
-    document.getElementById("imagenGrande").src = src;
-    document.getElementById("modalImagen").classList.remove("hidden");
-  }
-  function cerrarImagen() {
-    document.getElementById("modalImagen").classList.add("hidden");
-  }
-</script>
-
 </body>
 </html>
