@@ -43,6 +43,80 @@
   transform: translateX(0);
 }
 
+/* ============================================================
+   FONDOS ANIMADOS
+   Antes usaban position:absolute + overflow:hidden en el body, lo que
+   bloqueaba el scroll y podía tapar botones. Con position:fixed y
+   pointer-events:none se ven igual, sin romper nada.
+   ============================================================ */
+
+/* ---------- Globos flotando (página del carrito) ---------- */
+.globo {
+  position: fixed;
+  width: 50px;
+  height: 70px;
+  background: radial-gradient(circle at 30% 30%, #f87171, #e11d48);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0.8;
+  animation: flotar 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes flotar {
+  0% {
+    transform: translateY(100vh) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
+}
+
+/* ---------- Emojis flotando (página de contacto) ---------- */
+body.contacto {
+  background-color: #ffe4e6; /* rosa suave */
+}
+
+.emoji {
+  position: fixed;
+  font-size: 2rem;
+  animation: float 7s linear infinite;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* El contenido siempre por encima de los fondos animados */
+header,
+main,
+footer,
+nav {
+  position: relative;
+  z-index: 1;
+}
+
 /* ---------- Accesibilidad: respetar "reducir movimiento" ---------- */
 @media (prefers-reduced-motion: reduce) {
   * {

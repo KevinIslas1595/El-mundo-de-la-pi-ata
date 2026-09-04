@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-      <!-- Encabezado fijo -->
-  <header class="fixed top-0 left-0 w-full bg-white shadow-md p-4 flex items-center justify-between z-50">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto | El Mundo de la Piñata</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body class="contacto pt-20">
+
+<!-- Encabezado fijo -->
+  <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md p-4 flex items-center justify-between z-50">
     <!-- Botón hamburguesa (izquierda) -->
     <button id="menuBtn" class="text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
 
@@ -11,7 +20,7 @@
   🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
 </a>
     <!-- Carrito (derecha) -->
-    <a href="carrito.html" class="text-2xl hover:scale-110 transition-transform">🛒</a>
+    <a href="carrito.html" class="relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
   </header>
 
   <!-- Menú lateral -->
@@ -32,63 +41,9 @@
 
 
   <!-- Script para abrir/cerrar menú -->
-  <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const menu = document.getElementById("menu");
-    const overlay = document.getElementById("overlay");
+  
 
-    menuBtn.addEventListener("click", () => {
-      menu.classList.toggle("-translate-x-full");
-      overlay.classList.toggle("hidden");
-    });
-
-    overlay.addEventListener("click", () => {
-      menu.classList.add("-translate-x-full");
-      overlay.classList.add("hidden");
-    });
-  </script>
-
-</body>
-</html>
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacto - Piñatería Neza</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-
-      /* Fondo animado con emojis flotando */
-      body {
-        background-color: #ffe4e6; /* rosa suave */
-        overflow: hidden;
-      }
-
-      .emoji {
-        position: absolute;
-        font-size: 2rem;
-        animation: float 7s linear infinite;
-        opacity: 0.8;
-      }
-
-      @keyframes float {
-        0% {
-          transform: translateY(100vh) rotate(0deg);
-          opacity: 0;
-        }
-        20% {
-          opacity: 0.8;
-        }
-        100% {
-          transform: translateY(-100vh) rotate(360deg);
-          opacity: 0;
-        }
-      }
-    </style>
-  </head>
-  <body
-    class="min-h-screen flex flex-col justify-center items-center text-center p-6 relative"
-  >
-    <!-- Emojis flotantes -->
+<!-- Emojis flotantes -->
     <span class="emoji" style="left: 10%; animation-delay: 1s">🎈</span>
     <span class="emoji" style="left: 25%; animation-delay: 2s">🎊</span>
     <span class="emoji" style="left: 40%; animation-delay: 0.5s">🎉</span>
@@ -123,8 +78,7 @@
       </h2>
       <p class="mb-2">📞5615868610</p>
     </div>
-  </body>
-  <div class="text-center mt-6">
+<div class="text-center mt-6">
     <a
       href="principal.html"
       class="border-4 border-red-500 text-red-600 px-8 py-4 rounded-xl text-2xl font-bold hover:bg-red-100 transition-transform hover:scale-105"
@@ -132,4 +86,12 @@
       ⬅ Volver a la tienda ⬅
     </a>
   </div>
+
+  <!-- Modal para ver la imagen en grande (uno solo para toda la pagina) -->
+  <div id="modalImagen" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden" onclick="cerrarImagen()">
+    <img id="imagenGrande" class="max-w-full max-h-full rounded-xl shadow-2xl border-4 border-white" alt="Imagen ampliada" />
+  </div>
+
+  <script src="js/comunes.js"></script>
+</body>
 </html>

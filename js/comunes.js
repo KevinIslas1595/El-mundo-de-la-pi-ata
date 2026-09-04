@@ -140,6 +140,19 @@ function updateCart() {
   const list = document.getElementById("cartItems");
   if (list) {
     list.innerHTML = "";
+
+    /* Carrito vacío: antes se quedaba en blanco y parecía roto */
+    if (cart.length === 0) {
+      const vacio = document.createElement("li");
+      vacio.className = "text-center py-6 text-gray-700";
+      vacio.innerHTML = `
+        <p class="text-lg">Tu carrito está vacío 🛒</p>
+        <a href="principal.html" class="inline-block mt-3 text-pink-700 underline">
+          Ver productos
+        </a>`;
+      list.appendChild(vacio);
+    }
+
     cart.forEach((item) => {
       const li = document.createElement("li");
       li.innerHTML = `
@@ -172,6 +185,8 @@ function updateCart() {
 
   document.querySelectorAll("#cartCount, #contador-carrito").forEach((el) => {
     el.textContent = countItems;
+    /* La burbuja roja solo se ve si hay algo en el carrito */
+    el.classList.toggle("hidden", countItems === 0);
   });
 
   /* Enlace de pedido por WhatsApp */

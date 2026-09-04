@@ -21,8 +21,7 @@
   🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
 </a>
     <!-- Carrito (derecha) -->
-    <a href="carrito.html" class="text-2xl hover:scale-110 transition-transform">🛒<span id="contador-carrito" class="bg-red-500 text-white px-2 py-1 rounded-full text-sm">0</span>
-    </a>
+    <a href="carrito.html" class="relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
     
   </header>
 
@@ -45,7 +44,7 @@
     <a
       href="https://wa.me/5615868610"
       class="fixed bottom-5 right-5 z-50"
-      target="_blank"
+      target="_blank" rel="noopener"
       title="Chatea conmigo en WhatsApp"
     >
       <img
@@ -443,7 +442,7 @@
         <!-- Producto 27 Sonic -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
           <img
-            src="img/Sonic.jpg"
+            src="img/sonic.jpg"
             alt="Piñata Mario Bros"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
@@ -552,7 +551,7 @@
     <p class="mt-4 text-xl font-bold">Total: $<span id="total">0</span></p>
 
     <!-- Botón WhatsApp -->
-   <a id="whatsappLink" href="https://wa.me/5615868610" target="_blank" class="mt-4 inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded text-lg">
+   <a id="whatsappLink" href="https://wa.me/5615868610" target="_blank" rel="noopener" class="mt-4 inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded text-lg">
      Enviar pedido por WhatsApp
     </a>
   </div>
@@ -562,7 +561,7 @@
       <h2 class="text-xl mb-4">
         👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
       </h2>
-      <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank">
+      <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank" rel="noopener">
         <img src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto w-104" />
       </a>
     </section>
@@ -602,7 +601,7 @@
       <div class="text-center mt-10">
         <a
           href="https://wa.me/5615868610?text=Hola quiero realizar un pedido de su pagina EL MUNDO DE LA PIÑATA"
-          target="_blank"
+          target="_blank" rel="noopener"
           class="bg-green-500 text-white px-6 py-3 rounded-full text-lg hover:bg-green-600 transition"
         >
           📱 Hacer pedido por WhatsApp

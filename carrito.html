@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
-   <!-- Encabezado fijo -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tu carrito | El Mundo de la Piñata</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body class="bg-gray-100 pt-20">
+
+  <!-- Globos de fondo. El CSS ya existía pero nunca se pusieron
+       los elementos, así que la animación no se veía. -->
+  <span class="globo" style="left: 8%; animation-delay: 0s"></span>
+  <span class="globo" style="left: 26%; animation-delay: 2.5s"></span>
+  <span class="globo" style="left: 48%; animation-delay: 1.2s"></span>
+  <span class="globo" style="left: 68%; animation-delay: 4s"></span>
+  <span class="globo" style="left: 88%; animation-delay: 3.1s"></span>
+
+<!-- Encabezado fijo -->
   <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md p-4 flex items-center justify-between z-50">
     <!-- Botón hamburguesa (izquierda) -->
     <button id="menuBtn" class="text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
@@ -10,7 +28,7 @@
   🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
 </a>
     <!-- Carrito (derecha) -->
-    <a href="carrito.html" class="text-2xl hover:scale-110 transition-transform">🛒</a>
+    <a href="carrito.html" class="relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
   </header>
 
   <!-- Menú lateral -->
@@ -31,68 +49,24 @@
 
 
   <!-- Script para abrir/cerrar menú -->
-  <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const menu = document.getElementById("menu");
-    const overlay = document.getElementById("overlay");
-
-    menuBtn.addEventListener("click", () => {
-      menu.classList.toggle("-translate-x-full");
-      overlay.classList.toggle("hidden");
-    });
-
-    overlay.addEventListener("click", () => {
-      menu.classList.add("-translate-x-full");
-      overlay.classList.add("hidden");
-    });
-  </script>
+  
 
 
-</body>
-</html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carrito de Compras</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <style>
-    
-    .globo {
-      position: absolute;
-      width: 50px;
-      height: 70px;
-      background: radial-gradient(circle at 30% 30%, #f87171, #e11d48);
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      opacity: 0.8;
-      animation: flotar 8s linear infinite;
-    }
-
-    @keyframes flotar {
-      0% {
-        transform: translateY(100vh) scale(0.8);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh) scale(1);
-        opacity: 0;
-      }
-    }
-  </style>
-
-  <body class="bg-gray-100 min-h-screen p-6">
-    <h1 class="text-3xl font-bold text-center mb-6">🛒 Tu carrito 🛒</h1>
+<h1 class="text-3xl font-bold text-center mb-6">🛒 Tu carrito 🛒</h1>
     <h2 class="text-3xl font-bold text-center mb-6">
       🛒 Gracias por tu preferencia 🛒
     </h2>
 
     <div class="max-w-2xl mx-auto bg-pink-300 rounded-xl shadow p-6">
+      <div class="flex justify-end mb-3">
+        <button
+          onclick="clearCart()"
+          class="text-sm text-red-700 hover:underline"
+        >
+          Vaciar carrito
+        </button>
+      </div>
+
       <ul id="cartItems" class="space-y-4"></ul>
       <p class="text-xl mt-4 font-semibold">
         Total: $<span id="total">0</span>
@@ -101,7 +75,7 @@
       <a
         id="whatsappLink"
         href="#"
-        target="_blank"
+        target="_blank" rel="noopener"
         class="mt-4 block bg-green-500 hover:bg-green-600 text-white text-center px-4 py-2 rounded"
       >
         Enviar pedido por WhatsApp
@@ -115,89 +89,30 @@
   </a>
 </div>
 
-    <script>
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-      function saveCart() {
-        localStorage.setItem("cart", JSON.stringify(cart));
-      }
-
-      function renderCart() {
-        const list = document.getElementById("cartItems");
-        const totalEl = document.getElementById("total");
-        const waLink = document.getElementById("whatsappLink");
-
-        list.innerHTML = "";
-        let total = 0;
-        let mensaje = "Hola, quiero pedir los siguientes productos:\n";
-
-        cart.forEach((item, index) => {
-          const subtotal = item.price * item.qty;
-          total += subtotal;
-          mensaje += `- ${item.qty} x ${item.name} = $${subtotal}\n`;
-
-          const li = document.createElement("li");
-          li.innerHTML = `
-        <div class="flex justify-between items-center bg-gray-50 p-3 rounded shadow">
-          <div>
-            <span class="font-semibold">${item.name}</span><br>
-            <div class="flex items-center gap-2 mt-2">
-              <button onclick="decreaseQty(${index})" class="px-2 bg-red-500 text-white rounded">-</button>
-              <span>${item.qty}</span>
-              <button onclick="increaseQty(${index})" class="px-2 bg-green-500 text-white rounded">+</button>
-            </div>
-          </div>
-          <div class="text-right">
-            <p>$${subtotal}</p>
-            <button onclick="removeItem(${index})" class="text-red-500 text-sm hover:underline mt-2 block">Eliminar</button>
-          </div>
-        </div>
-      `;
-          list.appendChild(li);
-        });
-
-        totalEl.textContent = total;
-        const encodedMsg = encodeURIComponent(mensaje + `\nTotal: $${total}`);
-        waLink.href = `https://wa.me/5615868610?text=${encodedMsg}`;
-      }
-
-      function increaseQty(index) {
-        cart[index].qty += 1;
-        saveCart();
-        renderCart();
-      }
-
-      function decreaseQty(index) {
-        if (cart[index].qty > 1) {
-          cart[index].qty -= 1;
-        } else {
-          cart.splice(index, 1);
-        }
-        saveCart();
-        renderCart();
-      }
-
-      function removeItem(index) {
-        cart.splice(index, 1);
-        saveCart();
-        renderCart();
-      }
-
-      renderCart();
-    </script>
+    
     
 <!-- Ubicación -->
     <section class="text-center py-6">
       <h2 class="text-xl mb-4">
         👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
       </h2>
-      <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank">
-        <img src="IMG/mapa.PNG" alt="Mapa de ubicación" class="mx-auto w-104" />
+      <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank" rel="noopener">
+        <img src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
+      </a>
+    </section>
+
  <!-- Footer  barra final -->
    <footer class="bg-red-600 text-white text-center py-2 mt-10">
   <a href="Contacto.html" class="inline-block hover:underline cursor-pointer">
     © 2025 🎈EL MUNDO DE LA PIÑATA🎈🎉 Todos los derechos reservados.
   </a>
 </footer>
-  </body>
+
+  <!-- Modal para ver la imagen en grande (uno solo para toda la pagina) -->
+  <div id="modalImagen" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden" onclick="cerrarImagen()">
+    <img id="imagenGrande" class="max-w-full max-h-full rounded-xl shadow-2xl border-4 border-white" alt="Imagen ampliada" />
+  </div>
+
+  <script src="js/comunes.js"></script>
+</body>
 </html>
