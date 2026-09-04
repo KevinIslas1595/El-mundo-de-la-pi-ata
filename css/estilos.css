@@ -1,0 +1,253 @@
+/* ============================================================
+   EL MUNDO DE LA PIÑATA — Estilos compartidos
+   Antes estaban repartidos en varios <style> dentro de <head>
+   anidados en medio de las páginas.
+   ============================================================ */
+
+/* ---------- Galería del panel de administración ---------- */
+.producto {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+}
+
+.producto img {
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- Miniaturas con deslizamiento (ficha de producto) ---------- */
+.active {
+  border: 2px solid #f87171;
+}
+
+.slide {
+  opacity: 0;
+  transform: translateX(0);
+  transition: all 0.4s ease-in-out;
+}
+
+.slide-left {
+  transform: translateX(-50px);
+}
+
+.slide-right {
+  transform: translateX(50px);
+}
+
+.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ============================================================
+   FONDOS ANIMADOS
+   Antes usaban position:absolute + overflow:hidden en el body, lo que
+   bloqueaba el scroll y podía tapar botones. Con position:fixed y
+   pointer-events:none se ven igual, sin romper nada.
+   ============================================================ */
+
+/* ---------- Globos flotando (página del carrito) ---------- */
+.globo {
+  position: fixed;
+  width: 50px;
+  height: 70px;
+  background: radial-gradient(circle at 30% 30%, #f87171, #e11d48);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0.8;
+  animation: flotar 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes flotar {
+  0% {
+    transform: translateY(100vh) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
+}
+
+/* ---------- Emojis flotando (página de contacto) ---------- */
+body.contacto {
+  background-color: #ffe4e6; /* rosa suave */
+}
+
+.emoji {
+  position: fixed;
+  font-size: 2rem;
+  animation: float 7s linear infinite;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* El contenido siempre por encima de los fondos animados */
+header,
+main,
+footer,
+nav {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   FICHAS DE PRODUCTO
+   Se aplica por la estructura, sin tocar el HTML de cada tarjeta.
+   ============================================================ */
+#productos-grid > div,
+#productos-admin > div,
+#productos-globos > div,
+#productos-velas > div,
+#lista-productos > div {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#productos-grid > div:hover,
+#productos-admin > div:hover,
+#productos-globos > div:hover,
+#productos-velas > div:hover,
+#lista-productos > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+/* La imagen de la ficha se puede ampliar: que se note */
+#productos-grid img,
+#productos-admin img,
+#productos-globos img,
+#productos-velas img {
+  cursor: zoom-in;
+}
+
+/* Foco visible al navegar con el teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #db2777;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   BOTÓN "VOLVER A LA TIENDA"
+   ============================================================ */
+.btn-volver {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2.2rem;
+  border: 4px solid #ef4444;
+  border-radius: 0.85rem;
+  background: #fff;
+  color: #dc2626;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  overflow: hidden;
+  animation: latido 2.4s ease-in-out infinite;
+  transition: transform 0.25s ease, background-color 0.25s ease,
+    color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Latido suave para que llame la atención sin molestar */
+@keyframes latido {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.45);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 12px rgba(239, 68, 68, 0);
+  }
+}
+
+/* Brillo que cruza el botón */
+.btn-volver::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.75),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: brillo 3.5s ease-in-out infinite;
+}
+
+@keyframes brillo {
+  0%,
+  60% {
+    left: -75%;
+  }
+  100% {
+    left: 130%;
+  }
+}
+
+/* Al pasar el ratón: se llena de color y deja de latir */
+.btn-volver:hover,
+.btn-volver:focus-visible {
+  animation-play-state: paused;
+  background: #ef4444;
+  color: #fff;
+  transform: scale(1.08);
+  box-shadow: 0 10px 24px rgba(239, 68, 68, 0.4);
+}
+
+.btn-volver:active {
+  transform: scale(0.98);
+}
+
+/* Las flechas se separan al pasar el ratón */
+.btn-volver .flecha {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.btn-volver:hover .flecha-izq,
+.btn-volver:focus-visible .flecha-izq {
+  transform: translateX(-7px);
+}
+
+/* ---------- Accesibilidad: respetar "reducir movimiento" ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

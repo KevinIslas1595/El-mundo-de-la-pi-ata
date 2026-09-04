@@ -1,0 +1,11 @@
+# Dependencias de las pruebas (se reinstalan con: npm install)
+node_modules/
+package-lock.json
+
+# Archivos del sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Credenciales locales de las pruebas: NUNCA subir a GitHub
+pruebas/credenciales.json
