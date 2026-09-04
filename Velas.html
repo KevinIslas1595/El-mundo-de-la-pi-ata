@@ -11,16 +11,18 @@
 <body class="bg-gray-100 pt-20">
 
 <!-- Encabezado fijo -->
-  <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md p-4 flex items-center justify-between z-50">
+  <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md px-3 py-3 flex items-center gap-2 z-50">
     <!-- Botón hamburguesa (izquierda) -->
-    <button id="menuBtn" class="text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
+    <button id="menuBtn" aria-label="Abrir menú" class="shrink-0 text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
 
-     <!-- Logo centrado con enlace -->
-<a href="principal.html" class="text-xl font-bold absolute left-1/2 transform -translate-x-1/2 hover:underline cursor-pointer">
-  🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
-</a>
+    <!-- Logo centrado. Antes iba en position:absolute y en el móvil se
+         montaba encima del botón de menú y del carrito. -->
+    <a href="principal.html" class="flex-1 min-w-0 text-center text-sm sm:text-lg md:text-xl font-bold truncate hover:underline cursor-pointer">
+      🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
+    </a>
+
     <!-- Carrito (derecha) -->
-    <a href="carrito.html" class="relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
+    <a href="carrito.html" class="shrink-0 relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
   </header>
 
   <!-- Menú lateral -->
@@ -38,9 +40,6 @@
   <!-- Fondo oscuro al abrir el menú -->
   <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
 
-  <!-- Script para abrir/cerrar menú -->
-  
-
 <!-- Botón de WhatsApp flotante -->
     <a
       href="https://wa.me/5615868610"
@@ -48,7 +47,7 @@
       target="_blank" rel="noopener"
       title="Chatea conmigo en WhatsApp"
     >
-      <img
+      <img loading="lazy" decoding="async"
         src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
         alt="WhatsApp"
         class="w-16 h-16 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
@@ -63,21 +62,21 @@
       <div class="grid md:grid-cols-3 gap-8" id="productos-grid">
         <!-- Producto 1 Vela Kuromi -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Kuromi.jpg"
             alt="Vela Kuromi"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Vela Kuromi</h3>
-          <p class="text-red-600 mt-2 font-semibold">$35</p>
+          <p class="text-pink-600 mt-2 font-semibold">$35</p>
             <button onclick="addToCart('Vela Kuromi', 35)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 2 Vela Goku -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Goku.jpg"
             alt="Vela Goku"
              onclick="mostrarImagen(this.src)"
@@ -91,7 +90,7 @@
 
         <!-- Producto 3 Vela Princesa Cenicienta -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Princesa Cenicienta.jpg"
             alt="Vela Princesa Cenicienta"
              onclick="mostrarImagen(this.src)"
@@ -107,35 +106,35 @@
 
         <!-- Producto 4   Vela Bos Layer -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Bos Layer.jpg"
             alt="Vela Bos Layer"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold"> Vela Bos Layer</h3>
-          <p class="text-red-600 mt-2 font-semibold">$35</p>
+          <p class="text-pink-600 mt-2 font-semibold">$35</p>
            <button onclick="addToCart('Vela Bos Layer', 35)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 5  Vela Unicornio -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Unicornio.jpg"
             alt="Vela Unicornioa"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Vela Unicornio</h3>
-          <p class="text-red-600 mt-2 font-semibold">$35</p>
+          <p class="text-pink-600 mt-2 font-semibold">$35</p>
            <button onclick="addToCart('Vela Unicornio', 35)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 6   Vela Minnie -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Vela Minnie.jpg"
             alt="Vela Minnie"
              onclick="mostrarImagen(this.src)"
@@ -149,35 +148,35 @@
 
         <!-- Producto 7 Vela Mario Bros -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Mario Bros.jpg"
             alt="Vela Mario Bros"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Vela Mario Bros</h3>
-          <p class="text-red-600 mt-2 font-semibold">$35</p>
+          <p class="text-pink-600 mt-2 font-semibold">$35</p>
            <button onclick="addToCart('Vela Mario Bros', 35)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 8  Vela Labubu-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Labubu.jpg"
             alt="Vela Labubu"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Vela Labubu</h3>
-          <p class="text-red-600 mt-2 font-semibold">$35</p>
+          <p class="text-pink-600 mt-2 font-semibold">$35</p>
            <button onclick="addToCart('Vela Labubu', 35)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 9  Vela Dinosaurio -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Dinosaurio.jpg"
             alt="Vela Dinosaurio"
              onclick="mostrarImagen(this.src)"
@@ -190,21 +189,21 @@
         </div>
  <!-- Producto 10  Vela Frozen -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Frozen.jpg"
             alt="Vela Frozen"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Vela Frozen</h3>
-          <p class="text-red-600 mt-2 font-semibold">$35</p>
+          <p class="text-pink-600 mt-2 font-semibold">$35</p>
            <button onclick="addToCart(' Vela Frozen', 35)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 11 Vela Blanca Nieves -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Blanca Nieves.jpg"
             alt=" Vela Blanca Nieves"
              onclick="mostrarImagen(this.src)"
@@ -218,7 +217,7 @@
 
         <!-- Producto 12 Vela Bella  -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Bella.jpg"
             alt="Vela Bella"
              onclick="mostrarImagen(this.src)"
@@ -232,35 +231,35 @@
 
         <!-- Producto 13 Vela Minecraft -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Minecraft.jpg"
             alt="Vela Minecraft"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Vela Minecraft</h3>
-          <p class="text-red-600 mt-2 font-semibold">$35</p>
+          <p class="text-pink-600 mt-2 font-semibold">$35</p>
            <button onclick="addToCart('Vela Minecraft', 35)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 14 Vela Spiderman -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Spiderman.jpg"
             alt="Vela Spiderman"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Vela Spiderman</h3>
-          <p class="text-red-600 mt-2 font-semibold">$35</p>
+          <p class="text-pink-600 mt-2 font-semibold">$35</p>
            <button onclick="addToCart('Vela Spiderman', 35)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 15  Vela Hello Kitty -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Vela Hello Kitty.jpg"
             alt="Vela Hello Kitty"
              onclick="mostrarImagen(this.src)"
@@ -360,13 +359,13 @@
         👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
       </h2>
       <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank" rel="noopener">
-        <img src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
+        <img loading="lazy" decoding="async" src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
       </a>
     </section>
 
   <!-- Footer  barra final -->
    
-   <footer class="bg-red-600 text-white text-center py-2 mt-10">
+   <footer class="bg-red-600 text-white text-center py-4 mt-10">
   <a href="Contacto.html" class="inline-block hover:underline cursor-pointer">
     © 2025 🎈EL MUNDO DE LA PIÑATA🎈🎉 Todos los derechos reservados.
   </a>

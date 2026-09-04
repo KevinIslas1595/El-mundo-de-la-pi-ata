@@ -12,17 +12,18 @@
 <body class="bg-gray-100 pt-20">
 
 <!-- Encabezado fijo -->
-  <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md p-4 flex items-center justify-between z-50">
+  <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md px-3 py-3 flex items-center gap-2 z-50">
     <!-- Botón hamburguesa (izquierda) -->
-    <button id="menuBtn" class="text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
+    <button id="menuBtn" aria-label="Abrir menú" class="shrink-0 text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
 
-    <!-- Logo centrado con enlace -->
-<a href="principal.html" class="text-xl font-bold absolute left-1/2 transform -translate-x-1/2 hover:underline cursor-pointer">
-  🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
-</a>
+    <!-- Logo centrado. Antes iba en position:absolute y en el móvil se
+         montaba encima del botón de menú y del carrito. -->
+    <a href="principal.html" class="flex-1 min-w-0 text-center text-sm sm:text-lg md:text-xl font-bold truncate hover:underline cursor-pointer">
+      🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
+    </a>
+
     <!-- Carrito (derecha) -->
-    <a href="carrito.html" class="relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
-    
+    <a href="carrito.html" class="shrink-0 relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
   </header>
 
   <!-- Menú lateral -->
@@ -47,7 +48,7 @@
       target="_blank" rel="noopener"
       title="Chatea conmigo en WhatsApp"
     >
-      <img
+      <img loading="lazy" decoding="async"
         src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
         alt="WhatsApp"
         class="w-16 h-16 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
@@ -62,21 +63,21 @@
       <div class="grid md:grid-cols-3 gap-8" id="productos-grid">
         <!-- Producto 1 Barbie -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/barbie.jpg"
             alt="Piñata Barbie"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Barbie</h3>
-          <p class="text-red-600 mt-2 font-semibold">$350</p>
+          <p class="text-pink-600 mt-2 font-semibold">$350</p>
             <button onclick="addToCart('Piñata Barbie', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 2 BARBIE 2 -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/barbie3.jpg"
             alt="Piñata Barbie2"
              onclick="mostrarImagen(this.src)"
@@ -90,7 +91,7 @@
 
         <!-- Producto 3 Bluey -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/bluey.jpg"
             alt="Piñata Bluey"
              onclick="mostrarImagen(this.src)"
@@ -106,35 +107,35 @@
 
         <!-- Producto 4   bob esponja-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/bob esponja2.jpg"
             alt="Bob Esponja"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold"> Bob Esponja</h3>
-          <p class="text-red-600 mt-2 font-semibold">$350</p>
+          <p class="text-pink-600 mt-2 font-semibold">$350</p>
            <button onclick="addToCart('Piñata Bob Esponja', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 5  Capibara -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/capibara.jpg"
             alt="Piñata Capibara"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Capibara</h3>
-          <p class="text-red-600 mt-2 font-semibold">$350</p>
+          <p class="text-pink-600 mt-2 font-semibold">$350</p>
            <button onclick="addToCart('Piñata Capibara', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 6   Coraline -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/caroline.jpg"
             alt="Piñata Coraline"
              onclick="mostrarImagen(this.src)"
@@ -148,47 +149,47 @@
 
         <!-- Producto 7 Chopper -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Chopper.jpg"
             alt="Piñata Chopper"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Chopper</h3>
-          <p class="text-red-600 mt-2 font-semibold">$550</p>
+          <p class="text-pink-600 mt-2 font-semibold">$550</p>
            <button onclick="addToCart('Piñata Chopper', 550)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 8  Piñata Gengar-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Piñata Gengar.jpg"
             alt="Piñata Gengar"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Piñata Gengar</h3>
-          <p class="text-red-600 mt-2 font-semibold">$300</p>
+          <p class="text-pink-600 mt-2 font-semibold">$300</p>
            <button onclick="addToCart('Piñata Gengar', 300)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
         
 <!-- Producto   Piñata Psyduck-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Piñata Psyduck.jpg"
             alt="Piñata Piñata Psyduck"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Piñata Piñata Psyduck</h3>
-          <p class="text-red-600 mt-2 font-semibold">$300</p>
+          <p class="text-pink-600 mt-2 font-semibold">$300</p>
            <button onclick="addToCart(' Piñata Psyduck', 300)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     </div>
         <!-- Producto 9  Hello Kitty -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Hello Kitty.jpg"
             alt="Piñata Hello Kitty"
              onclick="mostrarImagen(this.src)"
@@ -201,21 +202,21 @@
         </div>
  <!-- Producto 10  Jack -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Jack.jpg"
             alt="Jack"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Jack</h3>
-          <p class="text-red-600 mt-2 font-semibold">$350</p>
+          <p class="text-pink-600 mt-2 font-semibold">$350</p>
            <button onclick="addToCart('Piñata Jack', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 11 Kutromi -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/kuromi1.jpg"
             alt="Piñata Kutromi"
              onclick="mostrarImagen(this.src)"
@@ -229,7 +230,7 @@
 
         <!-- Producto 12 Kuromi2-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/kuromi2.jpg"
             alt="Piñata Kuromi2"
              onclick="mostrarImagen(this.src)"
@@ -243,35 +244,35 @@
 
         <!-- Producto 13 Moana -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/moana.jpg"
             alt="Piñata Moana"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Moana</h3>
-          <p class="text-red-600 mt-2 font-semibold">$350</p>
+          <p class="text-pink-600 mt-2 font-semibold">$350</p>
            <button onclick="addToCart('Piñata Moana', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 14 Nezuko -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/nezuko.jpg"
             alt="Piñata Nezuko"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Nezuko</h3>
-          <p class="text-red-600 mt-2 font-semibold">$350</p>
+          <p class="text-pink-600 mt-2 font-semibold">$350</p>
            <button onclick="addToCart('Piñata Nezuko', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 15  Plim Plim-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/plim plim.jpg"
             alt="Plim Plim"
              onclick="mostrarImagen(this.src)"
@@ -287,7 +288,7 @@
         <!-- Producto 16 Spiderman 1-->
      <div class="bg-white p-4 rounded-xl shadow-md text-center">
   <div class="w-full h-64 overflow-hidden rounded-lg mb-4">
-    <img
+    <img loading="lazy" decoding="async"
       src="img/spiderman.jpg"
       alt="Piñata Spiderman"
        onclick="mostrarImagen(this.src)"
@@ -295,28 +296,28 @@
     />
   </div>
   <h3 class="text-xl font-bold">Spiderman M/1</h3>
-  <p class="text-red-600 mt-2 font-semibold">$550</p>
+  <p class="text-pink-600 mt-2 font-semibold">$550</p>
    <button onclick="addToCart('Piñata Spiderman', 550)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
 </div>
 
         <!-- Producto 17 Spiderman2 -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/spiderman 2.jpg"
             alt="Piñata Spiderman2 "
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Spiderman M/2</h3>
-          <p class="text-red-600 mt-2 font-semibold">$700</p>
+          <p class="text-pink-600 mt-2 font-semibold">$700</p>
            <button onclick="addToCart('Piñata Spiderman2 ', 700)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 18 Spiderman 3 -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/spiderman3.jpg"
             alt="Spiderman 3"
              onclick="mostrarImagen(this.src)"
@@ -329,21 +330,21 @@
         </div>
       <!-- Producto 19  Tortugas Ninjas   -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/tortugas ninja.jpg"
             alt="Piñata Tortugas Ninjas"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Tortugas Ninjas</h3>
-          <p class="text-red-600 mt-2 font-semibold">$350</p>
+          <p class="text-pink-600 mt-2 font-semibold">$350</p>
            <button onclick="addToCart('Piñata Tortugas Ninjas', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 20 Turbo Granny -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Turbo Granny.jpg"
             alt="Piñata Turbo Granny"
              onclick="mostrarImagen(this.src)"
@@ -357,7 +358,7 @@
 
         <!-- Producto 21 Unicornio  -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/unicornio.jpeg"
             alt="Piñata  Unicornio"
              onclick="mostrarImagen(this.src)"
@@ -371,35 +372,35 @@
 
         <!-- Producto 22 Capibara  -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/capibara2.jpg"
             alt="Piñata Capibara"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Capibara</h3>
-          <p class="text-red-600 mt-2 font-semibold">$350</p>
+          <p class="text-pink-600 mt-2 font-semibold">$350</p>
            <button onclick="addToCart('Piñata Capibara', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 23 Dumbo -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Dumbo2.jpg"
             alt="Dumbo"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Dumbo</h3>
-          <p class="text-red-600 mt-2 font-semibold">$350</p>
+          <p class="text-pink-600 mt-2 font-semibold">$350</p>
            <button onclick="addToCart('Piñata Dumbo', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 24 Cars-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/cars.jpg"
             alt="Piñata Cars"
             onclick="mostrarImagen(this.src)"
@@ -413,35 +414,35 @@
 
         <!-- Producto 25 Plimplim -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/plim plim2.jpg"
             alt="Piñata Plimplim"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Plim Plim</h3>
-          <p class="text-red-600 mt-2 font-semibold">$550</p>
+          <p class="text-pink-600 mt-2 font-semibold">$550</p>
              <button onclick="addToCart('Piñata Plim Plim', 550)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 26 cars 2 -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/cars2.jpg"
             alt="cars 2"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Cars</h3>
-          <p class="text-red-600 mt-2 font-semibold">$700</p>
+          <p class="text-pink-600 mt-2 font-semibold">$700</p>
              <button onclick="addToCart('Piñata Cars 2', 700)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
 
         </div>
 
         <!-- Producto 27 Sonic -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/sonic.jpg"
             alt="Piñata Mario Bros"
              onclick="mostrarImagen(this.src)"
@@ -455,22 +456,20 @@
       
          <!-- Producto 28 Labubu -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/labubu.jpg"
             alt="Piñata Labubu"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Labubu</h3>
-          <p class="text-red-600 mt-2 font-semibold">$350</p>
+          <p class="text-pink-600 mt-2 font-semibold">$350</p>
           <button onclick="addToCart('Piñata Labubu', 350)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
 </div>
 
-
-
         <!-- Producto 29  One piece 2  -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/One piece 2.jpg"
             alt="Piñata One piece 2"
              onclick="mostrarImagen(this.src)"
@@ -484,7 +483,7 @@
         
         <!-- Producto 30  Nezuco M/3-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/nezuko3.jpg"
             alt="Piñata Nezuco M/3"
              onclick="mostrarImagen(this.src)"
@@ -497,20 +496,20 @@
 
         <!-- Producto 31 Dinosaurio -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Dinosaurio.jpg"
             alt="Piñata Dinosaurio"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Piñata Dinosaurio</h3>
-          <p class="text-red-600 mt-2 font-semibold">$180</p>
+          <p class="text-pink-600 mt-2 font-semibold">$180</p>
           <button onclick="addToCart('Piñata Dinosaurio', 180)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
         </div>
 
         <!-- Producto 32 Labubu (con miniaturas) -->
   <div class="bg-white p-4 rounded-xl shadow-md text-center max-w-md mx-auto">
-    <img
+    <img loading="lazy" decoding="async"
       id="mainImage"
       src="img/labubu4.jpg"
       alt="Piñata Labubu"
@@ -519,13 +518,13 @@
 
     <!-- Miniaturas -->
     <div class="flex justify-center space-x-2 mb-4" id="thumbnailContainer">
-      <img src="img/labubu.jpg" class="w-16 h-16 object-cover rounded cursor-pointer active" onclick="changeImage(this, 0)" />
-      <img src="img/labubu2.jpg" class="w-16 h-16 object-cover rounded cursor-pointer" onclick="changeImage(this, 1)" />
-      <img src="img/labubu3.jpg" class="w-16 h-16 object-cover rounded cursor-pointer" onclick="changeImage(this, 2)" />
+      <img loading="lazy" decoding="async" src="img/labubu.jpg" class="w-16 h-16 object-cover rounded cursor-pointer active" onclick="changeImage(this, 0)" />
+      <img loading="lazy" decoding="async" src="img/labubu2.jpg" class="w-16 h-16 object-cover rounded cursor-pointer" onclick="changeImage(this, 1)" />
+      <img loading="lazy" decoding="async" src="img/labubu3.jpg" class="w-16 h-16 object-cover rounded cursor-pointer" onclick="changeImage(this, 2)" />
     </div>
 
     <h3 class="text-xl font-bold">Labubu</h3>
-    <p class="text-red-600 mt-2 font-semibold">$350</p>
+    <p class="text-pink-600 mt-2 font-semibold">$350</p>
     <button onclick="addToCart('Piñata Spiderman', 400)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
   </div>
       </div>
@@ -562,7 +561,7 @@
         👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
       </h2>
       <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank" rel="noopener">
-        <img src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto w-104" />
+        <img loading="lazy" decoding="async" src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto w-104" />
       </a>
     </section>
 

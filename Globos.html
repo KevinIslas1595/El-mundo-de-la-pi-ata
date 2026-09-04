@@ -11,17 +11,18 @@
 <body class="bg-gray-100 pt-20">
 
 <!-- Encabezado fijo -->
-  <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md p-4 flex items-center justify-between z-50">
+  <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md px-3 py-3 flex items-center gap-2 z-50">
     <!-- Botón hamburguesa (izquierda) -->
-    <button id="menuBtn" class="text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
+    <button id="menuBtn" aria-label="Abrir menú" class="shrink-0 text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
 
-  <!-- Logo centrado con enlace -->
-<a href="principal.html" class="text-xl font-bold absolute left-1/2 transform -translate-x-1/2 hover:underline cursor-pointer">
-  🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
-</a>
+    <!-- Logo centrado. Antes iba en position:absolute y en el móvil se
+         montaba encima del botón de menú y del carrito. -->
+    <a href="principal.html" class="flex-1 min-w-0 text-center text-sm sm:text-lg md:text-xl font-bold truncate hover:underline cursor-pointer">
+      🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
+    </a>
 
     <!-- Carrito (derecha) -->
-    <a href="carrito.html" class="relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
+    <a href="carrito.html" class="shrink-0 relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
   </header>
 
   <!-- Menú lateral -->
@@ -39,9 +40,6 @@
   <!-- Fondo oscuro al abrir el menú -->
   <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
 
-  <!-- Script para abrir/cerrar menú -->
-  
-
 <!-- Botón de WhatsApp flotante -->
     <a
       href="https://wa.me/5615868610"
@@ -49,7 +47,7 @@
       target="_blank" rel="noopener"
       title="Chatea conmigo en WhatsApp"
     >
-      <img
+      <img loading="lazy" decoding="async"
         src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
         alt="WhatsApp"
         class="w-16 h-16 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
@@ -63,21 +61,21 @@
       <div class="grid md:grid-cols-3 gap-8" id="productos-grid">
         <!-- Producto 1 Kit Globos Kit Sonic Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Sonic Feliz Cumpleaños.jpg"
             alt="Kit Sonic Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Sonic Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$120</p>
+          <p class="text-pink-600 mt-2 font-semibold">$120</p>
             <button onclick="addToCart('Globos Kit Sonic Feliz Cumpleaños', 120)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 2 Kit Futbol Feliz Cumpleaños-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Futbol Feliz Cumpleaños.jpg"
             alt="Kit Futbol Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
@@ -91,7 +89,7 @@
 
         <!-- Producto 3 Kit Labubu  Feliz Cumpleaños  Azul -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Labubu  Feliz Cumpleaños .jpg"
             alt="Kit Labubu  Feliz Cumpleaños Azul "
              onclick="mostrarImagen(this.src)"
@@ -107,35 +105,35 @@
 
         <!-- Producto 4   globos Labubu  Feliz Cumpleaños  Rosa-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Labubu  Feliz Cumpleaños  Rosa.jpg"
             alt="Labubu  Feliz Cumpleaños  Rosa"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold"> Labubu  Feliz Cumpleaños  Rosa</h3>
-          <p class="text-red-600 mt-2 font-semibold">$100</p>
+          <p class="text-pink-600 mt-2 font-semibold">$100</p>
            <button onclick="addToCart(' Globos Labubu  Feliz Cumpleaños  Rosa', 100)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 5  Kit Graduacion  metalico 1 -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Graduacion  metalico 1.jpg"
             alt="Kit Graduacion  metalico 1"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Graduacion  metalico 1</h3>
-          <p class="text-red-600 mt-2 font-semibold">$100</p>
+          <p class="text-pink-600 mt-2 font-semibold">$100</p>
            <button onclick="addToCart('Globos Kit Graduacion  metalico 1', 100)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 6   Kit Graduacion  metalico 2 -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Graduacion  metalico 2.jpg"
             alt="Kit Graduacion  metalico 2"
              onclick="mostrarImagen(this.src)"
@@ -149,35 +147,35 @@
 
         <!-- Producto 7 Kit Con Dados Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Con Dados Feliz Cumpleaños.jpg"
             alt="Kit Con Dados Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Con Dados Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$220</p>
+          <p class="text-pink-600 mt-2 font-semibold">$220</p>
            <button onclick="addToCart('Kit Con Dados Feliz Cumpleaños', 220)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 8  Kit Globos Barbie Feliz Cumpleaños-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Barbie Feliz Cumpleaños.jpg"
             alt="Kit Globos Barbie Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Barbie Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$100</p>
+          <p class="text-pink-600 mt-2 font-semibold">$100</p>
            <button onclick="addToCart('Kit Globos Barbie Feliz Cumpleaños', 100)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 9  Kit Plim Plim Color Rosa -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Plim Plim Color Rosa.jpg"
             alt="Kit Plim Plim Color Rosa"
              onclick="mostrarImagen(this.src)"
@@ -190,21 +188,21 @@
         </div>
  <!-- Producto 10 Kit Globos Monster Inc Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Monster Inc Feliz Cumpleaños.jpg"
             alt="Kit Globos Monster Inc Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Monster Inc Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">220</p>
+          <p class="text-pink-600 mt-2 font-semibold">220</p>
            <button onclick="addToCart('Kit Globos Monster Inc Feliz Cumpleaños', 220)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 11 Globos Kit Globos Dragon Ball Feliz Cumpleaños-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Dragon Ball Feliz Cumpleaños.jpg"
             alt="Kit Globos Dragon Ball Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
@@ -218,7 +216,7 @@
 
         <!-- Producto 12 Kit Globos Hello Kitty Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Hello Kitty Feliz Cumpleaños .jpg"
             alt="Kit Globos Hello Kitty Feliz Cumpleaños "
              onclick="mostrarImagen(this.src)"
@@ -232,35 +230,35 @@
 
         <!-- Producto 13 Kit Globos Hello Kitty Feliz Cumpleaños M2 -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Hello Kitty Feliz Cumpleaños M2.jpg"
             alt="Kit Globos Hello Kitty Feliz Cumpleaños M2 "
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Hello Kitty Feliz Cumpleaños M2 </h3>
-          <p class="text-red-600 mt-2 font-semibold">$200</p>
+          <p class="text-pink-600 mt-2 font-semibold">$200</p>
            <button onclick="addToCart('Kit Globos Hello Kitty Feliz Cumpleaños M2', 200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 14 Kit Globos Minions Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Minions Feliz Cumpleaños.jpg"
             alt="Kit Globos Minions Feliz Cumpleaños"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Minions Feliz Cumpleañoss</h3>
-          <p class="text-red-600 mt-2 font-semibold">$150</p>
+          <p class="text-pink-600 mt-2 font-semibold">$150</p>
            <button onclick="addToCart('Kit Globos Minions Feliz Cumpleaños', 150)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 15  Kit Globos Mi Bautizo-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Mi Bautizo.jpg"
             alt="Kit Globos Mi Bautizo"
              onclick="mostrarImagen(this.src)"
@@ -276,7 +274,7 @@
         <!-- Producto 16 Kit Globos Baby Shower M1-->
      <div class="bg-white p-4 rounded-xl shadow-md text-center">
   <div class="w-full h-64 overflow-hidden rounded-lg mb-4">
-    <img
+    <img loading="lazy" decoding="async"
       src="img/Kit Globos Baby Shower M1.jpg"
       alt="Kit Globos Baby Shower M1"
        onclick="mostrarImagen(this.src)"
@@ -284,28 +282,28 @@
     />
   </div>
   <h3 class="text-xl font-bold">Kit Globos Baby Shower M1</h3>
-  <p class="text-red-600 mt-2 font-semibold">$200</p>
+  <p class="text-pink-600 mt-2 font-semibold">$200</p>
    <button onclick="addToCart('Kit Globos Baby Shower M1', 200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
 </div>
 
         <!-- Producto 17 Kit Globos Revelacion es Niño   -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Revelacion es Niño .jpg"
             alt="Kit Globos Revelacion es Niño"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Revelacion es Niño </h3>
-          <p class="text-red-600 mt-2 font-semibold">$120</p>
+          <p class="text-pink-600 mt-2 font-semibold">$120</p>
            <button onclick="addToCart('Kit Globos Revelacion es Niño', 120)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 18 Kit Globos Baby Shower  M2 -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Baby Shower  M2.jpg"
             alt="Kit Globos Baby Shower  M2"
              onclick="mostrarImagen(this.src)"
@@ -318,21 +316,21 @@
         </div>
       <!-- Producto 19  Kit Globos Sirenita Feliz Cumpleaños  -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Sirenita Feliz Cumpleaños.jpg"
             alt=" Kit Globos Sirenita Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Sirenita Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$140</p>
+          <p class="text-pink-600 mt-2 font-semibold">$140</p>
            <button onclick="addToCart('Kit Globos Sirenita Feliz Cumpleaños', 140)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 20 Globos Capibara Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Globos Capibara Feliz Cumpleaños.jpg"
             alt="Globos Capibara Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
@@ -346,7 +344,7 @@
 
         <!-- Producto 21 Globos Capibara Feliz Cumpleaños M2 -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Globos Capibara Feliz Cumpleaños M2.jpg"
             alt="Globos Capibara Feliz Cumpleaños M2"
              onclick="mostrarImagen(this.src)"
@@ -362,21 +360,21 @@
 
         <!-- Producto 23 Kit Globos Toy Story Feliz Cumpleaños-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Toy Story Feliz Cumpleaños.jpg"
             alt="Kit Globos Toy Story Feliz Cumpleaños"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Toy Story Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$200</p>
+          <p class="text-pink-600 mt-2 font-semibold">$200</p>
            <button onclick="addToCart('Kit Globos Toy Story Feliz Cumpleaños',200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 24  Kit Globos Toy Story Feliz Cumpleaños M2 -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Toy Story Feliz Cumpleaños M2.jpg"
             alt="Kit Globos Toy Story Feliz Cumpleaños M2"
             onclick="mostrarImagen(this.src)"
@@ -391,14 +389,14 @@
 
         <!-- Producto 25 Globos Kit Globos Gris, Blanco , Morado, Feliz Cumpleaños-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Gris, Blanco , Morado, Feliz Cumpleaños.jpg"
             alt="Kit Globos Gris, Blanco , Morado, Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Gris, Blanco , Morado, Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$100</p>
+          <p class="text-pink-600 mt-2 font-semibold">$100</p>
              <button onclick="addToCart('Kit Globos Gris, Blanco , Morado, Feliz Cumpleaños', 100)"
            class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
@@ -406,21 +404,21 @@
 
         <!-- Producto 26 Kit Globos  Caballos M2-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos  Caballos M2.jpg"
             alt="Arco Globos Negro Pastel Fiestas Cumpleaños Bodas Kit"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos  Caballos M2</h3>
-          <p class="text-red-600 mt-2 font-semibold">$100</p>
+          <p class="text-pink-600 mt-2 font-semibold">$100</p>
              <button onclick="addToCart('Kit Globos  Caballos M2', 100)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
 
         </div>
 
         <!-- Producto 27 Kit Globos  Caballos M3 -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos  Caballos M3.jpg"
             alt="Globos Kit Globos  Caballos M3"
              onclick="mostrarImagen(this.src)"
@@ -433,7 +431,7 @@
         </div>
        <!-- Producto 28 Revelacion de Genero -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Revelacion de Genero.jpg"
             alt="Revelacion de Genero"
              onclick="mostrarImagen(this.src)"
@@ -446,21 +444,21 @@
         </div>
       <!-- Producto 29  Kit Globos Morado, plateados , Feliz cumpleaños  -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Morado, plateados , Feluz cumpleaños.jpg"
             alt="Kit Globos Morado, plateados , Feliz cumpleaños"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Morado, plateados , Feliz cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$140</p>
+          <p class="text-pink-600 mt-2 font-semibold">$140</p>
            <button onclick="addToCart('Globos Kit Globos Morado, plateados , Feliz cumpleaños', 140)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 30 Kit kuromi Feliz cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit kuromi Feliz cumpleaños.jpg"
             alt="Kit kuromi Feliz cumpleaños"
              onclick="mostrarImagen(this.src)"
@@ -474,7 +472,7 @@
 
         <!-- Producto 31 Kit  Frozen Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit  Frozen Feliz Cumpleaños .jpg"
             alt="Globos Kit  Frozen Feliz Cumpleaños "
              onclick="mostrarImagen(this.src)"
@@ -488,34 +486,34 @@
 
         <!-- Producto 32 Kit Globos negros metalico ,plateado Feliz Cumpleaños  -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos negros metalico,plateado Feliz Cumpleaños.jpg"
             alt="Kit Globos negros metalico ,plateado Feliz Cumpleaños "
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos negros metalico ,plateado Feliz Cumpleaños </h3>
-          <p class="text-red-600 mt-2 font-semibold">$200</p>
+          <p class="text-pink-600 mt-2 font-semibold">$200</p>
            <button onclick="addToCart('Kit Globos negros metalico ,plateado Feliz Cumpleaños ', 200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 33 Kit Globos metalicos Rosa ,rojo, blanco-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos metalicos Rosa ,rojo, blanco.jpg"
             alt="Kit Globos metalicos Rosa ,rojo, blanco"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos metalicos Rosa ,rojo, blanco</h3>
-          <p class="text-red-600 mt-2 font-semibold">$200</p>
+          <p class="text-pink-600 mt-2 font-semibold">$200</p>
            <button onclick="addToCart(' Kit Globos metalicos Rosa ,rojo, blanco',200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
          <!-- Producto 34 Kit Globos Bob Esponja -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Bob Esponja.jpg"
             alt="Kit Kit Globos Bob Esponja"
              onclick="mostrarImagen(this.src)"
@@ -528,21 +526,21 @@
         </div>
       <!-- Producto 35  Kit Globos Rosas -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Rosas.jpg"
             alt="Kit Globos Rosas"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Rosas</h3>
-          <p class="text-red-600 mt-2 font-semibold">$140</p>
+          <p class="text-pink-600 mt-2 font-semibold">$140</p>
            <button onclick="addToCart('Kit Globos Rosas', 140)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 36 Kit Globos Revelacion M1-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Revelacion M1.jpg"
             alt="Kit Globos Revelacion M1"
              onclick="mostrarImagen(this.src)"
@@ -556,7 +554,7 @@
 
         <!-- Producto 37 Kit Princesa Peach Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Princesa Peach Feliz Cumpleaños.jpg"
             alt="Kit Princesa Peach Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
@@ -570,34 +568,34 @@
 
         <!-- Producto 38 Kit  Globos Fiesta Bluey Feliz Cumpleaños  -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit  Globos Fiesta Bluey Feliz Cumpleaños.jpg"
             alt="Kit  Globos Fiesta Bluey Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit  Globos Fiesta Bluey Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$200</p>
+          <p class="text-pink-600 mt-2 font-semibold">$200</p>
            <button onclick="addToCart('Kit  Globos Fiesta Bluey Feliz Cumpleaños', 200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 39 Kit Globos Piñatas Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Piñatas Feliz Cumpleaños.jpg"
             alt="Kit Globos Piñatas Feliz Cumpleaños"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Piñatas Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$200</p>
+          <p class="text-pink-600 mt-2 font-semibold">$200</p>
            <button onclick="addToCart('Kit Globos Piñatas Feliz Cumpleaños',200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
          <!-- Producto 40 Kit Globos Bluey Feliz Cumpleaños M2 -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Bluey Feliz Cumpleaños M2.jpg"
             alt="Kit Globos Bluey Feliz Cumpleaños M2"
              onclick="mostrarImagen(this.src)"
@@ -610,21 +608,21 @@
         </div>
       <!-- Producto 41 Kit Globos paw patrol Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos paw patrol Feliz Cumpleaños.jpg"
             alt="Kit Globos paw patrol Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos paw patrol Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$140</p>
+          <p class="text-pink-600 mt-2 font-semibold">$140</p>
            <button onclick="addToCart('Kit Globos paw patrol Feliz Cumpleaños', 140)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 42 Kit Globos One Piece-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos One Piece.jpg"
             alt="Kit Globos One Piece"
              onclick="mostrarImagen(this.src)"
@@ -638,7 +636,7 @@
 
         <!-- Producto 43 Globos  Kit Skibidi Toilet Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Skibidi Toilet Feliz Cumpleaños.jpg"
             alt="Kit Skibidi Toilet Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
@@ -652,70 +650,70 @@
 
         <!-- Producto 43 Kit Globos Azul, blanco, Feliz Cumpleaños  -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Azul, blanco, Feliz Cumpleaños.jpg"
             alt="Kit Globos Azul, blanco, Feliz Cumpleaños"
              onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Azul, blanco, Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$200</p>
+          <p class="text-pink-600 mt-2 font-semibold">$200</p>
            <button onclick="addToCart('Kit Globos Azul, blanco, Feliz Cumpleaños', 200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
 
         <!-- Producto 44 Kit Globos Astronauta Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Astronauta Feliz Cumpleaños.jpg"
             alt="Kit Globos Astronauta Feliz Cumpleaños"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Astronauta Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$200</p>
+          <p class="text-pink-600 mt-2 font-semibold">$200</p>
            <button onclick="addToCart('Kit Globos Astronauta Feliz Cumpleaños',200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
         
         <!-- Producto 45 Kit Globos Astronauta Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos Astronauta Feliz Cumpleaños.jpg"
             alt="Kit Globos Astronauta Feliz Cumpleaños"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Astronauta Feliz Cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$200</p>
+          <p class="text-pink-600 mt-2 font-semibold">$200</p>
            <button onclick="addToCart('Kit Globos Astronauta Feliz Cumpleaños',200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
         
         <!-- Producto 46 Kit Globos Five Nights at Freddy's -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos  Five Nights at Freddy's  Feliz Cumpleaños.jpg"
             alt="Kit Globos Five Nights at Freddys"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos Five Nights at Freddy's</h3>
-          <p class="text-red-600 mt-2 font-semibold">$200</p>
+          <p class="text-pink-600 mt-2 font-semibold">$200</p>
            <button onclick="addToCart('Kit Globos Five Nights at Freddys',200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
           
         <!-- Producto 47 Kit Globos  Spy × Family  Feliz cumpleaños-->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
-          <img
+          <img loading="lazy" decoding="async"
             src="img/Kit Globos  Spy × Family  Feliz cumpleaños.jpg"
             alt="Kit Globos  Spy × Family  Feliz cumpleaños"
             onclick="mostrarImagen(this.src)"
       class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
           />
           <h3 class="text-xl font-bold">Kit Globos  Spy × Family  Feliz cumpleaños</h3>
-          <p class="text-red-600 mt-2 font-semibold">$200</p>
+          <p class="text-pink-600 mt-2 font-semibold">$200</p>
            <button onclick="addToCart('Kit Globos  Spy × Family  Feliz cumpleaños',200)" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">Agregar al carrito</button>
     
         </div>
@@ -808,14 +806,14 @@
         👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
       </h2>
       <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank" rel="noopener">
-        <img src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
+        <img loading="lazy" decoding="async" src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
       </a>
     </section>
     </div>
   
 
 <!-- Footer  barra final -->
-      <footer class="bg-red-600 text-white text-center py-2 mt-10">
+      <footer class="bg-red-600 text-white text-center py-4 mt-10">
   <a href="Contacto.html" class="inline-block hover:underline cursor-pointer">
     © 2025 🎈EL MUNDO DE LA PIÑATA🎈🎉 Todos los derechos reservados.
   </a>

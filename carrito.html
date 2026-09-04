@@ -19,16 +19,18 @@
   <span class="globo" style="left: 88%; animation-delay: 3.1s"></span>
 
 <!-- Encabezado fijo -->
-  <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md p-4 flex items-center justify-between z-50">
+  <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md px-3 py-3 flex items-center gap-2 z-50">
     <!-- Botón hamburguesa (izquierda) -->
-    <button id="menuBtn" class="text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
+    <button id="menuBtn" aria-label="Abrir menú" class="shrink-0 text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
 
-     <!-- Logo centrado con enlace -->
-<a href="principal.html" class="text-xl font-bold absolute left-1/2 transform -translate-x-1/2 hover:underline cursor-pointer">
-  🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
-</a>
+    <!-- Logo centrado. Antes iba en position:absolute y en el móvil se
+         montaba encima del botón de menú y del carrito. -->
+    <a href="principal.html" class="flex-1 min-w-0 text-center text-sm sm:text-lg md:text-xl font-bold truncate hover:underline cursor-pointer">
+      🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
+    </a>
+
     <!-- Carrito (derecha) -->
-    <a href="carrito.html" class="relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
+    <a href="carrito.html" class="shrink-0 relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
   </header>
 
   <!-- Menú lateral -->
@@ -46,10 +48,6 @@
   <!-- Fondo oscuro al abrir el menú -->
   <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
 
-
-
-  <!-- Script para abrir/cerrar menú -->
-  
 
 
 <h1 class="text-3xl font-bold text-center mb-6">🛒 Tu carrito 🛒</h1>
@@ -83,10 +81,11 @@
     </div>
 
     <div class="text-center mt-6">
-      <a href="principal.html"  class="border-4 border-red-500 text-red-600 px-8 py-4 rounded-xl text-2xl font-bold hover:bg-red-100 transition-transform hover:scale-105"
-  >
-    ⬅ Volver a la tienda ⬅
-  </a>
+      <a href="principal.html" class="btn-volver">
+      <span class="flecha flecha-izq">⬅</span>
+      Volver a la tienda
+      <span class="flecha flecha-izq">⬅</span>
+    </a>
 </div>
 
     
@@ -97,12 +96,12 @@
         👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
       </h2>
       <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank" rel="noopener">
-        <img src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
+        <img loading="lazy" decoding="async" src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
       </a>
     </section>
 
  <!-- Footer  barra final -->
-   <footer class="bg-red-600 text-white text-center py-2 mt-10">
+   <footer class="bg-red-600 text-white text-center py-4 mt-10">
   <a href="Contacto.html" class="inline-block hover:underline cursor-pointer">
     © 2025 🎈EL MUNDO DE LA PIÑATA🎈🎉 Todos los derechos reservados.
   </a>

@@ -6,6 +6,7 @@
     <title>Administrador de productos</title>
     <meta name="robots" content="noindex, nofollow" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/estilos.css" />
 
     <!-- Candado: si no hay sesión iniciada, manda al login antes de
          que se llegue a dibujar nada de la página. -->
@@ -127,7 +128,7 @@
           div.className = "border p-4 rounded-lg shadow text-center";
 
           div.innerHTML = `
-          <img src="${p.imagen}" class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl" />
+          <img loading="lazy" decoding="async" src="${p.imagen}" class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl" />
           <h3 class="font-bold text-xl">${p.nombre}</h3>
           <p class="text-pink-600">$${p.precio}</p>
           <div class="flex justify-center gap-4 mt-3">
@@ -176,12 +177,11 @@
     </script>
 
     <div class="text-center mt-6 mb-10">
-      <a
-        href="principal.html"
-        class="inline-block border-4 border-red-500 text-red-600 px-8 py-4 rounded-xl text-2xl font-bold hover:bg-red-100 transition-transform hover:scale-105"
-      >
-        ⬅ Volver a la tienda ⬅
-      </a>
+      <a href="principal.html" class="btn-volver">
+      <span class="flecha flecha-izq">⬅</span>
+      Volver a la tienda
+      <span class="flecha flecha-izq">⬅</span>
+    </a>
     </div>
   </body>
 </html>

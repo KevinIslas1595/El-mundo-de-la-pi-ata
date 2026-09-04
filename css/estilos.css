@@ -118,6 +118,45 @@ nav {
 }
 
 /* ============================================================
+   FICHAS DE PRODUCTO
+   Se aplica por la estructura, sin tocar el HTML de cada tarjeta.
+   ============================================================ */
+#productos-grid > div,
+#productos-admin > div,
+#productos-globos > div,
+#productos-velas > div,
+#lista-productos > div {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#productos-grid > div:hover,
+#productos-admin > div:hover,
+#productos-globos > div:hover,
+#productos-velas > div:hover,
+#lista-productos > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+/* La imagen de la ficha se puede ampliar: que se note */
+#productos-grid img,
+#productos-admin img,
+#productos-globos img,
+#productos-velas img {
+  cursor: zoom-in;
+}
+
+/* Foco visible al navegar con el teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #db2777;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================================
    BOTÓN "VOLVER A LA TIENDA"
    ============================================================ */
 .btn-volver {

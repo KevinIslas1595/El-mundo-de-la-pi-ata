@@ -11,16 +11,18 @@
 <body class="bg-gray-100 pt-20">
 
 <!-- Encabezado fijo -->
-  <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md p-4 flex items-center justify-between z-50">
+  <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md px-3 py-3 flex items-center gap-2 z-50">
     <!-- Botón hamburguesa (izquierda) -->
-    <button id="menuBtn" class="text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
+    <button id="menuBtn" aria-label="Abrir menú" class="shrink-0 text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
 
-  <!-- Logo centrado con enlace -->
-<a href="principal.html" class="text-xl font-bold absolute left-1/2 transform -translate-x-1/2 hover:underline cursor-pointer">
-  🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
-</a>
+    <!-- Logo centrado. Antes iba en position:absolute y en el móvil se
+         montaba encima del botón de menú y del carrito. -->
+    <a href="principal.html" class="flex-1 min-w-0 text-center text-sm sm:text-lg md:text-xl font-bold truncate hover:underline cursor-pointer">
+      🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
+    </a>
+
     <!-- Carrito (derecha) -->
-    <a href="carrito.html" class="relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
+    <a href="carrito.html" class="shrink-0 relative text-2xl hover:scale-110 transition-transform" aria-label="Ver carrito">🛒<span id="contador-carrito" class="hidden bg-red-500 text-white px-2 py-0.5 rounded-full text-xs align-top">0</span></a>
   </header>
 
   <!-- Menú lateral -->
@@ -41,9 +43,6 @@
 
 
 
-  <!-- Script para abrir/cerrar menú -->
-  
-
 <!-- Botón de WhatsApp flotante -->
     <a
       href="https://wa.me/5615868610"
@@ -51,7 +50,7 @@
       target="_blank" rel="noopener"
       title="Chatea conmigo en WhatsApp"
     >
-      <img
+      <img loading="lazy" decoding="async"
         src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
         alt="WhatsApp"
         class="w-16 h-16 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
@@ -72,47 +71,47 @@
         id="slider"
         class="flex transition-transform duration-700 ease-in-out"
       >
-        <img
+        <img loading="lazy" decoding="async"
           src="img/alex.jpg"
           class="w-full h-96 object-cover bg-white flex-shrink-0"
           alt="Piñata 1"
         />
-        <img
+        <img loading="lazy" decoding="async"
           src="img/alex2.jpg"
           class="w-full h-96 object-cover bg-white flex-shrink-0"
           alt="Piñata 2"
         />
-        <img
+        <img loading="lazy" decoding="async"
           src="img/alex3.jpg"
           class="w-full h-96 object-cover bg-white flex-shrink-0"
           alt="Piñata 3"
         />
-        <img
+        <img loading="lazy" decoding="async"
           src="img/Hello Kitty.jpg"
           class="w-full h-96 object-cover bg-white flex-shrink-0"
           alt="Piñata 4"
         />
-        <img
+        <img loading="lazy" decoding="async"
           src="img/alex5.jpg"
           class="w-full h-96 object-cover bg-white flex-shrink-0"
           alt="Piñata 5"
         />
-        <img
+        <img loading="lazy" decoding="async"
           src="img/alex6.jpg"
           class="w-full h-96 object-cover bg-white flex-shrink-0"
           alt="Piñata 6"
         />
-        <img
+        <img loading="lazy" decoding="async"
           src="img/alex7.jpg"
           class="w-full h-96 object-cover bg-white flex-shrink-0"
           alt="Piñata 7"
         />
-        <img
+        <img loading="lazy" decoding="async"
           src="img/bob esponja.jpg"
           class="w-full h-96 object-cover bg-white flex-shrink-0"
           alt="Piñata 8"
         />
-        <img
+        <img loading="lazy" decoding="async"
           src="img/mario.jpg"
           class="w-full h-96 object-cover bg-white flex-shrink-0"
           alt="Piñata Mario"
@@ -224,7 +223,7 @@
       <div
         class="w-32 h-32 bg-pink-300 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300"
       >
-        <img
+        <img loading="lazy" decoding="async"
           src="img/PIÑATA ANIMADA.png"
           alt="PIÑATAS"
           class="w-16 h-16 transition-transform duration-700 group-hover:rotate-[360deg]"
@@ -239,7 +238,7 @@
       <div
         class="w-32 h-32 bg-yellow-300 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300"
       >
-        <img
+        <img loading="lazy" decoding="async"
           src="img/GLOBOS ANIMADO.png"
           alt="GLOBOS"
           class="w-16 h-16 transition-transform duration-700 group-hover:rotate-[360deg]"
@@ -258,7 +257,7 @@
       <div
         class="w-32 h-32 bg-green-300 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300"
       >
-        <img
+        <img loading="lazy" decoding="async"
           src="img/velas nuevo.png"
           alt="VELAS"
           class="w-16 h-16 transition-transform duration-700 group-hover:rotate-[360deg]"
@@ -289,13 +288,13 @@
         👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
       </h2>
       <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank" rel="noopener">
-        <img src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
+        <img loading="lazy" decoding="async" src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
       </a>
     </section>
      
 </section>
    <!-- Footer  barra final -->
-    <footer class="bg-red-600 text-white text-center py-2 mt-10">
+    <footer class="bg-red-600 text-white text-center py-4 mt-10">
   <a href="Contacto.html" class="inline-block hover:underline cursor-pointer">
     © 2025 🎈EL MUNDO DE LA PIÑATA🎈🎉 Todos los derechos reservados.
   </a>
