@@ -51,6 +51,12 @@
         background: #ccc;
         cursor: not-allowed;
       }
+      .pista {
+        margin: -4px 0 0;
+        font-size: 0.78rem;
+        color: #777;
+        text-align: left;
+      }
       .volver {
         display: inline-block;
         margin-top: 16px;
@@ -75,6 +81,7 @@
           spellcheck="false"
           required
         />
+        <p id="pista" class="pista"></p>
 
         <label for="clave" hidden>Contraseña</label>
         <input
@@ -91,7 +98,10 @@
       <a href="principal.html" class="volver">⬅ Volver a la tienda</a>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
     <script src="js/auth.js"></script>
+    <script src="js/datos.js"></script>
     <script>
       const form = document.getElementById("formLogin");
       const campoUsuario = document.getElementById("usuario");
@@ -99,17 +109,31 @@
       const boton = document.getElementById("btnEntrar");
       const mensaje = document.getElementById("mensaje");
 
+      /* Con Supabase el usuario es un CORREO; sin configurar, sigue
+         siendo el usuario de siempre. Se ajustan el campo y la pista. */
+      if (NUBE_CONFIGURADA) {
+        campoUsuario.type = "email";
+        campoUsuario.placeholder = "Correo electrónico";
+        document.getElementById("pista").textContent =
+          "Entra con el correo que diste de alta en Supabase";
+      }
+
       /* Si ya hay sesión abierta, entrar directo */
-      if (sesionActiva()) window.location.replace("admin.html");
+      haySesion().then((hay) => {
+        if (hay) window.location.replace("admin.html");
+      });
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         mensaje.textContent = "";
         boton.disabled = true;
+        boton.textContent = "Entrando…";
 
         try {
-          if (await accesoCorrecto(campoUsuario.value.trim(), campoClave.value)) {
-            iniciarSesion();
+          if (await entrar(campoUsuario.value.trim(), campoClave.value)) {
+            /* El candado antiguo necesita marcar la sesión a mano.
+               Con Supabase la sesión la lleva la propia librería. */
+            if (!NUBE_CONFIGURADA) iniciarSesion();
             window.location.replace("admin.html");
           } else {
             /* Mensaje genérico a propósito: no revelamos cuál de los
@@ -122,6 +146,7 @@
           mensaje.textContent = "⚠️ " + error.message;
         } finally {
           boton.disabled = false;
+          boton.textContent = "Entrar";
         }
       });
     </script>

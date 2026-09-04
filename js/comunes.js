@@ -203,22 +203,50 @@ function updateCart() {
 
 /* ============================================================
    4. PRODUCTOS AGREGADOS DESDE EL PANEL DE ADMIN
+   ============================================================
+   Cada página tiene su propio contenedor. Se busca cuál está en
+   esta página y se carga solo esa categoría.
    ============================================================ */
-function mostrarProductosAdmin() {
-  const contenedor = document.getElementById("productos-admin");
-  if (!contenedor) return;
+const CONTENEDORES = {
+  "productos-admin": "productos", // index.html  → Piñatas
+  "productos-globos": "productos-globos", // Globos.html
+  "productos-velas": "productos-velas", // Velas.html
+};
 
-  const productos = JSON.parse(localStorage.getItem("productos")) || [];
-  contenedor.innerHTML = "";
+async function mostrarProductosAdmin() {
+  for (const [idContenedor, categoria] of Object.entries(CONTENEDORES)) {
+    const contenedor = document.getElementById(idContenedor);
+    if (!contenedor) continue;
 
+    contenedor.innerHTML =
+      '<p class="col-span-full text-center text-gray-500 py-4">Cargando productos…</p>';
+
+    let productos = [];
+    try {
+      productos = await listarProductos(categoria);
+    } catch (e) {
+      console.error(e);
+      contenedor.innerHTML =
+        '<p class="col-span-full text-center text-red-600 py-4">No se pudieron cargar los productos.</p>';
+      continue;
+    }
+
+    contenedor.innerHTML = "";
+    if (productos.length === 0) continue;
+
+    pintarProductos(contenedor, productos);
+  }
+}
+
+function pintarProductos(contenedor, productos) {
   productos.forEach((p) => {
     const div = document.createElement("div");
     div.className = "bg-white p-4 rounded-xl shadow-md text-center";
     div.innerHTML = `
-      <img src="${p.imagen}" alt="${escaparHTML(p.nombre)}"
+      <img src="${p.imagen}" alt="${escaparHTML(p.nombre)}" loading="lazy" decoding="async"
            class="w-full h-64 object-cover rounded-lg mb-4 cursor-pointer transition-transform duration-300 hover:scale-105 hover:shadow-2xl js-ampliar" />
       <h3 class="text-xl font-bold">${escaparHTML(p.nombre)}</h3>
-      <p class="text-red-600 mt-2 font-semibold">$${escaparHTML(String(p.precio))}</p>
+      <p class="text-pink-600 mt-2 font-semibold">$${escaparHTML(String(p.precio))}</p>
       <button class="mt-2 bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded js-agregar">
         Agregar al carrito
       </button>`;
