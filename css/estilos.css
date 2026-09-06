@@ -251,3 +251,76 @@ select:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============================================================
+   FICHAS QUE SE PONEN ROSAS AL PASAR EL RATON
+   Es el mismo efecto del boton "Volver a la tienda" (latido +
+   brillo que cruza), pero en rosa y solo mientras el raton esta
+   encima, no todo el rato.
+
+   Se activa poniendo la clase "fichas-animadas" en el contenedor
+   de la cuadricula. De momento solo en index.html; para llevarlo
+   a Globos o Velas basta con anadir esa clase alli tambien.
+   ============================================================ */
+.fichas-animadas > div {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.25s ease, transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.fichas-animadas > div:hover {
+  background-color: #fce7f3; /* rosita */
+  animation: latido-ficha 1.8s ease-in-out infinite;
+}
+
+@keyframes latido-ficha {
+  0%,
+  100% {
+    transform: translateY(-6px) scale(1);
+    box-shadow: 0 0 0 3px #f472b6, 0 14px 30px rgba(236, 72, 153, 0.35),
+      0 0 0 0 rgba(236, 72, 153, 0.5);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 0 0 3px #f472b6, 0 14px 30px rgba(236, 72, 153, 0.35),
+      0 0 0 16px rgba(236, 72, 153, 0);
+  }
+}
+
+/* El brillo que cruza la ficha. pointer-events:none es importante:
+   sin eso taparia el boton "Agregar al carrito" y la foto. */
+.fichas-animadas > div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.75),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2;
+}
+
+.fichas-animadas > div:hover::before {
+  opacity: 1;
+  animation: brillo-ficha 1.4s ease-in-out infinite;
+}
+
+/* Mas rapido que el del boton: en un hover no da tiempo de esperar */
+@keyframes brillo-ficha {
+  0% {
+    left: -75%;
+  }
+  55%,
+  100% {
+    left: 130%;
+  }
+}
