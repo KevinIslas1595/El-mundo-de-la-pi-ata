@@ -702,3 +702,270 @@ header::after {
   padding: 0.5rem 1.4rem;
   font-size: clamp(1rem, 2.6vw, 1.4rem);
 }
+/* ============================================================
+   RECUADRO DEL CARRITO (carrito.html)
+   Cada producto va en su propia tarjeta blanca, separada de las
+   demás, para que se lea de un vistazo qué se lleva y cuánto.
+   ============================================================ */
+.caja-carrito {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1.25rem;
+  border: 3px solid #f9a8d4;
+  border-radius: 1.25rem;
+  background: linear-gradient(160deg, #fff1f7 0%, #fce7f3 55%, #fbcfe8 100%);
+  box-shadow: 0 12px 30px rgba(219, 39, 119, 0.18);
+}
+
+/* ---------- Barra de arriba: título y "vaciar" ---------- */
+.caja-carrito-arriba {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  /* La rayita de puntos separa el título de la lista */
+  border-bottom: 2px dashed #f472b6;
+}
+
+.caja-carrito-titulo {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #9d174d;
+}
+
+.caja-carrito-vaciar {
+  padding: 0.3rem 0.9rem;
+  border: 2px solid #fca5a5;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #b91c1c;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.caja-carrito-vaciar:hover {
+  background: #b91c1c;
+  border-color: #b91c1c;
+  color: #ffffff;
+}
+
+/* ---------- La lista: sin viñetas y con aire entre productos ---------- */
+#cartItems {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Cada producto, en su tarjeta ---------- */
+.ficha-carrito {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.9rem;
+  background: #ffffff;
+  box-shadow: 0 3px 10px rgba(157, 23, 77, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ficha-carrito:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(157, 23, 77, 0.22);
+}
+
+.ficha-carrito-datos {
+  /* Se estira para ocupar el hueco, pero puede encogerse en el móvil */
+  flex: 1 1 9rem;
+  min-width: 0;
+}
+
+.ficha-carrito-nombre {
+  font-weight: 800;
+  color: #1f2937;
+  line-height: 1.25;
+}
+
+.ficha-carrito-unitario {
+  margin-top: 0.15rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* ---------- Los botones - y + de la cantidad ---------- */
+.ficha-carrito-cantidad {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  border: 2px solid #f9a8d4;
+  border-radius: 999px;
+  background: #fff5f9;
+}
+
+.ficha-carrito-cantidad button {
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 0;
+  background: transparent;
+  color: #be185d;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.ficha-carrito-cantidad button:hover {
+  background: #f472b6;
+  color: #ffffff;
+}
+
+.ficha-carrito-cantidad input {
+  width: 2.6rem;
+  height: 2.1rem;
+  border: 0;
+  background: transparent;
+  color: #9d174d;
+  font-weight: 700;
+  text-align: center;
+  /* Fuera las flechitas del campo numérico: ya están los botones */
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.ficha-carrito-cantidad input::-webkit-outer-spin-button,
+.ficha-carrito-cantidad input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ---------- Precio y "quitar" ---------- */
+.ficha-carrito-final {
+  text-align: right;
+}
+
+.ficha-carrito-subtotal {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #be185d;
+}
+
+.ficha-carrito-quitar {
+  margin-top: 0.15rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #ef4444;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ficha-carrito-quitar:hover {
+  color: #b91c1c;
+  text-decoration: underline;
+}
+
+/* En el móvil el nombre se pone arriba, en su propio renglón, y debajo
+   quedan la cantidad a la izquierda y el precio a la derecha. */
+@media (max-width: 480px) {
+  .ficha-carrito-datos {
+    flex: 1 1 100%;
+  }
+
+  .ficha-carrito-final {
+    margin-left: auto;
+  }
+}
+
+/* ---------- Cuando no hay nada ---------- */
+.carrito-vacio {
+  padding: 2rem 1rem;
+  border-radius: 0.9rem;
+  background: #ffffff;
+  text-align: center;
+}
+
+.carrito-vacio-emoji {
+  font-size: 2.5rem;
+  opacity: 0.55;
+}
+
+.carrito-vacio-texto {
+  margin-top: 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #4b5563;
+}
+
+.carrito-vacio-enlace {
+  display: inline-block;
+  margin-top: 0.9rem;
+  padding: 0.5rem 1.4rem;
+  border-radius: 999px;
+  background: #db2777;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.carrito-vacio-enlace:hover {
+  background: #9d174d;
+  transform: scale(1.05);
+}
+
+/* ---------- La barra del total ---------- */
+.caja-carrito-total {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, #9d174d, #be185d);
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.caja-carrito-monto {
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+/* ---------- Botón de WhatsApp ---------- */
+.caja-carrito-boton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.9rem;
+  background: #22c55e;
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgba(34, 197, 94, 0.4);
+  transition: background-color 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.caja-carrito-boton:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(22, 163, 74, 0.5);
+}

@@ -66,28 +66,30 @@
       <span class="titulo-cartel titulo-cartel-dorado titulo-cartel-chico">🛒 Gracias por tu preferencia 🛒</span>
     </h2>
 
-    <div class="max-w-2xl mx-auto bg-pink-300 rounded-xl shadow p-6">
-      <div class="flex justify-end mb-3">
-        <button
-          onclick="clearCart()"
-          class="text-sm text-red-700 hover:underline"
-        >
-          Vaciar carrito
+    <!-- Recuadro del carrito. Todo el diseño está en css/estilos.css -->
+    <div class="caja-carrito">
+      <div class="caja-carrito-arriba">
+        <span class="caja-carrito-titulo">🛍️ Tus productos</span>
+        <button type="button" onclick="clearCart()" class="caja-carrito-vaciar">
+          🗑️ Vaciar carrito
         </button>
       </div>
 
-      <ul id="cartItems" class="space-y-4"></ul>
-      <p class="text-xl mt-4 font-semibold">
-        Total: $<span id="total">0</span>
-      </p>
+      <!-- Cada producto entra aquí como una tarjeta blanca -->
+      <ul id="cartItems"></ul>
+
+      <div class="caja-carrito-total">
+        <span>Total a pagar</span>
+        <span class="caja-carrito-monto">$<span id="total">0</span></span>
+      </div>
 
       <a
         id="whatsappLink"
         href="#"
         target="_blank" rel="noopener"
-        class="mt-4 block bg-green-500 hover:bg-green-600 text-white text-center px-4 py-2 rounded"
+        class="caja-carrito-boton"
       >
-        Enviar pedido por WhatsApp
+        <span aria-hidden="true">📲</span> Enviar pedido por WhatsApp
       </a>
     </div>
 

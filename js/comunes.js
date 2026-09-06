@@ -144,33 +144,42 @@ function updateCart() {
     /* Carrito vacío: antes se quedaba en blanco y parecía roto */
     if (cart.length === 0) {
       const vacio = document.createElement("li");
-      vacio.className = "text-center py-6 text-gray-700";
+      vacio.className = "carrito-vacio";
       vacio.innerHTML = `
-        <p class="text-lg">Tu carrito está vacío 🛒</p>
-        <a href="principal.html" class="inline-block mt-3 text-pink-700 underline">
-          Ver productos
-        </a>`;
+        <p class="carrito-vacio-emoji" aria-hidden="true">🛒</p>
+        <p class="carrito-vacio-texto">Tu carrito está vacío</p>
+        <a href="principal.html" class="carrito-vacio-enlace">Ver productos</a>`;
       list.appendChild(vacio);
     }
 
     cart.forEach((item) => {
       const li = document.createElement("li");
+      li.className = "ficha-carrito";
       li.innerHTML = `
-        <div class="flex justify-between items-center">
-          <div>
-            <span class="font-semibold">${escaparHTML(item.name)}</span><br>
-            <input type="number" min="1" value="${item.qty}"
-                   class="w-16 mt-1 px-2 py-1 border rounded js-cantidad"/>
-          </div>
-          <div class="text-right">
-            <p>$${item.price * item.qty}</p>
-            <button class="text-red-500 text-sm hover:underline js-eliminar">Eliminar</button>
-          </div>
+        <div class="ficha-carrito-datos">
+          <p class="ficha-carrito-nombre">${escaparHTML(item.name)}</p>
+          <p class="ficha-carrito-unitario">$${item.price} cada uno</p>
+        </div>
+        <div class="ficha-carrito-cantidad">
+          <button type="button" class="js-menos" aria-label="Quitar uno">−</button>
+          <input type="number" min="1" value="${item.qty}"
+                 class="js-cantidad" aria-label="Cantidad" />
+          <button type="button" class="js-mas" aria-label="Agregar uno">+</button>
+        </div>
+        <div class="ficha-carrito-final">
+          <p class="ficha-carrito-subtotal">$${item.price * item.qty}</p>
+          <button type="button" class="ficha-carrito-quitar js-eliminar">🗑️ Quitar</button>
         </div>`;
       /* Los listeners se enlazan aquí, no con onclick en el HTML:
          así un nombre con apóstrofo (ej. "Piñata D'Artagnan") no rompe nada. */
       li.querySelector(".js-cantidad").addEventListener("change", (e) =>
         changeQty(item.name, e.target.value)
+      );
+      li.querySelector(".js-menos").addEventListener("click", () =>
+        changeQty(item.name, item.qty - 1)
+      );
+      li.querySelector(".js-mas").addEventListener("click", () =>
+        changeQty(item.name, item.qty + 1)
       );
       li.querySelector(".js-eliminar").addEventListener("click", () =>
         removeFromCart(item.name)
