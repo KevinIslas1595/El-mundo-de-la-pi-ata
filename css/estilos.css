@@ -969,3 +969,93 @@ header::after {
   transform: translateY(-2px);
   box-shadow: 0 10px 22px rgba(22, 163, 74, 0.5);
 }
+/* ============================================================
+   MENÚ LATERAL DE CATEGORÍAS
+   El que se abre con el botón ☰ de la esquina. Antes era morado
+   plano con los enlaces en texto suelto; ahora cada categoría es
+   una pastilla que se ilumina al pasar por encima, y la página en
+   la que estás queda marcada en amarillo.
+
+   Ojo: la clase -translate-x-full la pone y quita el JavaScript
+   para abrirlo y cerrarlo. No tocarla desde aquí.
+   ============================================================ */
+.menu-lateral {
+  width: 17rem;
+  /* En pantallas muy chicas, que no se coma toda la pantalla */
+  max-width: 82vw;
+  /* Arriba deja hueco para la barra del encabezado */
+  padding: 5.5rem 1rem 1.5rem;
+  background: linear-gradient(165deg, #7e22ce 0%, #a21caf 45%, #db2777 100%);
+  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.3);
+  /* Si hay muchas categorías y la pantalla es baja, se puede bajar */
+  overflow-y: auto;
+}
+
+.menu-titulo {
+  padding-bottom: 0.7rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.menu-lista {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Cada categoría, en su pastilla */
+.menu-lista a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0.9rem;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease, transform 0.2s ease;
+}
+
+/* Al pasar el ratón se pone blanca y se desliza un poco */
+.menu-lista a:hover,
+.menu-lista a:focus-visible {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #9d174d;
+  transform: translateX(6px);
+}
+
+.menu-icono {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+/* La página en la que ya estás, marcada en amarillo */
+.menu-lista a.menu-actual {
+  background: #fde047;
+  border-color: #facc15;
+  color: #7c2d12;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.menu-lista a.menu-actual::after {
+  content: "●";
+  margin-left: auto;
+  color: #b45309;
+  font-size: 0.7rem;
+}
+
+.menu-lista a.menu-actual:hover {
+  background: #facc15;
+  color: #7c2d12;
+}

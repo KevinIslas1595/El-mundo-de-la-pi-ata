@@ -35,6 +35,15 @@ function iniciarMenu() {
     menu.classList.contains("-translate-x-full") ? abrir() : cerrar();
   });
   overlay.addEventListener("click", cerrar);
+
+  /* Se marca en el menú la página en la que estamos, para no perderse.
+     En la raíz del sitio el navegador sirve index.html. */
+  const aqui = location.pathname.split("/").pop() || "index.html";
+  menu.querySelectorAll("a").forEach((enlace) => {
+    if (enlace.getAttribute("href") === aqui) {
+      enlace.classList.add("menu-actual");
+    }
+  });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") cerrar();
   });
