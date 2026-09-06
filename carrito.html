@@ -10,13 +10,6 @@
 </head>
 <body class="bg-gray-100 pt-20">
 
-  <!-- Globos de fondo. El CSS ya existía pero nunca se pusieron
-       los elementos, así que la animación no se veía. -->
-  <span class="globo" style="left: 8%; animation-delay: 0s"></span>
-  <span class="globo" style="left: 26%; animation-delay: 2.5s"></span>
-  <span class="globo" style="left: 48%; animation-delay: 1.2s"></span>
-  <span class="globo" style="left: 68%; animation-delay: 4s"></span>
-  <span class="globo" style="left: 88%; animation-delay: 3.1s"></span>
 
 <!-- Encabezado fijo -->
   <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md px-3 py-3 flex items-center gap-2 z-50">
@@ -48,8 +41,17 @@
   <!-- Fondo oscuro al abrir el menú -->
   <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
 
+<!-- Emojis flotantes -->
+    <span class="emoji" style="left: 10%; animation-delay: 1s">🎈</span>
+    <span class="emoji" style="left: 25%; animation-delay: 2s">🎊</span>
+    <span class="emoji" style="left: 40%; animation-delay: 0.5s">🎉</span>
+    <span class="emoji" style="left: 55%; animation-delay: 0s">🎈</span>
+    <span class="emoji" style="left: 70%; animation-delay: 0.7s">🎂</span>
+    <span class="emoji" style="left: 85%; animation-delay: 3s">🎊</span>
 
 
+
+<main>
 <h1 class="text-3xl font-bold text-center mb-6">🛒 Tu carrito 🛒</h1>
     <h2 class="text-3xl font-bold text-center mb-6">
       🛒 Gracias por tu preferencia 🛒
@@ -99,6 +101,7 @@
         <img loading="lazy" decoding="async" src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
       </a>
     </section>
+  </main>
 
  <!-- Footer  barra final -->
    <footer class="bg-red-600 text-white text-center py-4 mt-10">
