@@ -4,7 +4,7 @@ Tienda web de piñatas, globos y velas. Los clientes ven el catálogo, arman su
 carrito y mandan el pedido por WhatsApp. La dueña o el dueño sube productos
 nuevos desde un panel, sin tocar código.
 
-**Ver la tienda:** https://kevinvekinkun.github.io/El-mundo-de-la-pi-ata/
+**Ver la tienda:** https://kevinislas1595.github.io/El-mundo-de-la-pi-ata/
 
 > El repositorio se llama `El-mundo-de-la-pi-ata` porque ese era el nombre
 > anterior de la tienda. Cambiarlo rompería el enlace que ya está compartido,
@@ -141,7 +141,7 @@ node pruebas/servidor.js
 node pruebas/pruebas.js
 
 # O contra el sitio ya publicado
-node pruebas/pruebas.js https://kevinvekinkun.github.io/El-mundo-de-la-pi-ata
+node pruebas/pruebas.js https://kevinislas1595.github.io/El-mundo-de-la-pi-ata
 ```
 
 ```

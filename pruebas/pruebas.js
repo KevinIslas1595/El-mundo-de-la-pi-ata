@@ -6,7 +6,7 @@ const puppeteer = require("puppeteer-core");
 
 const CHROME = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 /* Por defecto prueba en tu equipo. Para probar el sitio ya publicado:
-   node pruebas/pruebas.js https://kevinvekinkun.github.io/El-mundo-de-la-pi-ata */
+   node pruebas/pruebas.js https://kevinislas1595.github.io/El-mundo-de-la-pi-ata */
 const BASE = (process.argv[2] || "http://localhost:8080").replace(/\/$/, "");
 
 /* Las credenciales NO van escritas aquí: este archivo se sube a GitHub.

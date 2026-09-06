@@ -52,7 +52,7 @@ node pruebas/pruebas.js
 También puedes probar el sitio que ya está publicado, sin levantar nada:
 
 ```bash
-node pruebas/pruebas.js https://kevinvekinkun.github.io/El-mundo-de-la-pi-ata
+node pruebas/pruebas.js https://kevinislas1595.github.io/El-mundo-de-la-pi-ata
 ```
 
 Al terminar verás algo así:
