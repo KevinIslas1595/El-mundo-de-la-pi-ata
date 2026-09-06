@@ -13,7 +13,7 @@ carrito o el menú, te enteras al momento y no cuando te lo diga un cliente.
 La primera vez, instala lo necesario (solo una vez):
 
 ```bash
-npm install puppeteer-core
+npm install
 ```
 
 > Usa el Chrome que ya tienes instalado, no descarga ningún navegador.
@@ -49,6 +49,12 @@ node pruebas/servidor.js
 node pruebas/pruebas.js
 ```
 
+También puedes probar el sitio que ya está publicado, sin levantar nada:
+
+```bash
+node pruebas/pruebas.js https://kevinvekinkun.github.io/El-mundo-de-la-pi-ata
+```
+
 Al terminar verás algo así:
 
 ```
@@ -56,6 +62,17 @@ RESULTADO:  57 correctas,  0 fallidas
 ```
 
 Si alguna falla, te dice cuál y por qué.
+
+---
+
+## Ojo: escriben en la base de datos real
+
+Las pruebas del panel crean un producto llamado **"Piñata D'Prueba"** en
+tu Supabase de verdad, comprueban que un cliente lo ve, y lo borran al
+terminar (y también al empezar, por si quedó de una vez anterior).
+
+No hay una base de datos aparte para pruebas. Si algún día tocas
+`pruebas.js`, conserva esa limpieza para no dejar basura en tu tienda.
 
 ---
 
@@ -80,12 +97,18 @@ Si alguna falla, te dice cuál y por qué.
 Dentro del bloque 7 hay una que abre la web **como si fueras un cliente
 cualquiera** (navegador limpio, sin sesión) y mira si ve tus productos.
 
-- **Ahora mismo** pasa como `sin nube, el cliente NO lo ve` — confirma el
-  problema: los productos solo existen en tu navegador.
-- **Cuando configures Supabase** (ver `CONFIGURAR-SUPABASE.md`) esa misma
-  prueba cambiará sola a `UN CLIENTE VE TU PRODUCTO`.
+Desde que Supabase está configurado, pasa así:
 
-Esa es la señal de que ya funciona de verdad.
+```
+OK   UN CLIENTE VE TU PRODUCTO (con nube)
+```
+
+Esa es la señal de que la tienda funciona de verdad: lo que subes desde el
+panel lo ve cualquier cliente, no solo tu navegador.
+
+Si algún día vuelve a salir `sin nube, el cliente NO lo ve`, es que se
+rompió la conexión con la nube. Revisa `js/config.js` y los pasos de
+`CONFIGURAR-SUPABASE.md`.
 
 ---
 
