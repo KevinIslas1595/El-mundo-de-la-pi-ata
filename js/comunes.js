@@ -1,5 +1,5 @@
 /* ============================================================
-   EL MUNDO DE LA PIÑATA — Código compartido por todas las páginas
+   Piñatería Papelito Crepé — Código compartido por todas las páginas
    Antes esto estaba copiado dentro de cada .html (y duplicado
    varias veces por archivo, lo que rompía el JavaScript).
    ============================================================ */

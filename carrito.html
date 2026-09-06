@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tu carrito | El Mundo de la Piñata</title>
+  <title>Tu carrito | Piñatería Papelito Crepé</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Letra bonita para el nombre de la tienda -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
 <body class="bg-gray-100 pt-20">
@@ -16,10 +20,12 @@
     <!-- Botón hamburguesa (izquierda) -->
     <button id="menuBtn" aria-label="Abrir menú" class="shrink-0 text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
 
-    <!-- Logo centrado. Antes iba en position:absolute y en el móvil se
-         montaba encima del botón de menú y del carrito. -->
-    <a href="principal.html" class="flex-1 min-w-0 text-center text-sm sm:text-lg md:text-xl font-bold truncate hover:underline cursor-pointer">
-      🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
+    <!-- Nombre de la tienda, centrado. Conserva flex-1, min-w-0 y
+         truncate: es lo que evita que en el móvil se monte encima
+         del botón de menú o del carrito. El adorno (degradado que
+         se mueve, brillo y papel picado) está en css/estilos.css. -->
+    <a href="principal.html" class="marca flex-1 min-w-0 text-center truncate cursor-pointer">
+      <span class="marca-emoji" aria-hidden="true">🎉</span> <span class="marca-texto">Piñatería Papelito Crepé</span> <span class="marca-emoji" aria-hidden="true">🎈</span>
     </a>
 
     <!-- Carrito (derecha) -->
@@ -52,9 +58,12 @@
 
 
 <main>
-<h1 class="text-3xl font-bold text-center mb-6">🛒 Tu carrito 🛒</h1>
-    <h2 class="text-3xl font-bold text-center mb-6">
-      🛒 Gracias por tu preferencia 🛒
+<!-- Los dos títulos, en cartel dorado. El adorno va en css/estilos.css -->
+<h1 class="text-center mb-4">
+  <span class="titulo-cartel titulo-cartel-dorado">🛒 Tu carrito 🛒</span>
+</h1>
+    <h2 class="text-center mb-6">
+      <span class="titulo-cartel titulo-cartel-dorado titulo-cartel-chico">🛒 Gracias por tu preferencia 🛒</span>
     </h2>
 
     <div class="max-w-2xl mx-auto bg-pink-300 rounded-xl shadow p-6">
@@ -94,10 +103,16 @@
     
 <!-- Ubicación -->
     <section class="text-center py-6">
-      <h2 class="text-xl mb-4">
-        👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
+      <!-- El aviso de la ubicación ahora es un botón: abre el local
+           en Google Maps. El adorno está en css/estilos.css. -->
+      <h2 class="mb-4">
+        <a class="btn-ubicacion" href="https://www.google.com/maps/place/Mercado+Nezahualcoyotl/@19.3885796,-99.0194876,17z/data=!4m6!3m5!1s0x85d1fd2bb9637ba7:0x440daeeb0fa8c668!8m2!3d19.3883923!4d-99.0165826!16s%2Fg%2F11bbrlnpvl?entry=ttu&amp;g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
+          <span class="btn-ubicacion-pin" aria-hidden="true">📍</span>
+          <span class="btn-ubicacion-texto">Puedes encontrar nuestra ubicación aquí</span>
+          <span class="btn-ubicacion-dedo" aria-hidden="true">👇</span>
+        </a>
       </h2>
-      <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank" rel="noopener">
+      <a href="https://www.google.com/maps/place/Mercado+Nezahualcoyotl/@19.3885796,-99.0194876,17z/data=!4m6!3m5!1s0x85d1fd2bb9637ba7:0x440daeeb0fa8c668!8m2!3d19.3883923!4d-99.0165826!16s%2Fg%2F11bbrlnpvl?entry=ttu&amp;g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
         <img loading="lazy" decoding="async" src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
       </a>
     </section>
@@ -106,7 +121,7 @@
  <!-- Footer  barra final -->
    <footer class="bg-red-600 text-white text-center py-4 mt-10">
   <a href="Contacto.html" class="inline-block hover:underline cursor-pointer">
-    © 2025 🎈EL MUNDO DE LA PIÑATA🎈🎉 Todos los derechos reservados.
+    © 2025 🎈Piñatería Papelito Crepé🎈🎉 Todos los derechos reservados.
   </a>
 </footer>
 

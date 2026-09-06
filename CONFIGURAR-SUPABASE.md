@@ -1,4 +1,4 @@
-# Configurar Supabase — El Mundo de la Piñata
+# Configurar Supabase — Piñatería Papelito Crepé
 
 Esto hace que los productos que subes en el panel **los vean tus clientes**.
 Hoy se guardan solo en tu navegador y nadie más los ve.

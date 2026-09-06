@@ -1,5 +1,5 @@
 /* ============================================================
-   Pruebas automáticas de EL MUNDO DE LA PIÑATA
+   Pruebas automáticas de Piñatería Papelito Crepé
    Abre cada página en un Chrome real y comprueba que funciona.
    ============================================================ */
 const puppeteer = require("puppeteer-core");

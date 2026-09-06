@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Globos | El Mundo de la Piñata</title>
+  <title>Globos | Piñatería Papelito Crepé</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Letra bonita para el nombre de la tienda -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
 <body class="bg-gray-100 pt-20">
@@ -15,10 +19,12 @@
     <!-- Botón hamburguesa (izquierda) -->
     <button id="menuBtn" aria-label="Abrir menú" class="shrink-0 text-3xl bg-transparent focus:outline-none hover:scale-110 transition-transform">☰</button>
 
-    <!-- Logo centrado. Antes iba en position:absolute y en el móvil se
-         montaba encima del botón de menú y del carrito. -->
-    <a href="principal.html" class="flex-1 min-w-0 text-center text-sm sm:text-lg md:text-xl font-bold truncate hover:underline cursor-pointer">
-      🎉🎈EL MUNDO DE LA PIÑATA🎈🎉
+    <!-- Nombre de la tienda, centrado. Conserva flex-1, min-w-0 y
+         truncate: es lo que evita que en el móvil se monte encima
+         del botón de menú o del carrito. El adorno (degradado que
+         se mueve, brillo y papel picado) está en css/estilos.css. -->
+    <a href="principal.html" class="marca flex-1 min-w-0 text-center truncate cursor-pointer">
+      <span class="marca-emoji" aria-hidden="true">🎉</span> <span class="marca-texto">Piñatería Papelito Crepé</span> <span class="marca-emoji" aria-hidden="true">🎈</span>
     </a>
 
     <!-- Carrito (derecha) -->
@@ -57,7 +63,10 @@
 
     <!-- Galería de Globos -->
     <section class="py-10 px-6 max-w-6xl mx-auto">
-      <h2 class="text-2xl font-semibold text-center mb-8">🎈🎈Nuestros Productos en Globos🎈🎈</h2>
+      <!-- Encabezado en cartel amarillo; el adorno va en css/estilos.css -->
+      <h2 class="text-center mb-8">
+        <span class="titulo-cartel">🎈🎈 Nuestros Productos en Globos 🎈🎈</span>
+      </h2>
       <div class="grid md:grid-cols-3 gap-8 fichas-animadas" id="productos-grid">
         <!-- Producto 1 Kit Globos Kit Sonic Feliz Cumpleaños -->
         <div class="bg-white p-4 rounded-xl shadow-md text-center">
@@ -718,38 +727,21 @@
     
         </div>
 
-        <section class="py-10 px-6 w-full">
-  <h2 class="text-2xl font-semibold text-center mb-8">🎈 Productos de Globos 🎈</h2>
+        <section class="py-10 px-6 max-w-6xl mx-auto">
+      <!-- Encabezado en cartel amarillo; el adorno va en css/estilos.css -->
+      <h2 class="text-center mb-8">
+        <span class="titulo-cartel">🎈 Productos de Globos 🎈</span>
+      </h2>
 
-  <div id="productos-globos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 fichas-animadas"></div>
+  <div id="productos-globos" class="grid md:grid-cols-3 gap-8 fichas-animadas"></div>
 </section>
 
 <!-- SCRIPT -->
 
       </div>
 
-  <!-- Icono de carrito -->
-  <div class="fixed top-4 right-4 bg-white shadow px-4 py-2 rounded-xl flex items-center gap-2">
-    <span class="text-xl">🛒</span>
-    <span id="cartCount" class="text-lg font-semibold">0</span>
-  </div>
 
  
-  <!-- Carrito -->
-  <div class="max-w-2xl mx-auto bg-pink-300 rounded-xl shadow p-6">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold">🛒 Tu carrito</h2>
-      <button onclick="clearCart()" class="text-red-500 hover:underline text-sm">Vaciar carrito</button>
-    </div>
-
-    <ul id="cartItems" class="space-y-3 text-left text-lg"></ul>
-    <p class="mt-4 text-xl font-bold">Total: $<span id="total">0</span></p>
-
-    <!-- Botón WhatsApp -->
-   <a id="whatsappLink" href="https://wa.me/5615868610" target="_blank" rel="noopener" class="mt-4 inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded text-lg">
-     Enviar pedido por WhatsApp
-    </a>
-  </div>
 
   
 
@@ -767,45 +759,21 @@
 
     
 
-    <!-- Formulario de contacto -->
-    <section class="bg-white py-10 px-6">
-      <h2 class="text-2xl font-semibold text-center mb-6">Contáctanos</h2>
-      <form class="max-w-xl mx-auto grid gap-4">
-        <input
-          type="text"
-          placeholder="Tu nombre"
-          class="border p-3 rounded-md"
-          required
-        />
-        <input
-          type="email"
-          placeholder="Tu correo"
-          class="border p-3 rounded-md"
-          required
-        />
-        <textarea
-          placeholder="Mensaje o tipo de piñata"
-          rows="4"
-          class="border p-3 rounded-md"
-          required
-        ></textarea>
-        <button
-          type="submit"
-          class="bg-red-500 text-white py-3 rounded-md hover:bg-red-600 transition"
-        >
-          Enviar mensaje
-        </button>
-      </form>
-    </section>
 
   
 <!-- SweetAlert2 -->
 <!-- Ubicación -->
     <section class="text-center py-6">
-      <h2 class="text-xl mb-4">
-        👇👇 Puedes encontrar nuestra ubicación aquí 👇👇
+      <!-- El aviso de la ubicación ahora es un botón: abre el local
+           en Google Maps. El adorno está en css/estilos.css. -->
+      <h2 class="mb-4">
+        <a class="btn-ubicacion" href="https://www.google.com/maps/place/Mercado+Nezahualcoyotl/@19.3885796,-99.0194876,17z/data=!4m6!3m5!1s0x85d1fd2bb9637ba7:0x440daeeb0fa8c668!8m2!3d19.3883923!4d-99.0165826!16s%2Fg%2F11bbrlnpvl?entry=ttu&amp;g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
+          <span class="btn-ubicacion-pin" aria-hidden="true">📍</span>
+          <span class="btn-ubicacion-texto">Puedes encontrar nuestra ubicación aquí</span>
+          <span class="btn-ubicacion-dedo" aria-hidden="true">👇</span>
+        </a>
       </h2>
-      <a href="https://maps.app.goo.gl/bsCrdLjRbgNAqysh9" target="_blank" rel="noopener">
+      <a href="https://www.google.com/maps/place/Mercado+Nezahualcoyotl/@19.3885796,-99.0194876,17z/data=!4m6!3m5!1s0x85d1fd2bb9637ba7:0x440daeeb0fa8c668!8m2!3d19.3883923!4d-99.0165826!16s%2Fg%2F11bbrlnpvl?entry=ttu&amp;g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
         <img loading="lazy" decoding="async" src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
       </a>
     </section>
@@ -815,7 +783,7 @@
 <!-- Footer  barra final -->
       <footer class="bg-red-600 text-white text-center py-4 mt-10">
   <a href="Contacto.html" class="inline-block hover:underline cursor-pointer">
-    © 2025 🎈EL MUNDO DE LA PIÑATA🎈🎉 Todos los derechos reservados.
+    © 2025 🎈Piñatería Papelito Crepé🎈🎉 Todos los derechos reservados.
   </a>
 </footer>
 
