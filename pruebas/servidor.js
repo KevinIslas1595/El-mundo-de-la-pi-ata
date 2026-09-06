@@ -3,7 +3,9 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 
-const RAIZ = "C:\\Users\\Kevin\\Desktop\\PAGINA ALEX";
+// La carpeta del proyecto, calculada sola: asi el servidor
+// funciona aunque muevas o renombres la carpeta.
+const RAIZ = path.resolve(__dirname, "..");
 const PUERTO = 8080;
 
 const TIPOS = {

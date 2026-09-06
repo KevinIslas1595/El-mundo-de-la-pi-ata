@@ -1,0 +1,24 @@
+{
+  // Arranca el servidor local antes de abrir la pagina con F5.
+  // Sin esto, Chrome abria http://localhost:8080 sin que nadie lo
+  // estuviera sirviendo y salia "No se puede acceder a este sitio".
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Servidor local",
+      "type": "shell",
+      "command": "node",
+      "args": ["pruebas/servidor.js"],
+      "isBackground": true,
+      "presentation": { "reveal": "silent", "panel": "dedicated" },
+      "problemMatcher": {
+        "pattern": { "regexp": "^$", "file": 1, "location": 2, "message": 3 },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Iniciando.*$",
+          "endsPattern": "^.*Servidor listo.*$"
+        }
+      }
+    }
+  ]
+}
