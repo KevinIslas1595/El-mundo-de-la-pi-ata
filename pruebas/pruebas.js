@@ -316,6 +316,12 @@ async function esperarPanel(pagina) {
 
     pagina.on("dialog", async (d) => await d.accept());
 
+    /* Cuantos productos hay ya. No se puede dar por hecho que la
+       tienda este vacia: tiene los productos de verdad. */
+    const antes = await pagina.evaluate(
+      () => document.querySelectorAll("#lista-productos > div").length
+    );
+
     /* Se inserta directamente por la capa de datos, sin simular
        la selección de un archivo (eso el navegador no lo permite). */
     await pagina.evaluate(async () => {
@@ -342,7 +348,11 @@ async function esperarPanel(pagina) {
       tarjetas: document.querySelectorAll("#lista-productos > div").length,
       texto: document.getElementById("lista-productos").textContent,
     }));
-    comprobar("el producto aparece en el panel", tras.tarjetas === 1, "n=" + tras.tarjetas);
+    comprobar(
+      "el producto aparece en el panel",
+      tras.tarjetas === antes + 1,
+      `antes=${antes} despues=${tras.tarjetas}`
+    );
     comprobar("muestra el precio", tras.texto.includes("321"));
     comprobar(
       "el apostrofo se escapa bien",
