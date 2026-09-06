@@ -41,6 +41,47 @@ function comprobar(nombre, condicion, detalle = "") {
   }
 }
 
+/* El nombre del producto que crean las pruebas. Se borra al terminar
+   y tambien al empezar, por si una prueba anterior se corto a medias. */
+const PRODUCTO_PRUEBA = "Piñata D'Prueba";
+
+/* Sin nube el login es instantaneo; con nube hay que ir al servidor de
+   Supabase. Por eso se espera al resultado y no a un tiempo fijo. */
+const ESPERA_MAX = 15000;
+
+async function esperarAviso(pagina) {
+  await pagina
+    .waitForFunction(
+      () => document.getElementById("mensaje").textContent.trim() !== "",
+      { timeout: ESPERA_MAX }
+    )
+    .catch(() => {});
+}
+
+/* Con Supabase la sesion queda guardada en el navegador, asi que
+   login.html puede saltar solo a admin.html y no haber formulario
+   que rellenar. Se contemplan los dos casos. */
+async function entrarAlPanel(pagina) {
+  await pagina.goto(`${BASE}/login.html`, { waitUntil: "networkidle2" });
+  await new Promise((r) => setTimeout(r, 500));
+  if (!pagina.url().includes("admin.html") && (await pagina.$("#usuario"))) {
+    await pagina.type("#usuario", USUARIO);
+    await pagina.type("#clave", CLAVE);
+    await pagina.click("#btnEntrar");
+  }
+  await esperarPanel(pagina);
+}
+
+async function esperarPanel(pagina) {
+  await pagina
+    .waitForFunction(() => location.pathname.endsWith("admin.html"), {
+      timeout: ESPERA_MAX,
+    })
+    .catch(() => {});
+  /* Un respiro para que admin.html pinte la lista */
+  await new Promise((r) => setTimeout(r, 400));
+}
+
 (async () => {
   const navegador = await puppeteer.launch({
     executablePath: CHROME,
@@ -245,7 +286,7 @@ function comprobar(nombre, condicion, detalle = "") {
     await pagina.type("#usuario", USUARIO);
     await pagina.type("#clave", "incorrecta");
     await pagina.click("#btnEntrar");
-    await new Promise((r) => setTimeout(r, 600));
+    await esperarAviso(pagina);
     const msg = await pagina.$eval("#mensaje", (el) => el.textContent);
     comprobar("rechaza clave incorrecta", /incorrect/i.test(msg), msg);
     comprobar("no entra al panel", !pagina.url().includes("admin.html"));
@@ -258,7 +299,7 @@ function comprobar(nombre, condicion, detalle = "") {
     await pagina.type("#usuario", USUARIO);
     await pagina.type("#clave", CLAVE);
     await pagina.click("#btnEntrar");
-    await new Promise((r) => setTimeout(r, 900));
+    await esperarPanel(pagina);
     comprobar(
       "entra con las credenciales correctas",
       pagina.url().includes("admin.html"),
@@ -271,11 +312,7 @@ function comprobar(nombre, condicion, detalle = "") {
   console.log("\n=== 7. Panel: guardar y borrar ===");
   if (HAY_CREDENCIALES) {
     const pagina = await navegador.newPage();
-    await pagina.goto(`${BASE}/login.html`, { waitUntil: "networkidle2" });
-    await pagina.type("#usuario", USUARIO);
-    await pagina.type("#clave", CLAVE);
-    await pagina.click("#btnEntrar");
-    await new Promise((r) => setTimeout(r, 900));
+    await entrarAlPanel(pagina);
 
     pagina.on("dialog", async (d) => await d.accept());
 
@@ -283,6 +320,13 @@ function comprobar(nombre, condicion, detalle = "") {
        la selección de un archivo (eso el navegador no lo permite). */
     await pagina.evaluate(async () => {
       localStorage.removeItem("productos");
+      if (NUBE_CONFIGURADA) {
+        for (const p of await listarProductos("productos")) {
+          if (p.nombre === "Piñata D'Prueba") {
+            await borrarProducto(p.id, "productos");
+          }
+        }
+      }
       await guardarProducto({
         id: null,
         categoria: "productos",
@@ -350,8 +394,18 @@ function comprobar(nombre, condicion, detalle = "") {
     await paginaCliente.close();
     await cliente.close();
 
-    /* Limpieza */
-    await pagina.evaluate(() => localStorage.removeItem("productos"));
+    /* Limpieza: en el navegador Y en la nube, para no dejar
+       productos de prueba en la tienda de verdad */
+    await pagina.evaluate(async () => {
+      localStorage.removeItem("productos");
+      if (NUBE_CONFIGURADA) {
+        for (const p of await listarProductos("productos")) {
+          if (p.nombre === "Piñata D'Prueba") {
+            await borrarProducto(p.id, "productos");
+          }
+        }
+      }
+    });
     await pagina.close();
   }
 

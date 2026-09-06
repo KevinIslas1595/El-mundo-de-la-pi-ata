@@ -15,8 +15,8 @@
    Los pasos completos están en CONFIGURAR-SUPABASE.md
    ============================================================ */
 
-const SUPABASE_URL = "";
-const SUPABASE_ANON_KEY = "";
+const SUPABASE_URL = "https://fabdpahpdxdenvsnxlpp.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_qgdzO3b8X0q0NGLQwxFw2w_AMD8q-_a";
 
 /* --- A partir de aquí no hace falta tocar nada --- */
 
