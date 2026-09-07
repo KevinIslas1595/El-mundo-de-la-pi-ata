@@ -815,6 +815,170 @@ header::after {
 }
 
 /* ============================================================
+   PINATAS PERSONALIZADAS (el recuadro de "haz tu fiesta inolvidable")
+   Va hasta abajo, despues de las entregas. Es el mas llamativo de
+   todos a proposito: el fondo cambia de color despacio, hay confeti
+   flotando y el boton de WhatsApp late para invitar a escribir.
+   ============================================================ */
+.promo {
+  position: relative;
+  /* para que el confeti no se salga del recuadro */
+  overflow: hidden;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  border: 4px solid #a855f7;
+  border-radius: 1.75rem;
+  background: linear-gradient(120deg, #fdf4ff, #fae8ff, #ffe4e6, #fef3c7, #fdf4ff);
+  background-size: 300% 300%;
+  box-shadow: 0 14px 34px rgba(168, 85, 247, 0.28);
+  animation: promo-fondo 16s ease-in-out infinite;
+}
+
+/* El fondo se pasea despacio de un lado a otro */
+@keyframes promo-fondo {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Confeti de adorno. Va detras del texto (z-index 0 contra el 1 del
+   contenido) y bien tenue, para que nunca estorbe la lectura. */
+.promo-confeti {
+  position: absolute;
+  z-index: 0;
+  font-size: 1.5rem;
+  opacity: 0.38;
+  pointer-events: none;
+  animation: promo-flota 6s ease-in-out infinite;
+}
+
+/* En el celular no hay margen libre: el texto llega hasta la orilla,
+   asi que ahi el confeti se quita. El fondo que cambia de color y el
+   emoji del titulo ya dan movimiento de sobra. */
+@media (max-width: 640px) {
+  .promo-confeti {
+    display: none;
+  }
+}
+
+@keyframes promo-flota {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-12deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(12deg);
+  }
+}
+
+.promo-titulo {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 1.1rem;
+  color: #7e22ce;
+  font-size: clamp(1.3rem, 3.8vw, 2rem);
+  font-weight: 800;
+  line-height: 1.3;
+  text-align: center;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.75);
+}
+
+.promo-emoji {
+  display: inline-block;
+  animation: promo-brinco 1.6s ease-in-out infinite;
+}
+
+@keyframes promo-brinco {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(8deg);
+  }
+}
+
+.promo-texto {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 1.1rem;
+  color: #581c87;
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  line-height: 1.7;
+  /* alineado a la izquierda: un parrafo largo centrado cansa la vista */
+  text-align: left;
+}
+
+/* Las frases importantes, como subrayadas con marcatextos amarillo */
+.promo-destacado {
+  padding: 0 0.2rem;
+  background: linear-gradient(180deg, transparent 58%, #fde047 58%);
+  font-weight: 800;
+}
+
+/* El boton de WhatsApp, verde y latiendo */
+.promo-boton {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: calc(100% - 1rem);
+  margin-top: 0.4rem;
+  padding: 0.9rem 1.8rem;
+  border: 4px solid #15803d;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #22c55e, #16a34a 55%, #15803d);
+  color: #ffffff;
+  font-size: clamp(1rem, 2.6vw, 1.25rem);
+  font-weight: 800;
+  line-height: 1.3;
+  text-decoration: none;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  animation: promo-latido 2.2s ease-in-out infinite;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+@keyframes promo-latido {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 6px 18px rgba(22, 163, 74, 0.4), 0 0 0 0 rgba(34, 197, 94, 0.55);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 6px 18px rgba(22, 163, 74, 0.4), 0 0 0 16px rgba(34, 197, 94, 0);
+  }
+}
+
+.promo-boton:hover,
+.promo-boton:focus-visible {
+  animation-play-state: paused;
+  transform: scale(1.07);
+  background: linear-gradient(135deg, #16a34a, #14532d);
+  box-shadow: 0 12px 28px rgba(21, 128, 61, 0.5);
+}
+
+.promo-boton-icono {
+  display: inline-block;
+  animation: promo-brinco 1.3s ease-in-out infinite;
+}
+
+/* Si en el telefono estan pedidas menos animaciones, se queda quieto */
+@media (prefers-reduced-motion: reduce) {
+  .promo,
+  .promo-confeti,
+  .promo-emoji,
+  .promo-boton,
+  .promo-boton-icono {
+    animation: none;
+  }
+}
+
+/* ============================================================
    ENCABEZADO EN CARTEL AMARILLO
    Para los títulos de sección ("Nuestros Productos en Globos").
    Es un letrero amarillo que se balancea despacio, con un brillo
