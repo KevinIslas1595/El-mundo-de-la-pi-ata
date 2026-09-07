@@ -676,6 +676,20 @@ header::after {
   color: #7c2d12;
 }
 
+/* El numero de local, en un letrerito blanco para que salte a la vista:
+   es el dato que el cliente busca cuando ya llego al mercado. */
+.tienda-local {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  border: 3px dashed #ca8a04;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #b45309;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
 .tienda-direccion {
   font-size: 0.95rem;
   line-height: 1.5;
