@@ -84,6 +84,65 @@
       </h2>
       <p class="mb-2">📞5615868610</p>
     </div>
+    <!-- Ubicacion: ahora son DOS tiendas -->
+    <section class="text-center py-6 w-full z-10 mt-4">
+      <!-- Cada tarjeta es un enlace completo: al tocarla abre en Google Maps
+           la ruta de ESA tienda. Los adornos estan en css/estilos.css. -->
+      <h2 class="mb-6">
+        <span class="titulo-cartel">🏪 ¡Tenemos dos tiendas para atenderte! 🎉</span>
+      </h2>
+
+      <div class="tiendas">
+
+        <!-- Tienda 1: Neza -->
+        <a class="tienda" href="https://maps.app.goo.gl/X3AJEpEUgbFyvkVW6" target="_blank" rel="noopener">
+          <span class="btn-ubicacion btn-ubicacion-mini">
+            <span class="btn-ubicacion-pin" aria-hidden="true">📍</span>
+            <span class="btn-ubicacion-texto">Puedes encontrar nuestra tienda de Neza aquí</span>
+            <span class="btn-ubicacion-dedo" aria-hidden="true">👇</span>
+          </span>
+          <!-- El mapa va en dos formatos: el .webp pesa mucho menos y es el
+               que ve casi todo el mundo; el .png/.PNG queda de repuesto por
+               si el telefono es viejito y no entiende webp. -->
+          <picture>
+            <source srcset="img/mapa.webp" type="image/webp" />
+            <img loading="lazy" decoding="async" src="img/mapa.PNG" class="tienda-mapa"
+                 alt="Mapa de nuestra tienda en el Mercado Nezahualcoyotl" />
+          </picture>
+          <span class="tienda-nombre">🎪 Tienda 1 &mdash; Mercado Nezahualcóyotl</span>
+          <span class="tienda-direccion">
+            Av. San Ángel 160, Metropolitana 3ra Secc,<br />
+            57750 Cdad. Nezahualcóyotl, Edo. de Méx.
+          </span>
+          <span class="tienda-comollegar">🚗 Cómo llegar</span>
+        </a>
+
+        <!-- Tienda 2: Iztapalapa -->
+        <a class="tienda" href="https://maps.app.goo.gl/vKiBZtpHDqz47gri6" target="_blank" rel="noopener">
+          <span class="btn-ubicacion btn-ubicacion-mini">
+            <span class="btn-ubicacion-pin" aria-hidden="true">📍</span>
+            <span class="btn-ubicacion-texto">Puedes encontrar nuestra tienda de Iztapalapa aquí</span>
+            <span class="btn-ubicacion-dedo" aria-hidden="true">👇</span>
+          </span>
+          <!-- El mapa va en dos formatos: el .webp pesa mucho menos y es el
+               que ve casi todo el mundo; el .png/.PNG queda de repuesto por
+               si el telefono es viejito y no entiende webp. -->
+          <picture>
+            <source srcset="img/mapa2.webp" type="image/webp" />
+            <img loading="lazy" decoding="async" src="img/mapa2.png" class="tienda-mapa"
+                 alt="Mapa de nuestra tienda en Plaza El Salado, Iztapalapa" />
+          </picture>
+          <span class="tienda-nombre">🎈 Tienda 2 &mdash; Plaza El Salado</span>
+          <span class="tienda-direccion">
+            Calz. Ignacio Zaragoza 3254, Santa Martha Acatitla,<br />
+            Iztapalapa, 09140 Ciudad de México, CDMX
+          </span>
+          <span class="tienda-comollegar">🚗 Cómo llegar</span>
+        </a>
+
+      </div>
+    </section>
+
 <div class="text-center mt-8">
     <a href="principal.html" class="btn-volver">
       <span class="flecha flecha-izq">⬅</span>

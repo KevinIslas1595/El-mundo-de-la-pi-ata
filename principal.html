@@ -298,15 +298,21 @@
 
       <div class="tiendas">
 
-        <!-- Tienda 1: Mercado Nezahualcoyotl -->
+        <!-- Tienda 1: Neza -->
         <a class="tienda" href="https://maps.app.goo.gl/X3AJEpEUgbFyvkVW6" target="_blank" rel="noopener">
           <span class="btn-ubicacion btn-ubicacion-mini">
             <span class="btn-ubicacion-pin" aria-hidden="true">📍</span>
             <span class="btn-ubicacion-texto">Puedes encontrar nuestra tienda de Neza aquí</span>
             <span class="btn-ubicacion-dedo" aria-hidden="true">👇</span>
           </span>
-          <img loading="lazy" decoding="async" src="img/mapa.PNG" class="tienda-mapa"
-               alt="Mapa de nuestra tienda en el Mercado Nezahualcoyotl" />
+          <!-- El mapa va en dos formatos: el .webp pesa mucho menos y es el
+               que ve casi todo el mundo; el .png/.PNG queda de repuesto por
+               si el telefono es viejito y no entiende webp. -->
+          <picture>
+            <source srcset="img/mapa.webp" type="image/webp" />
+            <img loading="lazy" decoding="async" src="img/mapa.PNG" class="tienda-mapa"
+                 alt="Mapa de nuestra tienda en el Mercado Nezahualcoyotl" />
+          </picture>
           <span class="tienda-nombre">🎪 Tienda 1 &mdash; Mercado Nezahualcóyotl</span>
           <span class="tienda-direccion">
             Av. San Ángel 160, Metropolitana 3ra Secc,<br />
@@ -315,15 +321,21 @@
           <span class="tienda-comollegar">🚗 Cómo llegar</span>
         </a>
 
-        <!-- Tienda 2: Plaza El Salado (Iztapalapa) -->
+        <!-- Tienda 2: Iztapalapa -->
         <a class="tienda" href="https://maps.app.goo.gl/vKiBZtpHDqz47gri6" target="_blank" rel="noopener">
           <span class="btn-ubicacion btn-ubicacion-mini">
             <span class="btn-ubicacion-pin" aria-hidden="true">📍</span>
             <span class="btn-ubicacion-texto">Puedes encontrar nuestra tienda de Iztapalapa aquí</span>
             <span class="btn-ubicacion-dedo" aria-hidden="true">👇</span>
           </span>
-          <img loading="lazy" decoding="async" src="img/mapa2.png" class="tienda-mapa"
-               alt="Mapa de nuestra tienda en Plaza El Salado, Iztapalapa" />
+          <!-- El mapa va en dos formatos: el .webp pesa mucho menos y es el
+               que ve casi todo el mundo; el .png/.PNG queda de repuesto por
+               si el telefono es viejito y no entiende webp. -->
+          <picture>
+            <source srcset="img/mapa2.webp" type="image/webp" />
+            <img loading="lazy" decoding="async" src="img/mapa2.png" class="tienda-mapa"
+                 alt="Mapa de nuestra tienda en Plaza El Salado, Iztapalapa" />
+          </picture>
           <span class="tienda-nombre">🎈 Tienda 2 &mdash; Plaza El Salado</span>
           <span class="tienda-direccion">
             Calz. Ignacio Zaragoza 3254, Santa Martha Acatitla,<br />

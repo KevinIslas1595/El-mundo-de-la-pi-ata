@@ -637,6 +637,13 @@ header::after {
   box-shadow: 0 12px 28px rgba(185, 28, 28, 0.5);
 }
 
+/* El <picture> que envuelve al mapa tiene que ocupar todo el ancho
+   de la tarjeta, si no la imagen se queda chiquita. */
+.tienda picture {
+  display: block;
+  width: 100%;
+}
+
 /* Los dos mapas tienen distinta forma: se recortan a la misma
    para que las dos tarjetas se vean parejas. */
 .tienda-mapa {
