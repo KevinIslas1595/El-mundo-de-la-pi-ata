@@ -314,20 +314,51 @@
 
   
 <!-- SweetAlert2 -->
-<!-- Ubicación -->
+    <!-- Ubicacion: ahora son DOS tiendas -->
     <section class="text-center py-6">
-      <!-- El aviso de la ubicación ahora es un botón: abre el local
-           en Google Maps. El adorno está en css/estilos.css. -->
-      <h2 class="mb-4">
-        <a class="btn-ubicacion" href="https://www.google.com/maps/place/Mercado+Nezahualcoyotl/@19.3885796,-99.0194876,17z/data=!4m6!3m5!1s0x85d1fd2bb9637ba7:0x440daeeb0fa8c668!8m2!3d19.3883923!4d-99.0165826!16s%2Fg%2F11bbrlnpvl?entry=ttu&amp;g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
-          <span class="btn-ubicacion-pin" aria-hidden="true">📍</span>
-          <span class="btn-ubicacion-texto">Puedes encontrar nuestra ubicación aquí</span>
-          <span class="btn-ubicacion-dedo" aria-hidden="true">👇</span>
-        </a>
+      <!-- Cada tarjeta es un enlace completo: al tocarla abre en Google Maps
+           la ruta de ESA tienda. Los adornos estan en css/estilos.css. -->
+      <h2 class="mb-6">
+        <span class="titulo-cartel">🏪 ¡Tenemos dos tiendas para atenderte! 🎉</span>
       </h2>
-      <a href="https://www.google.com/maps/place/Mercado+Nezahualcoyotl/@19.3885796,-99.0194876,17z/data=!4m6!3m5!1s0x85d1fd2bb9637ba7:0x440daeeb0fa8c668!8m2!3d19.3883923!4d-99.0165826!16s%2Fg%2F11bbrlnpvl?entry=ttu&amp;g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
-        <img loading="lazy" decoding="async" src="img/mapa.PNG" alt="Mapa de ubicación" class="mx-auto max-w-full rounded-lg shadow" />
-      </a>
+
+      <div class="tiendas">
+
+        <!-- Tienda 1: Mercado Nezahualcoyotl -->
+        <a class="tienda" href="https://maps.app.goo.gl/X3AJEpEUgbFyvkVW6" target="_blank" rel="noopener">
+          <span class="btn-ubicacion btn-ubicacion-mini">
+            <span class="btn-ubicacion-pin" aria-hidden="true">📍</span>
+            <span class="btn-ubicacion-texto">Puedes encontrar nuestra tienda de Neza aquí</span>
+            <span class="btn-ubicacion-dedo" aria-hidden="true">👇</span>
+          </span>
+          <img loading="lazy" decoding="async" src="img/mapa.PNG" class="tienda-mapa"
+               alt="Mapa de nuestra tienda en el Mercado Nezahualcoyotl" />
+          <span class="tienda-nombre">🎪 Tienda 1 &mdash; Mercado Nezahualcóyotl</span>
+          <span class="tienda-direccion">
+            Av. San Ángel 160, Metropolitana 3ra Secc,<br />
+            57750 Cdad. Nezahualcóyotl, Edo. de Méx.
+          </span>
+          <span class="tienda-comollegar">🚗 Cómo llegar</span>
+        </a>
+
+        <!-- Tienda 2: Plaza El Salado (Iztapalapa) -->
+        <a class="tienda" href="https://maps.app.goo.gl/vKiBZtpHDqz47gri6" target="_blank" rel="noopener">
+          <span class="btn-ubicacion btn-ubicacion-mini">
+            <span class="btn-ubicacion-pin" aria-hidden="true">📍</span>
+            <span class="btn-ubicacion-texto">Puedes encontrar nuestra tienda de Iztapalapa aquí</span>
+            <span class="btn-ubicacion-dedo" aria-hidden="true">👇</span>
+          </span>
+          <img loading="lazy" decoding="async" src="img/mapa2.png" class="tienda-mapa"
+               alt="Mapa de nuestra tienda en Plaza El Salado, Iztapalapa" />
+          <span class="tienda-nombre">🎈 Tienda 2 &mdash; Plaza El Salado</span>
+          <span class="tienda-direccion">
+            Calz. Ignacio Zaragoza 3254, Santa Martha Acatitla,<br />
+            Iztapalapa, 09140 Ciudad de México, CDMX
+          </span>
+          <span class="tienda-comollegar">🚗 Cómo llegar</span>
+        </a>
+
+      </div>
     </section>
 
   <!-- Footer  barra final -->
