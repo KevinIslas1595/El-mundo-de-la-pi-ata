@@ -1467,3 +1467,755 @@ header::after {
   background: #facc15;
   color: #7c2d12;
 }
+
+/* ============================================================
+   PANEL DE ADMINISTRACIÓN Y PANTALLA DE ACCESO
+   (admin.html y login.html)
+   Eran las dos únicas pantallas sin adornos: fondo gris y cajas
+   blancas sueltas. Ahora combinan con la tienda. Todo el
+   movimiento está aquí; en el HTML solo van las clases.
+   ============================================================ */
+
+/* El cuerpo del panel: la letra de la tienda y sitio para el fondo */
+.panel-cuerpo {
+  margin: 0;
+  padding-bottom: 1rem;
+  color: #3f0f2e;
+  font-family: "Baloo 2", "Segoe UI", Arial, sans-serif;
+}
+
+.panel-volver {
+  margin: 1.5rem 0 2.5rem;
+  text-align: center;
+}
+
+/* ---------- Fondo de fiesta ----------
+   Va en position:fixed y detrás de todo (z-index:-1) para que no
+   estorbe al scroll ni tape ningún botón. */
+.panel-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(160deg, #fff1f7 0%, #fdf4ff 45%, #eef2ff 100%);
+  pointer-events: none;
+}
+
+/* Dos manchas de color, borrosas, que se mueven despacio */
+.panel-fondo::before,
+.panel-fondo::after {
+  content: "";
+  position: absolute;
+  width: 26rem;
+  height: 26rem;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.45;
+}
+
+.panel-fondo::before {
+  top: -6rem;
+  left: -8rem;
+  background: #f9a8d4;
+  animation: panel-mancha 14s ease-in-out infinite;
+}
+
+.panel-fondo::after {
+  right: -9rem;
+  bottom: -7rem;
+  background: #c4b5fd;
+  animation: panel-mancha 18s ease-in-out infinite reverse;
+}
+
+@keyframes panel-mancha {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(3rem, 2rem) scale(1.15);
+  }
+}
+
+/* Confeti que cae. Cada uno lleva su posición y su retraso en el HTML */
+.panel-confeti {
+  position: fixed;
+  top: -3rem;
+  z-index: -1;
+  font-size: 1.4rem;
+  opacity: 0.55;
+  pointer-events: none;
+  animation: panel-caer 11s linear infinite;
+}
+
+@keyframes panel-caer {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(112vh) rotate(360deg);
+  }
+}
+
+/* ---------- Barra de arriba ---------- */
+.panel-barra {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.85rem 1.1rem;
+  border-radius: 0 0 1.3rem 1.3rem;
+  background: linear-gradient(100deg, #db2777 0%, #9333ea 55%, #4f46e5 100%);
+  box-shadow: 0 8px 24px rgba(147, 51, 234, 0.35);
+}
+
+.panel-barra-titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.panel-barra-emoji {
+  display: inline-block;
+  font-size: 1.5rem;
+  animation: panel-girito 3s ease-in-out infinite;
+}
+
+@keyframes panel-girito {
+  0%,
+  100% {
+    transform: rotate(-12deg) scale(1);
+  }
+  50% {
+    transform: rotate(12deg) scale(1.18);
+  }
+}
+
+/* Cartelito que dice si los productos están en la nube */
+.panel-nube {
+  margin-left: auto;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.panel-salir {
+  padding: 0.45rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.panel-salir:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  color: #be185d;
+}
+
+/* ---------- Tarjetas blancas ---------- */
+.panel-tarjeta {
+  max-width: 46rem;
+  margin: 1.6rem auto;
+  padding: 1.6rem;
+  border: 3px solid #fbcfe8;
+  border-radius: 1.4rem;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 14px 34px rgba(219, 39, 119, 0.16);
+  animation: panel-entrar 0.5s ease both;
+}
+
+.panel-tarjeta-ancha {
+  max-width: 64rem;
+}
+
+@keyframes panel-entrar {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.panel-subtitulo {
+  margin: 0 0 1rem;
+  color: #9d174d;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* ---------- Botones de categoría ----------
+   Sustituyen a la lista desplegable gris. El <select> sigue en la
+   página (oculto) porque es el que guarda la categoría elegida. */
+.panel-categorias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: center;
+  margin-bottom: 1.3rem;
+}
+
+.panel-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid #f9a8d4;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #9d174d;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.panel-chip:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 18px rgba(219, 39, 119, 0.25);
+}
+
+/* La categoría en la que estás: latido suave para no perderla de vista */
+.panel-chip.es-actual {
+  border-color: #a855f7;
+  background: linear-gradient(120deg, #ec4899, #a855f7);
+  color: #ffffff;
+  animation: panel-latido-chip 2.2s ease-in-out infinite;
+}
+
+@keyframes panel-latido-chip {
+  0%,
+  100% {
+    box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4),
+      0 0 0 0 rgba(168, 85, 247, 0.5);
+  }
+  50% {
+    box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4),
+      0 0 0 12px rgba(168, 85, 247, 0);
+  }
+}
+
+.panel-chip-num {
+  min-width: 1.5rem;
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  background: #fce7f3;
+  color: #9d174d;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.panel-chip.es-actual .panel-chip-num {
+  background: rgba(255, 255, 255, 0.9);
+  color: #7e22ce;
+}
+
+/* El desplegable de siempre, escondido pero funcionando */
+.panel-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Campos del formulario ---------- */
+.panel-campo {
+  margin-bottom: 1rem;
+}
+
+.panel-etiqueta {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #9d174d;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.panel-entrada {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #f5d0e6;
+  border-radius: 0.9rem;
+  background: #ffffff;
+  color: #3f0f2e;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.panel-entrada:focus {
+  outline: none;
+  border-color: #ec4899;
+  box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.18);
+  transform: translateY(-1px);
+}
+
+/* ---------- Zona de la foto ---------- */
+.panel-foto {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 1.3rem 1rem;
+  border: 3px dashed #f9a8d4;
+  border-radius: 1.1rem;
+  background: #fff7fb;
+  color: #9d174d;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.panel-foto:hover,
+.panel-foto.arrastrando {
+  border-color: #a855f7;
+  background: #faf5ff;
+  transform: translateY(-2px);
+}
+
+/* El campo de archivo cubre toda la zona, invisible */
+.panel-foto input[type="file"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.panel-foto-emoji {
+  font-size: 2.1rem;
+  animation: panel-flotar 2.4s ease-in-out infinite;
+}
+
+@keyframes panel-flotar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.panel-foto-texto {
+  font-weight: 800;
+}
+
+.panel-foto-nota {
+  font-size: 0.8rem;
+  color: #be6a9a;
+}
+
+/* Vista previa de la foto elegida */
+.panel-vista {
+  margin-top: 0.9rem;
+  text-align: center;
+}
+
+.panel-vista img {
+  max-height: 12rem;
+  border: 4px solid #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  animation: panel-entrar 0.4s ease both;
+}
+
+.panel-vista-pie {
+  margin: 0.4rem 0 0;
+  color: #9d174d;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ---------- Botones grandes ---------- */
+.panel-botones {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.panel-boton {
+  position: relative;
+  flex: 1 1 12rem;
+  padding: 0.9rem 1.2rem;
+  border: none;
+  border-radius: 1rem;
+  background: linear-gradient(120deg, #22c55e, #16a34a);
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 10px 22px rgba(22, 163, 74, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.panel-boton:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(22, 163, 74, 0.45);
+}
+
+.panel-boton:disabled {
+  background: #cbd5e1;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Brillo que cruza el botón, como en el resto de la tienda */
+.panel-boton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  animation: panel-brillo 3.2s ease-in-out infinite;
+}
+
+@keyframes panel-brillo {
+  0%,
+  60% {
+    left: -75%;
+  }
+  100% {
+    left: 130%;
+  }
+}
+
+.panel-boton:disabled::before {
+  animation: none;
+  opacity: 0;
+}
+
+.panel-boton-suave {
+  flex: 0 1 9rem;
+  border: 2px solid #f9a8d4;
+  background: #ffffff;
+  color: #9d174d;
+  box-shadow: none;
+}
+
+.panel-boton-suave::before {
+  display: none;
+}
+
+.panel-boton-suave:hover:not(:disabled) {
+  background: #fdf2f8;
+  box-shadow: 0 8px 18px rgba(219, 39, 119, 0.2);
+}
+
+/* ---------- Aviso de "estás editando" ---------- */
+.panel-aviso {
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+  border: 2px solid #facc15;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #fef9c3, #fef08a);
+  color: #854d0e;
+  font-size: 0.9rem;
+  animation: panel-aviso-latido 1.8s ease-in-out infinite;
+}
+
+@keyframes panel-aviso-latido {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(250, 204, 21, 0);
+  }
+}
+
+/* ---------- Buscador de la lista ---------- */
+.panel-buscador {
+  position: relative;
+  max-width: 22rem;
+  margin: 0 auto 1.2rem;
+}
+
+.panel-buscador .panel-entrada {
+  padding-left: 2.6rem;
+}
+
+.panel-buscador-lupa {
+  position: absolute;
+  top: 50%;
+  left: 0.9rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* ---------- Lista de productos guardados ---------- */
+.panel-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.1rem;
+}
+
+.panel-ficha {
+  padding: 1rem;
+  border: 3px solid #fbcfe8;
+  border-radius: 1.2rem;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(219, 39, 119, 0.12);
+  animation: panel-entrar 0.45s ease both;
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.panel-ficha:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  border-color: #f472b6;
+  box-shadow: 0 16px 32px rgba(219, 39, 119, 0.28);
+}
+
+.panel-ficha img {
+  width: 100%;
+  height: 12rem;
+  margin-bottom: 0.7rem;
+  border-radius: 0.9rem;
+  object-fit: cover;
+}
+
+/* Producto sin foto: mejor un recuadro con un dibujito que una
+   imagen rota */
+.panel-ficha-sinfoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 12rem;
+  margin-bottom: 0.7rem;
+  border-radius: 0.9rem;
+  background: #fdf2f8;
+  font-size: 2.6rem;
+}
+
+.panel-ficha-nombre {
+  margin: 0;
+  color: #3f0f2e;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.panel-ficha-precio {
+  display: inline-block;
+  margin: 0.4rem 0 0.7rem;
+  padding: 0.15rem 0.85rem;
+  border-radius: 999px;
+  background: #fce7f3;
+  color: #be185d;
+  font-weight: 800;
+}
+
+.panel-ficha-botones {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.panel-mini {
+  padding: 0.4rem 0.9rem;
+  border: none;
+  border-radius: 999px;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.panel-mini:hover {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.panel-mini-editar {
+  background: linear-gradient(120deg, #fbbf24, #f59e0b);
+}
+
+.panel-mini-borrar {
+  background: linear-gradient(120deg, #fb7185, #e11d48);
+}
+
+/* Cuando la categoría todavía no tiene nada */
+.panel-vacio {
+  grid-column: 1 / -1;
+  padding: 2rem 1rem;
+  color: #9d174d;
+  text-align: center;
+}
+
+.panel-vacio-emoji {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 2.8rem;
+  animation: panel-flotar 2.4s ease-in-out infinite;
+}
+
+/* ---------- En el celular ---------- */
+@media (max-width: 640px) {
+  .panel-barra {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .panel-nube {
+    margin-left: 0;
+    order: 3;
+    width: 100%;
+    text-align: center;
+  }
+
+  .panel-tarjeta {
+    margin: 1.1rem 0.7rem;
+    padding: 1.1rem;
+  }
+}
+
+/* ============================================================
+   PANTALLA DE ACCESO (login.html)
+   ============================================================ */
+.acceso-fondo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+  background: linear-gradient(160deg, #ffe4f1 0%, #f3e8ff 55%, #e0f2fe 100%);
+  font-family: "Baloo 2", "Segoe UI", Arial, sans-serif;
+}
+
+.acceso {
+  position: relative;
+  width: 100%;
+  max-width: 23rem;
+  padding: 2rem 1.6rem;
+  border: 3px solid #fbcfe8;
+  border-radius: 1.6rem;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 45px rgba(157, 23, 77, 0.25);
+  text-align: center;
+  animation: panel-entrar 0.5s ease both;
+}
+
+.acceso-candado {
+  display: block;
+  font-size: 3rem;
+  animation: acceso-candado 3s ease-in-out infinite;
+}
+
+@keyframes acceso-candado {
+  0%,
+  100% {
+    transform: rotate(-9deg);
+  }
+  50% {
+    transform: rotate(9deg) scale(1.1);
+  }
+}
+
+.acceso-titulo {
+  margin: 0.4rem 0 0.15rem;
+  color: #9d174d;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.acceso-marca {
+  margin: 0 0 1.3rem;
+  color: #a855f7;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.acceso-boton {
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 1rem;
+  background: linear-gradient(120deg, #ec4899, #a855f7);
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(168, 85, 247, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.acceso-boton:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(168, 85, 247, 0.45);
+}
+
+.acceso-boton:disabled {
+  background: #cbd5e1;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.acceso-pista {
+  margin: -0.4rem 0 0.6rem;
+  color: #9a7aa8;
+  font-size: 0.78rem;
+  text-align: left;
+}
+
+.acceso-mensaje {
+  min-height: 1.2rem;
+  margin: 0.8rem 0 0;
+  color: #dc2626;
+  font-weight: 700;
+  white-space: pre-line;
+}
+
+.acceso-volver {
+  display: inline-block;
+  margin-top: 1.1rem;
+  color: #9d174d;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.acceso-volver:hover {
+  transform: translateX(-4px);
+  color: #be185d;
+}

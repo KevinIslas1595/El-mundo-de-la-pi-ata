@@ -58,7 +58,7 @@ Es un sitio **estático**: solo HTML, CSS y JavaScript. No hay servidor propio.
 │
 ├── css/estilos.css         Todos los adornos y animaciones
 ├── js/
-│   ├── config.js           Conexión con Supabase y las categorías
+│   ├── config.js           Conexión con Supabase y la lista de categorías
 │   ├── datos.js            Leer y guardar productos; encoge las fotos
 │   ├── auth.js             Candado antiguo (respaldo si no hay Supabase)
 │   └── comunes.js          Menú, carrito y modal de imagen
@@ -107,7 +107,20 @@ GB gratuito de Supabase dura mucho más y la página carga rápido.
 
 ## El panel de administración
 
-`login.html` → `admin.html`.
+`login.html` → `admin.html`. Las dos pantallas usan los mismos adornos que
+la tienda (`css/estilos.css`, clases `panel-*` y `acceso-*`); no llevan
+estilos sueltos dentro del HTML.
+
+Lo que hace el panel además de guardar:
+
+- **Un botón de color por categoría**, con el número de productos que tiene
+  cada una. Salen de la lista `CATEGORIAS` de `js/config.js`, que es el
+  único sitio donde están escritas: de ahí se llenan también las opciones
+  del desplegable escondido `#categoria`, que es el que guarda la elegida.
+- **Vista previa de la foto** antes de subirla, y se puede arrastrar la
+  imagen hasta el recuadro punteado.
+- **Buscador** para filtrar la lista por nombre.
+- Los avisos de guardado, borrado y error son de SweetAlert2.
 
 Se entra con el **correo y la contraseña del usuario de Supabase**. La
 comprobación la hace Supabase en su servidor, no el navegador.

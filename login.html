@@ -5,97 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Acceso Super Usuario | Piñatería Papelito Crepé</title>
     <meta name="robots" content="noindex, nofollow" />
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #ffe4e1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-        padding: 16px;
-        box-sizing: border-box;
-      }
-      .login {
-        background: white;
-        padding: 24px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        width: 100%;
-        max-width: 340px;
-      }
-      input {
-        padding: 10px;
-        margin: 10px 0;
-        width: 100%;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-      button {
-        padding: 10px;
-        background: #ff3366;
-        color: white;
-        border: none;
-        width: 100%;
-        cursor: pointer;
-        border-radius: 5px;
-        font-size: 1rem;
-      }
-      button:hover {
-        background: #e62e5c;
-      }
-      button:disabled {
-        background: #ccc;
-        cursor: not-allowed;
-      }
-      .pista {
-        margin: -4px 0 0;
-        font-size: 0.78rem;
-        color: #777;
-        text-align: left;
-      }
-      .volver {
-        display: inline-block;
-        margin-top: 16px;
-        color: #666;
-        font-size: 0.9rem;
-      }
-    </style>
+
+    <!-- La misma letra y los mismos adornos que la tienda. Antes esta
+         página llevaba sus propios estilos sueltos dentro del <head>. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/estilos.css" />
   </head>
-  <body>
-    <main class="login">
-      <h2>🔒 Acceso Super Usuario</h2>
+  <body class="acceso-fondo">
+    <!-- Confeti cayendo, detrás de todo -->
+    <span class="panel-confeti" style="left: 8%; animation-delay: 0s" aria-hidden="true">🎊</span>
+    <span class="panel-confeti" style="left: 27%; animation-delay: 3.2s" aria-hidden="true">🎈</span>
+    <span class="panel-confeti" style="left: 62%; animation-delay: 1.7s" aria-hidden="true">✨</span>
+    <span class="panel-confeti" style="left: 84%; animation-delay: 5.4s" aria-hidden="true">🎉</span>
+
+    <main class="acceso">
+      <span class="acceso-candado" aria-hidden="true">🔐</span>
+      <h1 class="acceso-titulo">Acceso Super Usuario</h1>
+      <p class="acceso-marca">🎈 Piñatería Papelito Crepé 🎈</p>
 
       <!-- Un <form> de verdad: así funciona la tecla Enter -->
       <form id="formLogin">
         <label for="usuario" hidden>Usuario</label>
-        <input
-          type="text"
-          id="usuario"
-          placeholder="Usuario"
-          autocomplete="username"
-          autocapitalize="none"
-          spellcheck="false"
-          required
-        />
-        <p id="pista" class="pista"></p>
+        <div class="panel-campo">
+          <input
+            type="text"
+            id="usuario"
+            class="panel-entrada"
+            placeholder="Usuario"
+            autocomplete="username"
+            autocapitalize="none"
+            spellcheck="false"
+            required
+          />
+        </div>
+        <p id="pista" class="acceso-pista"></p>
 
         <label for="clave" hidden>Contraseña</label>
-        <input
-          type="password"
-          id="clave"
-          placeholder="Contraseña"
-          autocomplete="current-password"
-          required
-        />
-        <button type="submit" id="btnEntrar">Entrar</button>
+        <div class="panel-campo">
+          <input
+            type="password"
+            id="clave"
+            class="panel-entrada"
+            placeholder="Contraseña"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+
+        <button type="submit" id="btnEntrar" class="acceso-boton">
+          Entrar
+        </button>
       </form>
 
-      <p id="mensaje" role="alert" style="color: red; white-space: pre-line"></p>
-      <a href="principal.html" class="volver">⬅ Volver a la tienda</a>
+      <p id="mensaje" role="alert" class="acceso-mensaje"></p>
+      <a href="principal.html" class="acceso-volver">⬅ Volver a la tienda</a>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

@@ -521,6 +521,72 @@ async function esperarPanel(pagina) {
     await pagina.close();
   }
 
+  /* ---------- 11. Por dentro del panel de administracion ---------- */
+  console.log("\n=== 11. Panel de administracion ===");
+  if (HAY_CREDENCIALES) {
+    const pagina = await navegador.newPage();
+
+    /* Los errores de JavaScript del panel: aqui se cazo una vez que
+       admin.html declaraba otra vez una variable que ya estaba en
+       js/config.js, y el panel se quedaba en blanco. */
+    const errores = [];
+    pagina.on("console", (m) => {
+      if (m.type() === "error") errores.push(m.text());
+    });
+    pagina.on("pageerror", (e) => errores.push(e.message));
+
+    await entrarAlPanel(pagina);
+    const propios = errores.filter(
+      (e) => !/Failed to load resource|net::ERR|favicon/i.test(e)
+    );
+    comprobar("admin.html sin errores JS", propios.length === 0, propios[0]);
+
+    const r = await pagina.evaluate(() => ({
+      botones: document.querySelectorAll(".panel-chip").length,
+      opciones: document.querySelectorAll("#categoria option").length,
+      categoria: document.getElementById("categoria").value,
+      cuantas: typeof CATEGORIAS === "undefined" ? 0 : CATEGORIAS.length,
+    }));
+    comprobar(
+      "hay un boton por cada categoria",
+      r.botones === r.cuantas && r.cuantas > 0,
+      "botones=" + r.botones + " categorias=" + r.cuantas
+    );
+    comprobar(
+      "el desplegable tiene todas las categorias",
+      r.opciones === r.cuantas,
+      "opciones=" + r.opciones
+    );
+    comprobar("empieza en Pinatas", r.categoria === "productos", r.categoria);
+
+    /* Los botones de colores cambian de categoria */
+    await pagina.evaluate(() => {
+      const boton = [...document.querySelectorAll(".panel-chip")].find(
+        (b) => b.dataset.valor === "productos-vasos"
+      );
+      if (boton) boton.click();
+    });
+    await new Promise((r) => setTimeout(r, 600));
+
+    const tras = await pagina.evaluate(() => ({
+      categoria: document.getElementById("categoria").value,
+      marcado: document.querySelector(".panel-chip.es-actual")
+        ? document.querySelector(".panel-chip.es-actual").dataset.valor
+        : "",
+    }));
+    comprobar(
+      "el boton cambia de categoria",
+      tras.categoria === "productos-vasos",
+      tras.categoria
+    );
+    comprobar(
+      "el boton elegido se queda marcado",
+      tras.marcado === "productos-vasos",
+      tras.marcado
+    );
+    await pagina.close();
+  }
+
   await navegador.close();
 
   console.log("\n" + "=".repeat(50));

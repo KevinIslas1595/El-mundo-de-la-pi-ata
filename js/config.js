@@ -40,10 +40,20 @@ const db = NUBE_CONFIGURADA
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
   : null;
 
-/* Categorías: la clave es la que ya usaba el panel, así no se pierde
-   nada de lo que tengas guardado en el navegador. */
-const CATEGORIAS = {
-  productos: "Piñatas",
-  "productos-globos": "Globos",
-  "productos-velas": "Velas",
-};
+/* Categorías de la tienda: una sola lista para todo el sitio.
+   - valor:  la clave con la que se guardan en la base de datos.
+             Es la que ya usaba el panel, así no se pierde nada de
+             lo que tengas guardado.
+   - nombre: como se ve en el panel.
+   - emoji:  el dibujito de su botón.
+   De aquí salen los botones de colores de admin.html. Si algún día
+   agregas otra página de productos, la añades aquí. */
+const CATEGORIAS = [
+  { valor: "productos", nombre: "Piñatas", emoji: "🎉" },
+  { valor: "productos-globos", nombre: "Globos", emoji: "🎈" },
+  { valor: "productos-velas", nombre: "Velas", emoji: "🕯️" },
+  { valor: "productos-peluches", nombre: "Peluches", emoji: "🧸" },
+  { valor: "productos-cortinas", nombre: "Cortinas", emoji: "🪟" },
+  { valor: "productos-platos", nombre: "Platos", emoji: "🍽️" },
+  { valor: "productos-vasos", nombre: "Vasos", emoji: "🥤" },
+];

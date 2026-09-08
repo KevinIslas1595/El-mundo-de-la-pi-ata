@@ -3,10 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Administrador de productos</title>
+    <title>Panel de productos | Piñatería Papelito Crepé</title>
     <meta name="robots" content="noindex, nofollow" />
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- La misma letra y los mismos adornos que la tienda -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/estilos.css" />
+
+    <!-- Los avisos bonitos (guardado, borrado, errores) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Conexión con la nube -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -23,103 +30,271 @@
       protegerPaginaNube();
     </script>
   </head>
-  <body class="bg-gray-100 p-6">
-    <div class="max-w-4xl mx-auto flex justify-between items-center mb-2">
-      <span id="estadoNube" class="text-sm text-gray-500"></span>
-      <button
-        onclick="salir()"
-        class="text-sm text-gray-600 hover:text-red-600 hover:underline"
-      >
+  <body class="panel-cuerpo">
+    <!-- Fondo de fiesta y confeti cayendo. Van detrás de todo y no
+         se pueden tocar, así que no estorban a ningún botón. -->
+    <div class="panel-fondo" aria-hidden="true"></div>
+    <span class="panel-confeti" style="left: 6%; animation-delay: 0s" aria-hidden="true">🎊</span>
+    <span class="panel-confeti" style="left: 21%; animation-delay: 2.4s" aria-hidden="true">🎈</span>
+    <span class="panel-confeti" style="left: 38%; animation-delay: 5.1s" aria-hidden="true">🎁</span>
+    <span class="panel-confeti" style="left: 54%; animation-delay: 1.3s" aria-hidden="true">✨</span>
+    <span class="panel-confeti" style="left: 69%; animation-delay: 6.6s" aria-hidden="true">🎉</span>
+    <span class="panel-confeti" style="left: 85%; animation-delay: 3.7s" aria-hidden="true">🍬</span>
+
+    <!-- Barra de arriba -->
+    <header class="panel-barra">
+      <span class="panel-barra-titulo">
+        <span class="panel-barra-emoji" aria-hidden="true">🎯</span>
+        Panel de la Piñatería
+      </span>
+      <span id="estadoNube" class="panel-nube"></span>
+      <button type="button" class="panel-salir" onclick="salir()">
         🔓 Cerrar sesión
       </button>
-    </div>
+    </header>
 
-    <h1 class="text-3xl font-bold text-center mb-6 text-pink-600">
-      🎯 Administrador de productos 🎯
-    </h1>
+    <!-- ============ Tarjeta 1: subir o editar un producto ============ -->
+    <section class="panel-tarjeta">
+      <h1 class="panel-subtitulo">✨ Agregar un producto nuevo ✨</h1>
 
-    <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow space-y-4">
-      <p
-        id="avisoEdicion"
-        hidden
-        class="bg-yellow-100 border border-yellow-400 text-yellow-800 p-3 rounded text-sm"
-      >
+      <p id="avisoEdicion" hidden class="panel-aviso">
         ✏️ Estás <strong>editando</strong> un producto. Si no eliges una foto
         nueva, se conserva la que ya tenía.
       </p>
 
       <input type="hidden" id="editIndex" value="-1" />
 
-      <label for="categoria" class="block text-sm font-medium text-gray-700">
-        Categoría
-      </label>
-      <select id="categoria" class="w-full p-2 border rounded">
-        <option value="productos">Piñatas</option>
-        <option value="productos-globos">Globos</option>
-        <option value="productos-velas">Velas</option>
-        <option value="productos-peluches">Peluches</option>
-        <option value="productos-cortinas">Cortinas</option>
-        <option value="productos-platos">Platos</option>
-        <option value="productos-vasos">Vasos</option>
-      </select>
-
-      <input
-        type="text"
-        id="nombre"
-        placeholder="Nombre del producto"
-        class="w-full p-2 border rounded"
-        required
-      />
-      <input
-        type="number"
-        id="precio"
-        placeholder="Precio"
-        min="0"
-        step="1"
-        class="w-full p-2 border rounded"
-        required
-      />
-      <input
-        type="file"
-        id="imagen"
-        accept="image/*"
-        class="w-full p-2 border rounded"
-      />
-      <p class="text-xs text-gray-500">
-        La foto se encoge sola antes de subirse, así la página carga rápido.
+      <!-- Botones de categoría. Los crea el script de abajo a partir
+           de la lista de categorías de js/config.js. -->
+      <p class="panel-etiqueta" style="text-align: center">
+        ¿En qué página va este producto?
       </p>
+      <div id="botonesCategoria" class="panel-categorias"></div>
 
-      <div class="flex gap-3">
-        <button
-          id="btnGuardar"
-          class="flex-1 bg-green-500 text-white py-2 rounded hover:bg-green-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
-        >
-          Guardar producto
-        </button>
-        <button
-          id="btnCancelar"
-          class="px-4 py-2 rounded border border-gray-300 text-gray-600 hover:bg-gray-100"
-        >
+      <!-- El desplegable de siempre sigue aquí, escondido: es el que
+           guarda la categoría elegida y el que lee el resto del código. -->
+      <label for="categoria" class="panel-oculto">Categoría</label>
+      <select id="categoria" class="panel-oculto"></select>
+
+      <div class="panel-campo">
+        <label class="panel-etiqueta" for="nombre">Nombre del producto</label>
+        <input
+          type="text"
+          id="nombre"
+          class="panel-entrada"
+          placeholder="Ejemplo: Piñata de Hello Kitty"
+          required
+        />
+      </div>
+
+      <div class="panel-campo">
+        <label class="panel-etiqueta" for="precio">Precio en pesos</label>
+        <input
+          type="number"
+          id="precio"
+          class="panel-entrada"
+          placeholder="Ejemplo: 350"
+          min="0"
+          step="1"
+          required
+        />
+      </div>
+
+      <div class="panel-campo">
+        <span class="panel-etiqueta">Foto del producto</span>
+        <!-- Toda la zona punteada es el botón para elegir la foto, y
+             también acepta que se arrastre la imagen encima. -->
+        <label class="panel-foto" id="zonaFoto">
+          <span class="panel-foto-emoji" aria-hidden="true">📷</span>
+          <span class="panel-foto-texto">Toca aquí para elegir la foto</span>
+          <span class="panel-foto-nota">o arrástrala hasta aquí</span>
+          <input type="file" id="imagen" accept="image/*" />
+        </label>
+        <div id="vistaFoto" class="panel-vista"></div>
+        <p class="panel-foto-nota" style="margin-top: 0.5rem">
+          La foto se encoge sola antes de subirse, así la página carga rápido.
+        </p>
+      </div>
+
+      <div class="panel-botones">
+        <button id="btnGuardar" class="panel-boton">Guardar producto</button>
+        <button id="btnCancelar" class="panel-boton panel-boton-suave">
           Limpiar
         </button>
       </div>
-    </div>
+    </section>
 
-    <div class="max-w-4xl mx-auto mt-10 bg-white p-6 rounded-xl shadow">
-      <h2 class="text-xl font-bold mb-4">📦 Productos guardados</h2>
-      <div id="lista-productos" class="grid md:grid-cols-3 gap-4"></div>
+    <!-- ============ Tarjeta 2: lo que ya está guardado ============ -->
+    <section class="panel-tarjeta panel-tarjeta-ancha">
+      <h2 class="panel-subtitulo">
+        📦 Productos guardados <span id="resumen"></span>
+      </h2>
+
+      <div class="panel-buscador">
+        <span class="panel-buscador-lupa" aria-hidden="true">🔍</span>
+        <label for="buscador" class="panel-oculto">Buscar producto</label>
+        <input
+          type="search"
+          id="buscador"
+          class="panel-entrada"
+          placeholder="Buscar por nombre…"
+        />
+      </div>
+
+      <div id="lista-productos" class="panel-lista"></div>
+    </section>
+
+    <div class="panel-volver">
+      <a href="principal.html" class="btn-volver">
+        <span class="flecha flecha-izq">⬅</span>
+        Volver a la tienda
+        <span class="flecha flecha-izq">⬅</span>
+      </a>
     </div>
 
     <script>
       const $ = (id) => document.getElementById(id);
       let productosActuales = [];
 
-      /* Avisa de dónde se están guardando los productos, para que no
-         haya dudas sobre si los clientes los ven o no. */
-      $("estadoNube").innerHTML = NUBE_CONFIGURADA
-        ? '☁️ Conectado: tus clientes ven estos productos'
-        : '⚠️ Sin conectar: estos productos <strong>solo los ves tú</strong>. Mira CONFIGURAR-SUPABASE.md';
+      /* La lista de categorías (nombre y dibujito de cada una) vive en
+         js/config.js, para que no esté escrita en dos sitios. */
 
+      /* El desplegable escondido se llena desde la lista de config.js */
+      function crearOpcionesCategoria() {
+        const select = $("categoria");
+        CATEGORIAS.forEach((c) => {
+          const opcion = document.createElement("option");
+          opcion.value = c.valor;
+          opcion.textContent = c.nombre;
+          select.appendChild(opcion);
+        });
+        select.value = CATEGORIAS[0].valor;
+      }
+
+      function nombreCategoria(valor) {
+        const c = CATEGORIAS.find((x) => x.valor === valor);
+        return c ? c.emoji + " " + c.nombre : valor;
+      }
+
+      /* ---------- Avisos bonitos ----------
+         Si por lo que sea no cargó SweetAlert2, se usan los avisos
+         normales del navegador: nunca se queda sin avisar. */
+      function avisar(icono, titulo, texto) {
+        if (typeof Swal === "undefined") {
+          alert(titulo + (texto ? "\n" + texto : ""));
+          return;
+        }
+        Swal.fire({
+          icon: icono,
+          title: titulo,
+          text: texto || "",
+          confirmButtonColor: "#ec4899",
+          timer: icono === "success" ? 1600 : undefined,
+          showConfirmButton: icono !== "success",
+        });
+      }
+
+      async function preguntar(titulo, texto) {
+        if (typeof Swal === "undefined") return confirm(titulo + " " + texto);
+        const r = await Swal.fire({
+          title: titulo,
+          text: texto,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Sí, eliminar",
+          cancelButtonText: "Cancelar",
+          confirmButtonColor: "#e11d48",
+          cancelButtonColor: "#94a3b8",
+        });
+        return r.isConfirmed;
+      }
+
+      /* ---------- Botones de categoría ---------- */
+      function crearBotonesCategoria() {
+        const caja = $("botonesCategoria");
+        CATEGORIAS.forEach((c) => {
+          const boton = document.createElement("button");
+          boton.type = "button";
+          boton.className = "panel-chip";
+          boton.dataset.valor = c.valor;
+          boton.innerHTML =
+            '<span aria-hidden="true">' +
+            c.emoji +
+            "</span> " +
+            escaparHTML(c.nombre) +
+            ' <span class="panel-chip-num" data-num="' +
+            c.valor +
+            '">·</span>';
+          boton.addEventListener("click", () => {
+            if ($("categoria").value === c.valor) return;
+            $("categoria").value = c.valor;
+            $("categoria").dispatchEvent(new Event("change"));
+          });
+          caja.appendChild(boton);
+        });
+        marcarCategoria();
+      }
+
+      function marcarCategoria() {
+        const actual = $("categoria").value;
+        document.querySelectorAll(".panel-chip").forEach((b) => {
+          b.classList.toggle("es-actual", b.dataset.valor === actual);
+        });
+      }
+
+      /* Cuántos productos hay en cada categoría, para el numerito de
+         cada botón. Se piden todas a la vez para no ir una por una. */
+      async function contarCategorias() {
+        await Promise.all(
+          CATEGORIAS.map(async (c) => {
+            const hueco = document.querySelector('[data-num="' + c.valor + '"]');
+            if (!hueco) return;
+            try {
+              const lista = await listarProductos(c.valor);
+              hueco.textContent = lista.length;
+            } catch (e) {
+              hueco.textContent = "?";
+            }
+          })
+        );
+      }
+
+      /* ---------- Vista previa de la foto ---------- */
+      function mostrarVista(archivo) {
+        const caja = $("vistaFoto");
+        caja.innerHTML = "";
+        if (!archivo) return;
+
+        const lector = new FileReader();
+        lector.onload = () => {
+          const img = document.createElement("img");
+          img.src = lector.result;
+          img.alt = "Vista previa de la foto elegida";
+          const pie = document.createElement("p");
+          pie.className = "panel-vista-pie";
+          pie.textContent = "📸 " + archivo.name;
+          caja.appendChild(img);
+          caja.appendChild(pie);
+        };
+        lector.readAsDataURL(archivo);
+      }
+
+      /* La foto que ya tenía el producto, al editarlo */
+      function mostrarVistaGuardada(url) {
+        const caja = $("vistaFoto");
+        caja.innerHTML = "";
+        if (!url) return;
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = "Foto que tiene ahora el producto";
+        const pie = document.createElement("p");
+        pie.className = "panel-vista-pie";
+        pie.textContent = "Ésta es la foto que tiene ahora";
+        caja.appendChild(img);
+        caja.appendChild(pie);
+      }
+
+      /* ---------- Guardar ---------- */
       async function guardarDesdeFormulario() {
         const nombre = $("nombre").value.trim();
         const precio = parseFloat($("precio").value);
@@ -130,11 +305,11 @@
         const boton = $("btnGuardar");
 
         if (!nombre || isNaN(precio) || (!editando && !archivo)) {
-          alert("Por favor, completa todos los campos.");
+          avisar("info", "Falta algo", "Completa el nombre, el precio y la foto.");
           return;
         }
         if (precio < 0) {
-          alert("El precio no puede ser negativo.");
+          avisar("info", "Precio raro", "El precio no puede ser negativo.");
           return;
         }
 
@@ -153,28 +328,33 @@
           });
           limpiarFormulario();
           await mostrarProductos();
-          alert(editando ? "✅ Producto editado." : "✅ Producto guardado.");
+          contarCategorias();
+          avisar(
+            "success",
+            editando ? "✅ Producto editado" : "🎉 ¡Producto guardado!",
+            nombre
+          );
         } catch (e) {
-          alert("⚠️ " + e.message);
+          avisar("error", "No se pudo guardar", e.message);
         } finally {
           boton.disabled = false;
           boton.textContent = "Guardar producto";
         }
       }
 
+      /* ---------- Lista de lo guardado ---------- */
       async function mostrarProductos() {
         const categoria = $("categoria").value;
         const contenedor = $("lista-productos");
         contenedor.innerHTML =
-          '<p class="col-span-full text-center text-gray-500 py-4">Cargando…</p>';
+          '<p class="panel-vacio"><span class="panel-vacio-emoji">⏳</span>Cargando…</p>';
+        $("resumen").textContent = "";
 
         try {
           productosActuales = await listarProductos(categoria);
         } catch (e) {
           contenedor.innerHTML =
-            '<p class="col-span-full text-center text-red-600 py-4">Error: ' +
-            escaparHTML(e.message) +
-            "</p>";
+            '<p class="panel-vacio">⚠️ Error: ' + escaparHTML(e.message) + "</p>";
           return;
         }
 
@@ -182,7 +362,11 @@
 
         if (productosActuales.length === 0) {
           contenedor.innerHTML =
-            '<p class="col-span-full text-center text-gray-500 py-4">Todavía no hay productos en esta categoría.</p>';
+            '<p class="panel-vacio"><span class="panel-vacio-emoji">🫙</span>' +
+            "Todavía no hay nada en " +
+            escaparHTML(nombreCategoria(categoria)) +
+            ".<br />Sube el primero con el formulario de arriba.</p>";
+          $("resumen").textContent = "";
           return;
         }
 
@@ -192,16 +376,32 @@
           const ref = p.id !== undefined ? p.id : index;
 
           const div = document.createElement("div");
-          div.className = "border p-4 rounded-lg shadow text-center";
+          div.className = "panel-ficha";
+          /* Las fichas van apareciendo una detrás de otra */
+          div.style.animationDelay = index * 60 + "ms";
+          div.dataset.nombre = p.nombre;
           div.innerHTML = `
-            <img src="${p.imagen}" alt="${escaparHTML(p.nombre)}" loading="lazy"
-                 class="w-full h-64 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl" />
-            <h3 class="font-bold text-xl">${escaparHTML(p.nombre)}</h3>
-            <p class="text-pink-600">$${escaparHTML(String(p.precio))}</p>
-            <div class="flex justify-center gap-4 mt-3">
-              <button class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded js-editar">✏️ Editar</button>
-              <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded js-borrar">🗑️ Eliminar</button>
+            <p class="panel-ficha-nombre">${escaparHTML(p.nombre)}</p>
+            <p class="panel-ficha-precio">$${escaparHTML(String(p.precio))}</p>
+            <div class="panel-ficha-botones">
+              <button class="panel-mini panel-mini-editar js-editar">✏️ Editar</button>
+              <button class="panel-mini panel-mini-borrar js-borrar">🗑️ Eliminar</button>
             </div>`;
+
+          /* La foto se pone arriba del todo. Si el producto no tiene,
+             se deja un recuadro con un dibujito en vez de una imagen rota. */
+          if (p.imagen) {
+            const img = document.createElement("img");
+            img.src = p.imagen;
+            img.alt = p.nombre;
+            img.loading = "lazy";
+            div.insertBefore(img, div.firstChild);
+          } else {
+            const hueco = document.createElement("div");
+            hueco.className = "panel-ficha-sinfoto";
+            hueco.textContent = "🖼️";
+            div.insertBefore(hueco, div.firstChild);
+          }
 
           /* Listeners en vez de onclick: un nombre con apóstrofo
              ya no rompe nada. */
@@ -214,15 +414,35 @@
 
           contenedor.appendChild(div);
         });
+
+        $("resumen").textContent =
+          "· " +
+          productosActuales.length +
+          (productosActuales.length === 1 ? " producto en " : " productos en ") +
+          nombreCategoria(categoria);
+
+        filtrarLista();
       }
 
+      /* ---------- Buscador ---------- */
+      function filtrarLista() {
+        const texto = $("buscador").value.trim().toLowerCase();
+        document.querySelectorAll("#lista-productos > div").forEach((ficha) => {
+          const nombre = (ficha.dataset.nombre || "").toLowerCase();
+          ficha.style.display = !texto || nombre.includes(texto) ? "" : "none";
+        });
+      }
+
+      /* ---------- Borrar y editar ---------- */
       async function eliminarProducto(ref, nombre) {
-        if (!confirm(`¿Eliminar "${nombre}"?`)) return;
+        if (!(await preguntar("¿Eliminar este producto?", nombre))) return;
         try {
           await borrarProducto(ref, $("categoria").value);
           await mostrarProductos();
+          contarCategorias();
+          avisar("success", "🗑️ Producto eliminado", nombre);
         } catch (e) {
-          alert("⚠️ " + e.message);
+          avisar("error", "No se pudo borrar", e.message);
         }
       }
 
@@ -233,6 +453,7 @@
         $("editIndex").value = ref;
         $("imagen").value = "";
         $("avisoEdicion").hidden = false;
+        mostrarVistaGuardada(producto.imagen);
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
@@ -242,24 +463,54 @@
         $("imagen").value = "";
         $("editIndex").value = -1;
         $("avisoEdicion").hidden = true;
+        mostrarVista(null);
       }
+
+      /* ---------- Arrancar ---------- */
+      /* Avisa de dónde se están guardando los productos, para que no
+         haya dudas sobre si los clientes los ven o no. */
+      $("estadoNube").innerHTML = NUBE_CONFIGURADA
+        ? "☁️ Conectado: tus clientes ven estos productos"
+        : "⚠️ Sin conectar: estos productos <strong>solo los ves tú</strong>";
 
       $("btnGuardar").addEventListener("click", guardarDesdeFormulario);
       $("btnCancelar").addEventListener("click", limpiarFormulario);
+      $("buscador").addEventListener("input", filtrarLista);
+      $("imagen").addEventListener("change", () =>
+        mostrarVista($("imagen").files[0])
+      );
       $("categoria").addEventListener("change", () => {
         limpiarFormulario();
+        marcarCategoria();
         mostrarProductos();
       });
 
-      mostrarProductos(); // Mostrar al cargar
-    </script>
+      /* Arrastrar la foto hasta el recuadro punteado */
+      const zonaFoto = $("zonaFoto");
+      ["dragenter", "dragover"].forEach((evento) =>
+        zonaFoto.addEventListener(evento, (e) => {
+          e.preventDefault();
+          zonaFoto.classList.add("arrastrando");
+        })
+      );
+      ["dragleave", "drop"].forEach((evento) =>
+        zonaFoto.addEventListener(evento, () =>
+          zonaFoto.classList.remove("arrastrando")
+        )
+      );
+      zonaFoto.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const archivos = e.dataTransfer && e.dataTransfer.files;
+        if (archivos && archivos.length) {
+          $("imagen").files = archivos;
+          mostrarVista(archivos[0]);
+        }
+      });
 
-    <div class="text-center mt-6 mb-10">
-      <a href="principal.html" class="btn-volver">
-        <span class="flecha flecha-izq">⬅</span>
-        Volver a la tienda
-        <span class="flecha flecha-izq">⬅</span>
-      </a>
-    </div>
+      crearOpcionesCategoria();
+      crearBotonesCategoria();
+      mostrarProductos();
+      contarCategorias();
+    </script>
   </body>
 </html>
