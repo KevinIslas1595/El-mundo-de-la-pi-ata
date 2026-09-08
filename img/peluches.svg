@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Osito de peluche">
+  <!-- Osito de peluche. Se mece solito: la animacion va aqui dentro,
+       asi el dibujo se mueve aunque se use como <img>. -->
+  <style>
+    .osito { transform-origin: 50px 80px; animation: mecer 2.6s ease-in-out infinite; }
+    @keyframes mecer { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+    .brazo-izq { transform-origin: 33px 66px; animation: saludar 1.4s ease-in-out infinite; }
+    @keyframes saludar { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-22deg); } }
+  </style>
+  <g class="osito">
+    <!-- Patas -->
+    <ellipse cx="36" cy="90" rx="10" ry="8" fill="#a8672c" />
+    <ellipse cx="64" cy="90" rx="10" ry="8" fill="#a8672c" />
+    <ellipse cx="36" cy="91" rx="5" ry="4" fill="#f6d9b6" />
+    <ellipse cx="64" cy="91" rx="5" ry="4" fill="#f6d9b6" />
+    <!-- Brazos -->
+    <ellipse class="brazo-izq" cx="27" cy="68" rx="9" ry="7.5" fill="#a8672c" />
+    <ellipse cx="73" cy="68" rx="9" ry="7.5" fill="#a8672c" />
+    <!-- Cuerpo -->
+    <ellipse cx="50" cy="72" rx="20" ry="18" fill="#c48441" />
+    <ellipse cx="50" cy="74" rx="12" ry="12" fill="#f6d9b6" />
+    <!-- Orejas -->
+    <circle cx="31" cy="27" r="11" fill="#a8672c" />
+    <circle cx="69" cy="27" r="11" fill="#a8672c" />
+    <circle cx="31" cy="27" r="5.5" fill="#f0a9b8" />
+    <circle cx="69" cy="27" r="5.5" fill="#f0a9b8" />
+    <!-- Cabeza -->
+    <circle cx="50" cy="39" r="20" fill="#c48441" />
+    <ellipse cx="50" cy="46" rx="11" ry="8.5" fill="#f6d9b6" />
+    <ellipse cx="50" cy="42" rx="4" ry="3" fill="#4b2e15" />
+    <path d="M50 45 v4" stroke="#4b2e15" stroke-width="2" stroke-linecap="round" />
+    <circle cx="42" cy="35" r="2.8" fill="#3b2412" />
+    <circle cx="58" cy="35" r="2.8" fill="#3b2412" />
+    <circle cx="43" cy="34" r="1" fill="#ffffff" />
+    <circle cx="59" cy="34" r="1" fill="#ffffff" />
+    <!-- Monito de fiesta -->
+    <path d="M50 57 l-9 -5 v10 z" fill="#ec4899" />
+    <path d="M50 57 l9 -5 v10 z" fill="#ec4899" />
+    <circle cx="50" cy="57" r="3" fill="#be185d" />
+  </g>
+</svg>

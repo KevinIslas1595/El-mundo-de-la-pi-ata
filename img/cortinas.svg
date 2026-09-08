@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Cortinas de ventana">
+  <!-- Cortinas. Las dos telas se mecen como si entrara aire. -->
+  <style>
+    .tela-izq { transform-origin: 20px 16px; animation: aire-izq 3.4s ease-in-out infinite; }
+    .tela-der { transform-origin: 80px 16px; animation: aire-der 3.4s ease-in-out infinite; }
+    @keyframes aire-izq { 0%, 100% { transform: skewX(0deg); } 50% { transform: skewX(4deg); } }
+    @keyframes aire-der { 0%, 100% { transform: skewX(0deg); } 50% { transform: skewX(-4deg); } }
+  </style>
+  <!-- Ventana -->
+  <rect x="24" y="20" width="52" height="64" rx="4" fill="#bfe9ff" stroke="#60a5fa" stroke-width="2" />
+  <path d="M50 20 v64 M24 52 h52" stroke="#ffffff" stroke-width="3" />
+  <circle cx="66" cy="34" r="6" fill="#fef08a" opacity="0.9" />
+  <!-- Barra -->
+  <rect x="4" y="11" width="92" height="7" rx="3.5" fill="#b45309" />
+  <circle cx="6" cy="14.5" r="5" fill="#f59e0b" />
+  <circle cx="94" cy="14.5" r="5" fill="#f59e0b" />
+  <!-- Tela izquierda -->
+  <g class="tela-izq">
+    <path d="M9 16 h28 v62 q-7 7 -14 4 q-7 -3 -14 4 z" fill="#ec4899" />
+    <path d="M16 17 v62 M23 17 v63 M30 17 v62" stroke="#ffffff" stroke-width="1.6" opacity="0.45" />
+  </g>
+  <!-- Tela derecha -->
+  <g class="tela-der">
+    <path d="M91 16 h-28 v62 q7 7 14 4 q7 -3 14 4 z" fill="#a855f7" />
+    <path d="M84 17 v62 M77 17 v63 M70 17 v62" stroke="#ffffff" stroke-width="1.6" opacity="0.45" />
+  </g>
+</svg>

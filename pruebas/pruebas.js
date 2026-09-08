@@ -94,6 +94,10 @@ async function esperarPanel(pagina) {
     "index.html",
     "Globos.html",
     "Velas.html",
+    "Peluches.html",
+    "Cortinas.html",
+    "Platos.html",
+    "Vasos.html",
     "carrito.html",
     "Contacto.html",
     "login.html",
@@ -450,7 +454,16 @@ async function esperarPanel(pagina) {
 
   /* ---------- 9. Imágenes rotas ---------- */
   console.log("\n=== 9. Imagenes que no cargan ===");
-  for (const p of ["index.html", "Globos.html", "Velas.html", "principal.html"]) {
+  for (const p of [
+    "index.html",
+    "Globos.html",
+    "Velas.html",
+    "principal.html",
+    "Peluches.html",
+    "Cortinas.html",
+    "Platos.html",
+    "Vasos.html",
+  ]) {
     const pagina = await navegador.newPage();
     await pagina.goto(`${BASE}/${p}`, { waitUntil: "networkidle2" });
     /* Se fuerza la carga de todo para que lazy no oculte fallos */
@@ -468,6 +481,43 @@ async function esperarPanel(pagina) {
         .map((i) => i.getAttribute("src"))
     );
     comprobar(`${p} sin imagenes rotas`, rotas.length === 0, rotas.slice(0, 3).join(", "));
+    await pagina.close();
+  }
+
+  /* ---------- 10. Cada categoria tiene su hueco de productos ---------- */
+  console.log("\n=== 10. Contenedor de productos por categoria ===");
+  {
+    const CATEGORIAS = [
+      ["index.html", "productos-admin"],
+      ["Globos.html", "productos-globos"],
+      ["Velas.html", "productos-velas"],
+      ["Peluches.html", "productos-peluches"],
+      ["Cortinas.html", "productos-cortinas"],
+      ["Platos.html", "productos-platos"],
+      ["Vasos.html", "productos-vasos"],
+    ];
+    for (const [p, id] of CATEGORIAS) {
+      const pagina = await navegador.newPage();
+      await pagina.goto(`${BASE}/${p}`, { waitUntil: "domcontentloaded" });
+      const hay = await pagina.evaluate((x) => !!document.getElementById(x), id);
+      comprobar(`${p} tiene #${id}`, hay);
+      await pagina.close();
+    }
+
+    /* Y los circulos de principal.html llevan a todas ellas */
+    const pagina = await navegador.newPage();
+    await pagina.goto(`${BASE}/principal.html`, { waitUntil: "domcontentloaded" });
+    const enlaces = await pagina.evaluate(() =>
+      [...document.querySelectorAll("a")].map((a) => a.getAttribute("href"))
+    );
+    for (const destino of [
+      "Peluches.html",
+      "Cortinas.html",
+      "Platos.html",
+      "Vasos.html",
+    ]) {
+      comprobar(`principal.html enlaza a ${destino}`, enlaces.includes(destino));
+    }
     await pagina.close();
   }
 

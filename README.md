@@ -1,6 +1,6 @@
 # 🎉 Piñatería Papelito Crepé
 
-Tienda web de piñatas, globos y velas. Los clientes ven el catálogo, arman su
+Tienda web de piñatas, globos, velas, peluches, cortinas, platos y vasos. Los clientes ven el catálogo, arman su
 carrito y mandan el pedido por WhatsApp. La dueña o el dueño sube productos
 nuevos desde un panel, sin tocar código.
 
@@ -16,7 +16,7 @@ nuevos desde un panel, sin tocar código.
 
 | | |
 |---|---|
-| 🛍️ **Catálogo** | Piñatas, globos y velas, cada categoría en su página |
+| 🛍️ **Catálogo** | Piñatas, globos, velas, peluches, cortinas, platos y vasos, cada categoría en su página |
 | ➕ **Panel de administración** | Subir, editar y borrar productos desde el navegador |
 | 🛒 **Carrito** | Guarda lo elegido aunque se cierre la pestaña |
 | 📲 **Pedido por WhatsApp** | Arma el mensaje solo, con productos, cantidades y total |
@@ -47,6 +47,10 @@ Es un sitio **estático**: solo HTML, CSS y JavaScript. No hay servidor propio.
 ├── index.html              Piñatas
 ├── Globos.html             Globos
 ├── Velas.html              Velas
+├── Peluches.html           Peluches
+├── Cortinas.html           Cortinas
+├── Platos.html             Platos
+├── Vasos.html              Vasos
 ├── carrito.html            El carrito y el pedido por WhatsApp
 ├── Contacto.html           Redes sociales y teléfono
 ├── login.html              Entrada al panel
@@ -81,6 +85,15 @@ Cada página de categoría muestra **dos grupos**:
    | `index.html` | `#productos-admin` | Piñatas |
    | `Globos.html` | `#productos-globos` | Globos |
    | `Velas.html` | `#productos-velas` | Velas |
+   | `Peluches.html` | `#productos-peluches` | Peluches |
+   | `Cortinas.html` | `#productos-cortinas` | Cortinas |
+   | `Platos.html` | `#productos-platos` | Platos |
+   | `Vasos.html` | `#productos-vasos` | Vasos |
+
+   Peluches, Cortinas, Platos y Vasos **solo** tienen el segundo grupo:
+   todo su catálogo se sube desde el panel. Mientras no haya nada, la
+   página muestra el aviso que lleva el contenedor en `data-vacio`, para
+   que no se quede un hueco en blanco.
 
 > ⚠️ Esos contenedores tienen que ir **fuera** de `#productos-grid`. Si se
 > meten dentro, cada ficha queda encajada en una sola casilla de la cuadrícula

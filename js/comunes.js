@@ -229,6 +229,10 @@ const CONTENEDORES = {
   "productos-admin": "productos", // index.html  → Piñatas
   "productos-globos": "productos-globos", // Globos.html
   "productos-velas": "productos-velas", // Velas.html
+  "productos-peluches": "productos-peluches", // Peluches.html
+  "productos-cortinas": "productos-cortinas", // Cortinas.html
+  "productos-platos": "productos-platos", // Platos.html
+  "productos-vasos": "productos-vasos", // Vasos.html
 };
 
 async function mostrarProductosAdmin() {
@@ -250,7 +254,20 @@ async function mostrarProductosAdmin() {
     }
 
     contenedor.innerHTML = "";
-    if (productos.length === 0) continue;
+    if (productos.length === 0) {
+      /* Las páginas que todavía no tienen productos escritos a mano
+         (Peluches, Cortinas, Platos, Vasos) quedarían en blanco y
+         parecería que están rotas. Si el contenedor trae un aviso en
+         data-vacio, se muestra ese texto. */
+      const aviso = contenedor.dataset.vacio;
+      if (aviso) {
+        contenedor.innerHTML =
+          '<p class="col-span-full text-center text-gray-500 py-6">' +
+          escaparHTML(aviso) +
+          "</p>";
+      }
+      continue;
+    }
 
     pintarProductos(contenedor, productos);
   }

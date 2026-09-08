@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tu carrito | Piñatería Papelito Crepé</title>
+  <title>Cortinas | Piñatería Papelito Crepé</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Letra bonita para el nombre de la tienda -->
@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
 <body class="bg-gray-100 pt-20">
-
 
 <!-- Encabezado fijo -->
   <header class="fixed top-0 left-0 w-full bg-pink-500 shadow-md px-3 py-3 flex items-center gap-2 z-50">
@@ -51,62 +50,54 @@
   <!-- Fondo oscuro al abrir el menú -->
   <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
 
-<!-- Emojis flotantes -->
-    <span class="emoji" style="left: 10%; animation-delay: 1s">🎈</span>
-    <span class="emoji" style="left: 25%; animation-delay: 2s">🎊</span>
-    <span class="emoji" style="left: 40%; animation-delay: 0.5s">🎉</span>
-    <span class="emoji" style="left: 55%; animation-delay: 0s">🎈</span>
-    <span class="emoji" style="left: 70%; animation-delay: 0.7s">🎂</span>
-    <span class="emoji" style="left: 85%; animation-delay: 3s">🎊</span>
-
-
-
-<main>
-<!-- Los dos títulos, en cartel dorado. El adorno va en css/estilos.css -->
-<h1 class="text-center mb-4">
-  <span class="titulo-cartel titulo-cartel-dorado">🛒 Tu carrito 🛒</span>
-</h1>
-    <h2 class="text-center mb-6">
-      <span class="titulo-cartel titulo-cartel-dorado titulo-cartel-chico">🛒 Gracias por tu preferencia 🛒</span>
-    </h2>
-
-    <!-- Recuadro del carrito. Todo el diseño está en css/estilos.css -->
-    <div class="caja-carrito">
-      <div class="caja-carrito-arriba">
-        <span class="caja-carrito-titulo">🛍️ Tus productos</span>
-        <button type="button" onclick="clearCart()" class="caja-carrito-vaciar">
-          🗑️ Vaciar carrito
-        </button>
-      </div>
-
-      <!-- Cada producto entra aquí como una tarjeta blanca -->
-      <ul id="cartItems"></ul>
-
-      <div class="caja-carrito-total">
-        <span>Total a pagar</span>
-        <span class="caja-carrito-monto">$<span id="total">0</span></span>
-      </div>
-
-      <a
-        id="whatsappLink"
-        href="#"
-        target="_blank" rel="noopener"
-        class="caja-carrito-boton"
-      >
-        <span aria-hidden="true">📲</span> Enviar pedido por WhatsApp
-      </a>
-    </div>
-
-    <div class="text-center mt-6">
-      <a href="principal.html" class="btn-volver">
-      <span class="flecha flecha-izq">⬅</span>
-      Volver a la tienda
-      <span class="flecha flecha-izq">⬅</span>
+<!-- Botón de WhatsApp flotante -->
+    <a
+      href="https://wa.me/5615868610"
+      class="fixed bottom-5 right-5 z-50"
+      target="_blank" rel="noopener"
+      title="Chatea conmigo en WhatsApp"
+    >
+      <img loading="lazy" decoding="async"
+        src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
+        alt="WhatsApp"
+        class="w-16 h-16 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
+      />
     </a>
-</div>
+
+</a>
+
+    <!-- Galería de Cortinas -->
+    <section class="py-10 px-6 max-w-6xl mx-auto">
+      <!-- Encabezado en cartel amarillo; el adorno va en css/estilos.css -->
+      <h2 class="text-center mb-8">
+        <span class="titulo-cartel">🪟 Nuestras Cortinas 🪟</span>
+      </h2>
+
+      <!-- Los productos de esta página se suben desde el panel de
+           administrador (admin.html) y aparecen aquí solos, igual
+           que en Piñatas, Globos y Velas. Si algún día quieres
+           dejar fotos fijas escritas a mano, van en esta misma
+           cuadrícula, con la forma que tienen en Velas.html. -->
+      <div id="productos-cortinas" class="grid md:grid-cols-3 gap-8 fichas-animadas"
+           data-vacio="Muy pronto verás aquí nuestras cortinas. ¡Escríbenos por WhatsApp y te decimos lo que tenemos!"></div>
+
+<!-- Botón de WhatsApp adicional -->
+      <div class="text-center mt-10">
+        <a
+          href="https://wa.me/5615868610?text=Hola estoy interesado en algunis productos que vi en la pagina Piñatería Papelito Crepé"
+          target="_blank" rel="noopener"
+          class="bg-green-500 text-white px-6 py-3 rounded-full text-lg hover:bg-green-600 transition"
+        >
+          📱 Hacer pedido por WhatsApp
+        </a>
+      </div>
+    </section>
 
     
-    
+
+
+  
+<!-- SweetAlert2 -->
     <!-- Ubicacion: ahora son DOS tiendas -->
     <section class="text-center py-6">
       <!-- Cada tarjeta es un enlace completo: al tocarla abre en Google Maps
@@ -249,9 +240,9 @@
         </a>
       </div>
     </section>
-  </main>
 
- <!-- Footer  barra final -->
+  <!-- Footer  barra final -->
+   
    <footer class="bg-red-600 text-white text-center py-4 mt-10">
   <a href="Contacto.html" class="inline-block hover:underline cursor-pointer">
     © 2025 🎈Piñatería Papelito Crepé🎈🎉 Todos los derechos reservados.
