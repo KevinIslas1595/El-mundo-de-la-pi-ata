@@ -162,7 +162,30 @@ async function borrarProducto(id, categoria) {
 }
 
 /* ============================================================
-   5. ACCESO AL PANEL
+   5. PEDIDOS — los que toma el chat de la tienda
+   ============================================================
+   Solo se pueden leer con la sesión del panel iniciada: las reglas
+   de Supabase no dejan que un visitante los vea. Sin nube no hay
+   pedidos (el chat necesita Supabase para funcionar).
+   ============================================================ */
+async function listarPedidos() {
+  if (!NUBE_CONFIGURADA) return [];
+  const { data, error } = await db
+    .from("pedidos")
+    .select("*")
+    .order("creado_en", { ascending: false })
+    .limit(200);
+  if (error) throw new Error("No se pudieron cargar los pedidos: " + error.message);
+  return data;
+}
+
+async function cambiarEstadoPedido(id, estado) {
+  const { error } = await db.from("pedidos").update({ estado }).eq("id", id);
+  if (error) throw new Error("No se pudo cambiar el estado: " + error.message);
+}
+
+/* ============================================================
+   6. ACCESO AL PANEL
    ============================================================
    Con Supabase esto es un login DE VERDAD: la comprobación ocurre
    en el servidor, no en el navegador, así que ya no se puede saltar

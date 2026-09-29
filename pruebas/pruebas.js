@@ -587,6 +587,86 @@ async function esperarPanel(pagina) {
     await pagina.close();
   }
 
+  /* ---------- 12. Chat de la tienda ----------
+     Aqui NO se habla con la IA de verdad: se contesta con una
+     respuesta de mentira, para no gastar mensajes de Gemini ni
+     guardar pedidos falsos en la base de datos. */
+  console.log("\n=== 12. Chat de la tienda ===");
+  {
+    const pagina = await navegador.newPage();
+    const pedidoFalso = {
+      folio: "PC-TEST",
+      nombre: "Prueba",
+      productos: [
+        { nombre: "Piñata Bluey", cantidad: 2, precio: 450 },
+        { nombre: "Piñata personalizada", cantidad: 1, precio: null },
+      ],
+      total: null,
+      entrega: "Metro Línea A",
+      fecha_entrega: "sábado",
+      notas: "",
+    };
+    await pagina.setRequestInterception(true);
+    pagina.on("request", (req) => {
+      if (!req.url().includes("/functions/v1/chat")) return req.continue();
+      const cors = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+      };
+      if (req.method() === "OPTIONS") return req.respond({ status: 200, headers: cors });
+      req.respond({
+        status: 200,
+        headers: cors,
+        contentType: "application/json",
+        body: JSON.stringify({ respuesta: "¡Listo! Tu folio es **PC-TEST**", pedido: pedidoFalso }),
+      });
+    });
+
+    await pagina.goto(`${BASE}/index.html`, { waitUntil: "networkidle2" });
+    await pagina.evaluate(() => sessionStorage.clear());
+    await pagina.reload({ waitUntil: "networkidle2" });
+
+    const inicio = await pagina.evaluate(() => ({
+      boton: !!document.getElementById("chatBoton"),
+      cerrado: document.getElementById("chatVentana")?.hidden,
+      sobreWhatsApp: document.querySelector(".chat")?.classList.contains("chat-sobre-whatsapp"),
+    }));
+    comprobar("aparece el boton del chat", inicio.boton);
+    comprobar("empieza cerrado", inicio.cerrado === true);
+    comprobar("no tapa el boton de WhatsApp", inicio.sobreWhatsApp === true);
+
+    await pagina.click("#chatBoton");
+    await pagina.type("#chatTexto", "Quiero 2 piñatas Bluey");
+    await pagina.keyboard.press("Enter");
+    await pagina
+      .waitForSelector(".chat-pedido", { timeout: ESPERA_MAX })
+      .catch(() => {});
+
+    const tras = await pagina.evaluate(() => ({
+      cliente: document.querySelectorAll(".chat-cliente").length,
+      negrita: document.querySelector(".chat-bot strong")?.textContent || "",
+      whatsapp: decodeURIComponent(document.querySelector(".chat-pedido-whatsapp")?.href || ""),
+    }));
+    comprobar("se ve el mensaje del cliente", tras.cliente === 1, "burbujas=" + tras.cliente);
+    comprobar("la respuesta respeta las negritas", tras.negrita === "PC-TEST", tras.negrita);
+    comprobar(
+      "el boton de WhatsApp lleva el folio y el total",
+      tras.whatsapp.includes("Folio: PC-TEST") &&
+        tras.whatsapp.includes("2 x Piñata Bluey = $900") &&
+        tras.whatsapp.includes("Total: por cotizar"),
+      tras.whatsapp.slice(0, 80)
+    );
+
+    /* La platica sigue ahi al cambiar de pagina */
+    await pagina.goto(`${BASE}/Globos.html`, { waitUntil: "networkidle2" });
+    const otra = await pagina.evaluate(() => ({
+      abierto: !document.getElementById("chatVentana").hidden,
+      pedido: !!document.querySelector(".chat-pedido"),
+    }));
+    comprobar("la platica sigue en otra pagina", otra.abierto && otra.pedido, JSON.stringify(otra));
+    await pagina.close();
+  }
+
   await navegador.close();
 
   console.log("\n" + "=".repeat(50));

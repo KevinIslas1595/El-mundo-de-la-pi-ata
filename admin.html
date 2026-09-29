@@ -53,6 +53,16 @@
       </button>
     </header>
 
+    <!-- ============ Pedidos que tomó el chat de la tienda ============ -->
+    <section class="panel-tarjeta panel-tarjeta-ancha">
+      <h2 class="panel-subtitulo">
+        🧾 Pedidos del chat <span id="resumenPedidos"></span>
+      </h2>
+      <!-- Botones para ver solo los de un estado. Los crea el script. -->
+      <div id="filtrosPedidos" class="pedidos-filtros"></div>
+      <div id="listaPedidos" class="pedidos-lista"></div>
+    </section>
+
     <!-- ============ Tarjeta 1: subir o editar un producto ============ -->
     <section class="panel-tarjeta">
       <h1 class="panel-subtitulo">✨ Agregar un producto nuevo ✨</h1>
@@ -466,6 +476,153 @@
         mostrarVista(null);
       }
 
+      /* ---------- Pedidos del chat ---------- */
+      const ESTADOS = [
+        { valor: "nuevo", nombre: "🆕 Nuevos" },
+        { valor: "confirmado", nombre: "👍 Confirmados" },
+        { valor: "listo", nombre: "📦 Listos" },
+        { valor: "entregado", nombre: "✅ Entregados" },
+        { valor: "cancelado", nombre: "❌ Cancelados" },
+      ];
+      let pedidos = [];
+      /* Se empieza viendo los que faltan por atender */
+      let filtroPedidos = "pendientes";
+
+      function dinero(n) {
+        return "$" + Number(n).toLocaleString("es-MX");
+      }
+
+      function crearFiltrosPedidos() {
+        const caja = $("filtrosPedidos");
+        caja.innerHTML = "";
+        const opciones = [{ valor: "pendientes", nombre: "⏳ Por atender" }]
+          .concat(ESTADOS)
+          .concat([{ valor: "todos", nombre: "📋 Todos" }]);
+        opciones.forEach((o) => {
+          const cuantos =
+            o.valor === "todos"
+              ? pedidos.length
+              : pedidos.filter((p) => coincideFiltro(p, o.valor)).length;
+          const boton = document.createElement("button");
+          boton.type = "button";
+          boton.className = "panel-chip" + (o.valor === filtroPedidos ? " es-actual" : "");
+          boton.innerHTML =
+            escaparHTML(o.nombre) + ' <span class="panel-chip-num">' + cuantos + "</span>";
+          boton.addEventListener("click", () => {
+            filtroPedidos = o.valor;
+            pintarPedidos();
+          });
+          caja.appendChild(boton);
+        });
+      }
+
+      function coincideFiltro(p, filtro) {
+        if (filtro === "todos") return true;
+        if (filtro === "pendientes") return ["nuevo", "confirmado", "listo"].includes(p.estado);
+        return p.estado === filtro;
+      }
+
+      async function mostrarPedidos() {
+        const caja = $("listaPedidos");
+        caja.innerHTML =
+          '<p class="panel-vacio"><span class="panel-vacio-emoji">⏳</span>Cargando pedidos…</p>';
+        try {
+          pedidos = await listarPedidos();
+        } catch (e) {
+          caja.innerHTML =
+            '<p class="panel-vacio">⚠️ ' + escaparHTML(e.message) + "</p>";
+          return;
+        }
+        pintarPedidos();
+      }
+
+      function pintarPedidos() {
+        crearFiltrosPedidos();
+        const caja = $("listaPedidos");
+        const nuevos = pedidos.filter((p) => p.estado === "nuevo").length;
+        $("resumenPedidos").textContent = nuevos
+          ? "· " + nuevos + (nuevos === 1 ? " nuevo" : " nuevos")
+          : "";
+
+        const visibles = pedidos.filter((p) => coincideFiltro(p, filtroPedidos));
+        caja.innerHTML = "";
+        if (visibles.length === 0) {
+          caja.innerHTML =
+            '<p class="panel-vacio"><span class="panel-vacio-emoji">🫙</span>' +
+            (pedidos.length
+              ? "No hay pedidos aquí."
+              : "Todavía no llegan pedidos por el chat.") +
+            "</p>";
+          return;
+        }
+
+        visibles.forEach((p, i) => {
+          const div = document.createElement("div");
+          div.className = "pedido-ficha";
+          div.dataset.estado = p.estado;
+          div.style.animationDelay = i * 50 + "ms";
+
+          const filas = (p.productos || [])
+            .map(
+              (x) =>
+                "<li><span>" +
+                x.cantidad +
+                " × " +
+                escaparHTML(x.nombre) +
+                "</span><span>" +
+                (x.precio === null ? "por cotizar" : dinero(x.precio * x.cantidad)) +
+                "</span></li>"
+            )
+            .join("");
+          const cuando = new Date(p.creado_en).toLocaleString("es-MX", {
+            day: "numeric",
+            month: "short",
+            hour: "numeric",
+            minute: "2-digit",
+          });
+          const opciones = ESTADOS.map(
+            (e) =>
+              '<option value="' +
+              e.valor +
+              '"' +
+              (e.valor === p.estado ? " selected" : "") +
+              ">" +
+              e.nombre.replace(/s$/, "") +
+              "</option>"
+          ).join("");
+
+          div.innerHTML = `
+            <div class="pedido-cabeza">
+              <span class="pedido-folio">${escaparHTML(p.folio)}</span>
+              <span class="pedido-cuando">${escaparHTML(cuando)}</span>
+            </div>
+            <p class="pedido-dato"><strong>${escaparHTML(p.nombre)}</strong> ·
+              <a class="pedido-whatsapp" target="_blank" rel="noopener"
+                 href="https://wa.me/52${escaparHTML(p.telefono)}">📲 ${escaparHTML(p.telefono)}</a></p>
+            <ul>${filas}</ul>
+            <p class="pedido-total">Total: ${p.total === null ? "por cotizar" : dinero(p.total)}</p>
+            <p class="pedido-dato"><strong>Entrega:</strong> ${escaparHTML(p.entrega)}</p>
+            ${p.fecha_entrega ? '<p class="pedido-dato"><strong>Fecha:</strong> ' + escaparHTML(p.fecha_entrega) + "</p>" : ""}
+            ${p.notas ? '<p class="pedido-dato"><strong>Notas:</strong> ' + escaparHTML(p.notas) + "</p>" : ""}
+            <label class="panel-oculto" for="estado-${p.id}">Estado del pedido</label>
+            <select class="pedido-estado" id="estado-${p.id}">${opciones}</select>`;
+
+          div.querySelector("select").addEventListener("change", async (e) => {
+            const anterior = p.estado;
+            try {
+              await cambiarEstadoPedido(p.id, e.target.value);
+              p.estado = e.target.value;
+              pintarPedidos();
+              avisar("success", "Pedido " + p.folio, "Ahora está: " + e.target.selectedOptions[0].text);
+            } catch (err) {
+              e.target.value = anterior;
+              avisar("error", "No se pudo cambiar", err.message);
+            }
+          });
+          caja.appendChild(div);
+        });
+      }
+
       /* ---------- Arrancar ---------- */
       /* Avisa de dónde se están guardando los productos, para que no
          haya dudas sobre si los clientes los ven o no. */
@@ -511,6 +668,7 @@
       crearBotonesCategoria();
       mostrarProductos();
       contarCategorias();
+      mostrarPedidos();
     </script>
   </body>
 </html>
