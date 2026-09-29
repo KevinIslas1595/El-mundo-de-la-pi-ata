@@ -542,7 +542,7 @@ async function esperarPanel(pagina) {
     comprobar("admin.html sin errores JS", propios.length === 0, propios[0]);
 
     const r = await pagina.evaluate(() => ({
-      botones: document.querySelectorAll(".panel-chip").length,
+      botones: document.querySelectorAll("#botonesCategoria .panel-chip").length,
       opciones: document.querySelectorAll("#categoria option").length,
       categoria: document.getElementById("categoria").value,
       cuantas: typeof CATEGORIAS === "undefined" ? 0 : CATEGORIAS.length,
@@ -561,7 +561,7 @@ async function esperarPanel(pagina) {
 
     /* Los botones de colores cambian de categoria */
     await pagina.evaluate(() => {
-      const boton = [...document.querySelectorAll(".panel-chip")].find(
+      const boton = [...document.querySelectorAll("#botonesCategoria .panel-chip")].find(
         (b) => b.dataset.valor === "productos-vasos"
       );
       if (boton) boton.click();
@@ -570,8 +570,8 @@ async function esperarPanel(pagina) {
 
     const tras = await pagina.evaluate(() => ({
       categoria: document.getElementById("categoria").value,
-      marcado: document.querySelector(".panel-chip.es-actual")
-        ? document.querySelector(".panel-chip.es-actual").dataset.valor
+      marcado: document.querySelector("#botonesCategoria .es-actual")
+        ? document.querySelector("#botonesCategoria .es-actual").dataset.valor
         : "",
     }));
     comprobar(

@@ -19,7 +19,12 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const SITIO = "https://kevinislas1595.github.io/El-mundo-de-la-pi-ata";
-const MODELO = Deno.env.get("GEMINI_MODEL") || "gemini-3.5-flash";
+/* Si el primero está saturado (a Google le pasa seguido), se usa el
+   de repuesto, que es más ligero pero casi siempre está libre. */
+const MODELOS = [
+  Deno.env.get("GEMINI_MODEL") || "gemini-3.5-flash",
+  "gemini-3.5-flash-lite",
+];
 const LLAVE_GEMINI = Deno.env.get("GEMINI_API_KEY") || "";
 
 const db = createClient(
@@ -217,7 +222,10 @@ const HERRAMIENTAS = [
               type: "STRING",
               description: "Dónde y cómo: tienda, Metro (línea, estación y horario) o DiDi/Uber",
             },
-            fecha_entrega: { type: "STRING", description: "Día de la entrega, con fecha" },
+            fecha_entrega: {
+              type: "STRING",
+              description: "Día de la entrega con su fecha exacta, ej. sábado 3 de octubre",
+            },
             notas: { type: "STRING", description: "Dirección, detalles de la piñata, etc." },
           },
           required: ["nombre", "telefono", "productos", "entrega", "fecha_entrega"],
@@ -355,28 +363,61 @@ async function consultarPedido(args: any) {
 /* ============================================================
    4. PLATICAR CON GEMINI
    ============================================================ */
+const esperar = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/* Errores que se arreglan solos si se intenta otra vez o con otro
+   modelo: saturado (503), falla de Google (500) o tope gratis (429).
+   El 0 es "tardó demasiado" (ver PACIENCIA). */
+const PASAJERO = [0, 429, 500, 503];
+
+/* Cuántos segundos se espera a cada modelo. Cuando Google está
+   saturado, el principal puede tardar minutos en contestar; mejor
+   cortarlo y pasar al de repuesto, que es rápido. */
+const PACIENCIA = [12, 30];
+
 // deno-lint-ignore no-explicit-any
 async function preguntarGemini(sistema: string, contenidos: any[]) {
-  const r = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${MODELO}:generateContent`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": LLAVE_GEMINI },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: sistema }] },
-        contents: contenidos,
-        tools: HERRAMIENTAS,
-      }),
+  let ultimo = 0;
+  for (const [i, modelo] of MODELOS.entries()) {
+    for (let intento = 0; intento < 2; intento++) {
+      let r: Response;
+      try {
+        r = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "x-goog-api-key": LLAVE_GEMINI },
+            body: JSON.stringify({
+              systemInstruction: { parts: [{ text: sistema }] },
+              contents: contenidos,
+              tools: HERRAMIENTAS,
+            }),
+            signal: AbortSignal.timeout(PACIENCIA[i] * 1000),
+          }
+        );
+      } catch (e) {
+        /* Tardó demasiado: no se reintenta el mismo, se pasa al otro */
+        console.error(`Gemini ${modelo} no contestó a tiempo:`, String(e));
+        ultimo = 0;
+        break;
+      }
+      if (r.ok) {
+        const datos = await r.json();
+        return datos.candidates?.[0]?.content;
+      }
+      ultimo = r.status;
+      const detalle = await r.text();
+      console.error(`Gemini ${modelo} ${r.status}: ${detalle.slice(0, 300)}`);
+      if (!PASAJERO.includes(r.status)) {
+        throw Object.assign(new Error(`Gemini ${r.status}`), { estado: r.status });
+      }
+      /* Con el tope gratis no sirve reintentar el mismo: al siguiente */
+      if (r.status === 429) break;
+      if (intento === 0) await esperar(1200);
     }
-  );
-  if (!r.ok) {
-    const detalle = await r.text();
-    throw Object.assign(new Error(`Gemini ${r.status}: ${detalle.slice(0, 300)}`), {
-      estado: r.status,
-    });
   }
-  const datos = await r.json();
-  return datos.candidates?.[0]?.content;
+  /* Todos saturados: al cliente se le dice que está "ocupado" */
+  throw Object.assign(new Error(`Gemini saturado (${ultimo})`), { estado: 429 });
 }
 
 Deno.serve(async (req) => {

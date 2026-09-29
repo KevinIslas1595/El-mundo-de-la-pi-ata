@@ -247,7 +247,7 @@
 
       function marcarCategoria() {
         const actual = $("categoria").value;
-        document.querySelectorAll(".panel-chip").forEach((b) => {
+        document.querySelectorAll("#botonesCategoria .panel-chip").forEach((b) => {
           b.classList.toggle("es-actual", b.dataset.valor === actual);
         });
       }
