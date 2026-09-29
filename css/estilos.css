@@ -2727,9 +2727,8 @@ header::after {
 
 /* ============================================================
    BUSCADOR DE PRODUCTOS (js/buscador.js)
-   La lupa junto al carrito. En la computadora es una cajita
-   blanca siempre visible; en el celular solo se ve la lupa, y al
-   tocarla la barra de búsqueda tapa el encabezado.
+   La lupa junto al carrito. Al tocarla, la barra de búsqueda
+   tapa el encabezado (en el celular y en la computadora).
    ============================================================ */
 .buscador {
   display: flex;
@@ -2928,53 +2927,27 @@ header::after {
   text-align: center;
 }
 
-/* En la computadora hay espacio: la caja se ve siempre */
+/* En la computadora funciona igual que en el celular (lupa que
+   abre la barra), pero la barra y los resultados van centrados y
+   con un ancho cómodo, para que no se estiren de lado a lado */
 @media (min-width: 768px) {
-  .buscador {
-    position: relative;
-    padding: 0 0.3rem 0 0.75rem;
-    margin-right: 0.35rem;
-    background: #ffffff;
-    border: 3px solid #ffffff;
-    border-radius: 999px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  }
-
-  .buscador:focus-within {
-    border-color: #fde047;
-  }
-
-  .buscador-lupa {
-    font-size: 1.1rem;
-    filter: none;
-  }
-
-  .buscador-caja,
+  /* El espacio extra a la izquierda compensa la ✕ de la derecha,
+     para que la barra quede alineada con los resultados */
   .buscador-abierto .buscador-caja {
-    position: static;
-    display: flex;
-    padding: 0;
-    background: none;
+    justify-content: center;
+    gap: 0.75rem;
+    padding-left: 2.75rem;
   }
 
-  .buscador-texto,
-  .buscador-texto:focus {
-    width: 14rem;
-    height: 2.2rem;
-    padding: 0 0.5rem;
-    border: 0;
-    background: transparent;
-  }
-
-  .buscador-cerrar {
-    display: none;
+  .buscador-texto {
+    flex: 0 1 36rem;
   }
 
   .buscador-resultados {
-    top: calc(100% + 0.75rem);
-    left: auto;
-    right: 0;
-    width: 26rem;
+    left: 50%;
+    right: auto;
+    width: min(36rem, calc(100% - 1rem));
+    transform: translateX(-50%);
   }
 }
 

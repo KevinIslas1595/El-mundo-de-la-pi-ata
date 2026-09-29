@@ -680,6 +680,7 @@ async function esperarPanel(pagina) {
       return !!b && b.nextElementSibling?.getAttribute("href") === "carrito.html";
     }));
 
+    await pagina.click("#buscadorLupa");
     await pagina.type("#buscadorTexto", "pinatas bluey");
     await pagina.waitForSelector(".buscador-item", { timeout: ESPERA_MAX }).catch(() => {});
     const bluey = await pagina.$$eval(".buscador-item", (a) =>
