@@ -667,6 +667,92 @@ async function esperarPanel(pagina) {
     await pagina.close();
   }
 
+  /* ---------- 13. Buscador de productos ---------- */
+  console.log("\n=== 13. Buscador de productos ===");
+  {
+    const pagina = await navegador.newPage();
+    await pagina.setViewport({ width: 1280, height: 800 });
+    await pagina.goto(`${BASE}/principal.html`, { waitUntil: "networkidle2" });
+    await pagina.evaluate(() => localStorage.removeItem("cart"));
+
+    comprobar("aparece la lupa junto al carrito", await pagina.evaluate(() => {
+      const b = document.getElementById("buscador");
+      return !!b && b.nextElementSibling?.getAttribute("href") === "carrito.html";
+    }));
+
+    await pagina.type("#buscadorTexto", "pinatas bluey");
+    await pagina.waitForSelector(".buscador-item", { timeout: ESPERA_MAX }).catch(() => {});
+    const bluey = await pagina.$$eval(".buscador-item", (a) =>
+      a.map((x) => x.innerText.replace(/\s+/g, " "))
+    );
+    comprobar(
+      "sin acentos y en plural encuentra la Piñata Bluey",
+      bluey.length === 1 && bluey[0].includes("Piñata Bluey") && bluey[0].includes("$450"),
+      JSON.stringify(bluey)
+    );
+
+    const cuantos = await pagina.evaluate(async () => ({
+      velas: buscadorFiltrar(await buscadorCargar(), "vela kuromi").map((p) => p.pagina),
+      nada: buscadorFiltrar(await buscadorCargar(), "zzqqxx").length,
+    }));
+    comprobar("busca tambien en otras paginas", cuantos.velas.includes("Velas.html"), JSON.stringify(cuantos.velas));
+    comprobar("lo que no existe no da resultados", cuantos.nada === 0);
+
+    await pagina.click(".buscador-agregar");
+    const enCarrito = await pagina.evaluate(() => JSON.parse(localStorage.getItem("cart") || "[]"));
+    comprobar(
+      "el boton verde lo agrega al carrito",
+      enCarrito.length === 1 && enCarrito[0].name === "Piñata Bluey",
+      JSON.stringify(enCarrito)
+    );
+    await pagina.evaluate(() => localStorage.removeItem("cart"));
+    /* El aviso de "¡Agregado!" tapa la página un momento */
+    await pagina
+      .waitForFunction(() => !document.querySelector(".swal2-container"), { timeout: ESPERA_MAX })
+      .catch(() => {});
+
+    await pagina.evaluate(() => (document.getElementById("buscadorTexto").value = ""));
+    await pagina.type("#buscadorTexto", "zzqqxx");
+    await pagina.waitForSelector(".buscador-vacio", { timeout: ESPERA_MAX }).catch(() => {});
+    comprobar(
+      "sin resultados ofrece preguntar por WhatsApp",
+      await pagina.evaluate(() => !!document.querySelector('.buscador-vacio a[href*="wa.me"]'))
+    );
+
+    /* Al tocar un resultado se abre su página y la tarjeta brilla */
+    await pagina.evaluate(() => (document.getElementById("buscadorTexto").value = ""));
+    await pagina.type("#buscadorTexto", "vela kuromi");
+    await pagina.waitForSelector(".buscador-item", { timeout: ESPERA_MAX }).catch(() => {});
+    await Promise.all([
+      pagina.waitForNavigation({ waitUntil: "networkidle2" }).catch(() => {}),
+      pagina.click(".buscador-item"),
+    ]);
+    await pagina.waitForSelector(".buscador-resaltado", { timeout: ESPERA_MAX }).catch(() => {});
+    const llegada = await pagina.evaluate(() => ({
+      pagina: location.pathname.split("/").pop(),
+      busqueda: location.search,
+      tarjeta: document.querySelector(".buscador-resaltado h3")?.textContent.trim() || "",
+    }));
+    comprobar("abre la pagina del producto", llegada.pagina === "Velas.html", llegada.pagina);
+    comprobar("ilumina la tarjeta buscada", /kuromi/i.test(llegada.tarjeta), llegada.tarjeta);
+    comprobar("quita el ?ver= de la direccion", llegada.busqueda === "", llegada.busqueda);
+
+    /* En el celular solo se ve la lupa hasta tocarla */
+    await pagina.setViewport({ width: 390, height: 800, isMobile: true, hasTouch: true });
+    await pagina.goto(`${BASE}/Contacto.html`, { waitUntil: "networkidle2" });
+    const antes = await pagina.evaluate(
+      () => document.getElementById("buscadorTexto").offsetParent === null
+    );
+    await pagina.click("#buscadorLupa");
+    const despues = await pagina.evaluate(() => ({
+      visible: document.getElementById("buscadorTexto").offsetParent !== null,
+      enfocado: document.activeElement?.id === "buscadorTexto",
+    }));
+    comprobar("en el celular empieza escondido", antes);
+    comprobar("la lupa abre la barra y deja escribir", despues.visible && despues.enfocado, JSON.stringify(despues));
+    await pagina.close();
+  }
+
   await navegador.close();
 
   console.log("\n" + "=".repeat(50));

@@ -2724,3 +2724,279 @@ header::after {
   color: #9d174d;
   font-weight: 700;
 }
+
+/* ============================================================
+   BUSCADOR DE PRODUCTOS (js/buscador.js)
+   La lupa junto al carrito. En la computadora es una cajita
+   blanca siempre visible; en el celular solo se ve la lupa, y al
+   tocarla la barra de búsqueda tapa el encabezado.
+   ============================================================ */
+.buscador {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.buscador-lupa {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+  transition: transform 0.2s ease;
+}
+
+.buscador-lupa:hover {
+  transform: scale(1.1);
+}
+
+.buscador-caja {
+  display: none;
+}
+
+.buscador-abierto .buscador-caja {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.75rem;
+  background: linear-gradient(100deg, #ec4899, #d946ef);
+}
+
+.buscador-texto {
+  flex: 1;
+  min-width: 0;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border: 3px solid #ffffff;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #831843;
+  /* 16px: con menos, el iPhone hace zoom al escribir */
+  font-size: 1rem;
+  outline: none;
+}
+
+.buscador-texto:focus {
+  border-color: #fde047;
+}
+
+/* El borde amarillo ya marca dónde se escribe: sin el contorno
+   rosa general ni la tachita que pone el navegador (ya hay ✕) */
+.buscador-texto:focus-visible {
+  outline: none;
+}
+
+.buscador-texto::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.buscador-cerrar {
+  background: none;
+  border: 0;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.buscador-resultados {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0.5rem;
+  right: 0.5rem;
+  z-index: 3;
+  max-height: min(70vh, 30rem);
+  overflow-y: auto;
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+  text-align: left;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 16px 40px rgba(131, 24, 67, 0.3);
+}
+
+.buscador-resultados[hidden] {
+  display: none;
+}
+
+.buscador-fila {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.buscador-item {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  color: #1f2937;
+  text-decoration: none;
+}
+
+.buscador-item:hover,
+.buscador-item:focus-visible,
+.buscador-item-activo {
+  background: #fdf2f8;
+}
+
+.buscador-item img {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  background: #fce7f3;
+}
+
+.buscador-item-datos {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.buscador-item-nombre {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.buscador-item-seccion {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.buscador-item-precio {
+  flex-shrink: 0;
+  font-weight: 800;
+  color: #db2777;
+}
+
+.buscador-agregar {
+  flex-shrink: 0;
+  padding: 0.4rem 0.6rem;
+  border: 0;
+  border-radius: 999px;
+  background: #22c55e;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.buscador-agregar:hover {
+  background: #16a34a;
+}
+
+.buscador-vacio {
+  padding: 1rem;
+  text-align: center;
+  color: #374151;
+}
+
+.buscador-vacio a {
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: #22c55e;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.buscador-mas {
+  padding: 0.6rem 0.75rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+/* En la computadora hay espacio: la caja se ve siempre */
+@media (min-width: 768px) {
+  .buscador {
+    position: relative;
+    padding: 0 0.3rem 0 0.75rem;
+    margin-right: 0.35rem;
+    background: #ffffff;
+    border: 3px solid #ffffff;
+    border-radius: 999px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .buscador:focus-within {
+    border-color: #fde047;
+  }
+
+  .buscador-lupa {
+    font-size: 1.1rem;
+    filter: none;
+  }
+
+  .buscador-caja,
+  .buscador-abierto .buscador-caja {
+    position: static;
+    display: flex;
+    padding: 0;
+    background: none;
+  }
+
+  .buscador-texto,
+  .buscador-texto:focus {
+    width: 14rem;
+    height: 2.2rem;
+    padding: 0 0.5rem;
+    border: 0;
+    background: transparent;
+  }
+
+  .buscador-cerrar {
+    display: none;
+  }
+
+  .buscador-resultados {
+    top: calc(100% + 0.75rem);
+    left: auto;
+    right: 0;
+    width: 26rem;
+  }
+}
+
+/* La tarjeta del producto que se buscó brilla unos segundos */
+.buscador-resaltado {
+  outline: 4px solid #facc15;
+  outline-offset: 4px;
+  animation: buscador-brillo 1.3s ease-in-out 3;
+}
+
+@keyframes buscador-brillo {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.9);
+  }
+  50% {
+    box-shadow: 0 0 0 16px rgba(250, 204, 21, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .buscador-resaltado {
+    animation: none;
+  }
+}
