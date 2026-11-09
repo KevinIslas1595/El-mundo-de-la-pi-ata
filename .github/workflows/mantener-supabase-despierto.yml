@@ -1,0 +1,21 @@
+# Supabase gratis pausa el proyecto si pasa ~1 semana sin uso.
+# Esta tarea hace una consulta pequeña cada 3 días para que no se duerma.
+# La llave "publishable" es pública (es la misma que usa la página en el navegador).
+name: Mantener Supabase despierto
+
+on:
+  schedule:
+    - cron: "0 16 */3 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Consulta a la base de datos
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" -m 30 \
+            -H "apikey: sb_publishable_qgdzO3b8X0q0NGLQwxFw2w_AMD8q-_a" \
+            "https://fabdpahpdxdenvsnxlpp.supabase.co/rest/v1/productos?select=nombre&limit=1")
+          echo "Respuesta de Supabase: $code"
+          test "$code" = "200"
